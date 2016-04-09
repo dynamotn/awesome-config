@@ -72,8 +72,7 @@ is_fish_shell = string.find(os.getenv("SHELL"), "fish")
 wp_index = 1
 wp_timeout = 10
 wp_path = awful.util.pread("xdg-user-dir PICTURES"):gsub("^%s*(.-)%s*$", "%1") .. "/Wallpaper/"
--- wp_filter = function(s) return string.match(s,"%.png$") or string.match(s,"%.jpg$") end
-wp_filter = nil
+wp_filter = function(s) return string.match(s,"%.png$") or string.match(s,"%.jpg$") end
 -- }}}
 
 -- {{{ Function definitions
@@ -92,6 +91,15 @@ function scandir(directory, filter)
     return t
 end
 
+-- Quit function when using gnome session
+_awesome_quit = awesome.quit
+awesome.quit = function()
+    if os.getenv("DESKTOP_SESSION") == "awesome-gnome" then
+       os.execute("/usr/bin/gnome-session-quit")
+    else
+        _awesome_quit()
+    end
+end
 -- }}}
 
 -- {{{ Autostart applications with fish shell
@@ -151,10 +159,13 @@ wp_timer:start()
 
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
-tags = {}
+tags = {
+    names = { "TERM", "WEB", "NOTE", "M&V", "CHAT", "DOC", "GAME", "SYS", "MORE"},
+    layout = { layouts[3], layouts[2], layouts[5], layouts[1], layouts[3], layouts[4], layouts[3], layouts[1], layouts[1]}
+}
+
 for s = 1, screen.count() do
-    -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+    tags[s] = awful.tag(tags.names, s, tags.layout)
 end
 -- }}}
 
