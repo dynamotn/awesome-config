@@ -64,8 +64,34 @@ local layouts =
     awful.layout.suit.fair,
     awful.layout.suit.magnifier
 }
+
 -- If current shell is fish then use not POSIX syntax
 is_fish_shell = string.find(os.getenv("SHELL"), "fish")
+
+-- Wallpaper auto change config
+wp_index = 1
+wp_timeout = 10
+wp_path = awful.util.pread("xdg-user-dir PICTURES"):gsub("^%s*(.-)%s*$", "%1") .. "/Wallpaper/"
+-- wp_filter = function(s) return string.match(s,"%.png$") or string.match(s,"%.jpg$") end
+wp_filter = nil
+-- }}}
+
+-- {{{ Function definitions
+-- Scan directory, and optionally filter outputs
+function scandir(directory, filter)
+    local i, t, popen = 0, {}, io.popen
+    if not filter then
+        filter = function(s) return true end
+    end
+    for filename in popen('ls -a "'..directory..'"'):lines() do
+        if filter(filename) then
+            i = i + 1
+            t[i] = filename
+        end
+    end
+    return t
+end
+
 -- }}}
 
 -- {{{ Autostart applications with fish shell
@@ -108,11 +134,19 @@ run_once("urxvt")
 -- }}}
 
 -- {{{ Wallpaper
-if beautiful.wallpaper then
+-- Auto change wallpaper after wp_timeout second(s)
+wp_files = scandir(wp_path, wp_filter)
+wp_timer = timer { timeout = wp_timeout }
+wp_timer:connect_signal("timeout", function()
     for s = 1, screen.count() do
-        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+        gears.wallpaper.maximized(wp_path .. wp_files[wp_index], s, true)
     end
-end
+    wp_timer:stop()
+    wp_index = math.random( 1, #wp_files)
+    wp_timer.timeout = wp_timeout
+    wp_timer:start()
+end)
+wp_timer:start()
 -- }}}
 
 -- {{{ Tags
