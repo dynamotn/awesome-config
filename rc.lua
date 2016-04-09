@@ -1,4 +1,6 @@
--- Standard awesome library
+-- vim:
+-- filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80:fold-marker='{{{,}}}'
+-- {{{ Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
@@ -10,6 +12,7 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
+-- }}}
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -37,20 +40,20 @@ end
 -- }}}
 
 -- {{{ Variable definitions
+-- Localization
+os.setlocale(os.getenv("LANG"))
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
-editor = os.getenv("EDITOR") or "nano"
+terminal = "urxvt"
+editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
+-- Default function key on keyboard
 modkey = "Mod4"
+altkey = "Mod1"
+ctrlkey = "Control"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
@@ -58,16 +61,50 @@ local layouts =
     awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
     awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier
 }
+-- If current shell is fish then use not POSIX syntax
+is_fish_shell = string.find(os.getenv("SHELL"), "fish")
+-- }}}
+
+-- {{{ Autostart applications with fish shell
+function run_once(prg,arg_string,pname,screen)
+    if not prg then
+        do return nil end
+    end
+
+    if not pname then
+       pname = prg
+    end
+
+    if not arg_string then 
+        if is_fish_shell then
+            awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. "'; or " .. prg, screen)
+        else
+            awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. "' || (" .. prg .. ")", screen)
+        end
+    else
+        if is_fish_shell then
+            awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. " ".. arg_string .."'; or " .. prg .. " " .. arg_string, screen)
+        else
+            awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. " ".. arg_string .."' || (" .. prg .. " " .. arg_string .. ")", screen)
+        end
+    end
+end
+
+-- Hide mouse if not use
+run_once("unclutter")
+-- Chat IRC
+run_once("pidgin")
+-- Web Browser
+run_once("firefox")
+-- Clipboard
+run_once("clipit")
+-- Uim
+run_once("uim-systray")
+-- Urxvt
+run_once("urxvt")
 -- }}}
 
 -- {{{ Wallpaper

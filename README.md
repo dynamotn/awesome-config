@@ -1,7 +1,7 @@
 Installation
 =======
 
-Clone it to `.config/awesome` or symlink this source to `.config/awesome`
+Clone it to `$XDG_CONFIG_HOME/awesome` or symlink this source to `$XDG_CONFIG_HOME/awesome`
 
 License
 =======
