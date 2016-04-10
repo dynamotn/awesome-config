@@ -1,144 +1,26 @@
--- vim:
--- filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80:fold-marker='{{{,}}}'
+-- vim:filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:fdm=marker:foldmarker={{{,}}}
 -- {{{ Standard awesome library
 local gears = require("gears")
-local awful = require("awful")
+awful = require("awful")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
+local menubar = require("menubar")
 -- Theme handling library
 local beautiful = require("beautiful")
--- Notification library
-local naughty = require("naughty")
-local menubar = require("menubar")
 -- }}}
 
--- {{{ Error handling
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
-if awesome.startup_errors then
-    naughty.notify({ preset = naughty.config.presets.critical,
-                     title = "Oops, there were errors during startup!",
-                     text = awesome.startup_errors })
-end
-
--- Handle runtime errors after startup
-do
-    local in_error = false
-    awesome.connect_signal("debug::error", function (err)
-        -- Make sure we don't go into an endless error loop
-        if in_error then return end
-        in_error = true
-
-        naughty.notify({ preset = naughty.config.presets.critical,
-                         title = "Oops, an error happened!",
-                         text = err })
-        in_error = false
-    end)
-end
+-- {{{ Error handling, variable definitions and function definitions
+require("helpers")
 -- }}}
 
--- {{{ Variable definitions
--- Localization
-os.setlocale(os.getenv("LANG"))
--- Themes define colours, icons, font and wallpapers.
+-- {{{ Autostart applications
+require_exist("autorun")
+-- }}}
+
+-- {{{ Themes define colours, icons, font and wallpapers.
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/theme.lua")
-
--- This is used later as the default terminal and editor to run.
-terminal = "urxvt"
-editor = os.getenv("EDITOR") or "vim"
-editor_cmd = terminal .. " -e " .. editor
-
--- Default function key on keyboard
-modkey = "Mod4"
-altkey = "Mod1"
-ctrlkey = "Control"
-
--- Table of layouts to cover with awful.layout.inc, order matters.
-local layouts =
-{
-    awful.layout.suit.floating,
-    awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.fair,
-    awful.layout.suit.magnifier
-}
-
--- If current shell is fish then use not POSIX syntax
-is_fish_shell = string.find(os.getenv("SHELL"), "fish")
-
--- Wallpaper auto change config
-wp_index = 1
-wp_timeout = 10
-wp_path = awful.util.pread("xdg-user-dir PICTURES"):gsub("^%s*(.-)%s*$", "%1") .. "/Wallpaper/"
-wp_filter = function(s) return string.match(s,"%.png$") or string.match(s,"%.jpg$") end
--- }}}
-
--- {{{ Function definitions
--- Scan directory, and optionally filter outputs
-function scandir(directory, filter)
-    local i, t, popen = 0, {}, io.popen
-    if not filter then
-        filter = function(s) return true end
-    end
-    for filename in popen('ls -a "'..directory..'"'):lines() do
-        if filter(filename) then
-            i = i + 1
-            t[i] = filename
-        end
-    end
-    return t
-end
-
--- Quit function when using gnome session
-_awesome_quit = awesome.quit
-awesome.quit = function()
-    if os.getenv("DESKTOP_SESSION") == "awesome-gnome" then
-       os.execute("/usr/bin/gnome-session-quit")
-    else
-        _awesome_quit()
-    end
-end
--- }}}
-
--- {{{ Autostart applications with fish shell
-function run_once(prg,arg_string,pname,screen)
-    if not prg then
-        do return nil end
-    end
-
-    if not pname then
-       pname = prg
-    end
-
-    if not arg_string then 
-        if is_fish_shell then
-            awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. "'; or " .. prg, screen)
-        else
-            awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. "' || (" .. prg .. ")", screen)
-        end
-    else
-        if is_fish_shell then
-            awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. " ".. arg_string .."'; or " .. prg .. " " .. arg_string, screen)
-        else
-            awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. " ".. arg_string .."' || (" .. prg .. " " .. arg_string .. ")", screen)
-        end
-    end
-end
-
--- Hide mouse if not use
-run_once("unclutter")
--- Chat IRC
-run_once("pidgin")
--- Web Browser
-run_once("firefox")
--- Clipboard
-run_once("clipit")
--- Uim
-run_once("uim-systray")
--- Urxvt
-run_once("urxvt")
 -- }}}
 
 -- {{{ Wallpaper
@@ -150,7 +32,7 @@ wp_timer:connect_signal("timeout", function()
         gears.wallpaper.maximized(wp_path .. wp_files[wp_index], s, true)
     end
     wp_timer:stop()
-    wp_index = math.random( 1, #wp_files)
+    wp_index = math.random(1, #wp_files)
     wp_timer.timeout = wp_timeout
     wp_timer:start()
 end)

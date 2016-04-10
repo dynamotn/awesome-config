@@ -1,3 +1,4 @@
+-- vim:filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:fdm=marker:foldmarker={{{,}}}
 local awful     = require("awful")
 local beautiful = require("beautiful")
 
@@ -10,9 +11,9 @@ freedesktop.utils.icon_theme = 'Moka'
 menu_items = freedesktop.menu.new()
 
 myawesomemenu = {
- { "Sửa cấu hình", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua", freedesktop.utils.lookup_icon({ icon = 'package_settings' }) },
- { "Khởi tạo lại", awesome.restart, freedesktop.utils.lookup_icon({ icon = 'gtk-refresh' }) },
- { "Thoát phiên", awesome.quit, freedesktop.utils.lookup_icon({ icon = 'gtk-quit' }) }
+    { "Sửa cấu hình", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua", freedesktop.utils.lookup_icon({ icon = 'package_settings' }) },
+    { "Khởi tạo lại", awesome.restart, freedesktop.utils.lookup_icon({ icon = 'gtk-refresh' }) },
+    { "Thoát phiên", awesome.quit, freedesktop.utils.lookup_icon({ icon = 'gtk-quit' }) }
 }
 
 table.insert(menu_items, { "Awesome", myawesomemenu, beautiful.awesome_icon })
