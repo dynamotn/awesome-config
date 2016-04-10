@@ -9,6 +9,8 @@ local wibox = require("wibox")
 local menubar = require("menubar")
 -- Theme handling library
 local beautiful = require("beautiful")
+-- Scratch drop
+local drop = require("drop")
 -- }}}
 
 -- {{{ Error handling, variable definitions and function definitions
@@ -221,6 +223,8 @@ globalkeys = awful.util.table.join(
                   nil,
                   awful.util.getdir("cache") .. "/history_calc")
               end),
+    -- Dropdown terminal
+    awful.key({ modkey, }, "z", function () drop(terminal) end),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end)
 )
