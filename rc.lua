@@ -11,6 +11,10 @@ local menubar = require("menubar")
 local beautiful = require("beautiful")
 -- Scratch drop
 local drop = require("drop")
+-- Lua to HTML library
+local html = require("html")
+-- Vicious library
+local vicious = require("vicious")
 -- }}}
 
 -- {{{ Error handling, variable definitions and function definitions
@@ -59,7 +63,8 @@ require('freedesktop/dynamo')
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = awful.widget.textclock()
+clockicon = wibox.widget.imagebox(beautiful.widget_clock)
+mytextclock = awful.widget.textclock(html("#de5e1e", "%H:%M ") .. html("#7788af"," %a %d %b"))
 
 -- Create a wibox for each screen and add it
 mywibox = {}
