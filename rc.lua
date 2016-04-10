@@ -212,10 +212,14 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey }, "x",
               function ()
-                  awful.prompt.run({ prompt = "Run Lua code: " },
+                  awful.prompt.run({ prompt = "Máy tính: " },
                   mypromptbox[mouse.screen].widget,
-                  awful.util.eval, nil,
-                  awful.util.getdir("cache") .. "/history_eval")
+                  function (expr)
+                          local result = awful.util.eval("return (" .. trim(expr) .. ")")
+                          naughty.notify({ text = expr .. " = " .. result, timeout = 10 })
+                  end,
+                  nil,
+                  awful.util.getdir("cache") .. "/history_calc")
               end),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end)

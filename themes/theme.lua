@@ -5,7 +5,7 @@
 theme = {}
 themes_dir = os.getenv("HOME") .. "/.config/awesome/themes"
 
-theme.font          = "sans 8"
+theme.font          = "Terminess Powerline 9"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
