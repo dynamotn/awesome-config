@@ -29,8 +29,8 @@ theme.taglist_squares_unsel = themes_dir .. "/taglist/squarew.png"
 
 -- Variables set for theming the menu:
 theme.menu_submenu_icon = themes_dir .. "/submenu.png"
-theme.menu_height = 15
-theme.menu_width  = 100
+theme.menu_height = 24
+theme.menu_width  = 200
 
 -- Define the image to load
 theme.titlebar_close_button_normal = themes_dir .. "/titlebar/close_normal.png"

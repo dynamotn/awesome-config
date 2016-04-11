@@ -28,5 +28,5 @@ mysystemmenu = {
 table.insert(menu_items, { "&Awesome", myawesomemenu, beautiful.awesome_icon })
 table.insert(menu_items, { "&Hệ thống", mysystemmenu, freedesktop.utils.lookup_icon({ icon = 'system' }) })
 
-mymainmenu = awful.menu.new({ items = menu_items, theme = { width = 200, height = 24 } })
+mymainmenu = awful.menu.new({ items = menu_items, theme = { width = beautiful.menu_width, height = beautiful.menu_height } })
 mylauncher = awful.widget.launcher({ image = beautiful.tux, menu = mymainmenu })
