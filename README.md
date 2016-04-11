@@ -3,6 +3,7 @@ Feature
 
 * Autostart application
 * Quake drop-down terminal
+* Freedesktop menu with Moka icon theme (please use other icon themes with correct format of Freedesktop)
 
 Installation
 =======
