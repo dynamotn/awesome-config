@@ -10,7 +10,7 @@ Installation
 ```
 cd ~
 git clone https://github.com/dynamotn/awesomewm-config
-ln -s ~/awesomewm-config $XDG_CONFIG_HOME/awesome`
+ln -s ~/awesomewm-config $XDG_CONFIG_HOME/awesome
 cd awesomewm-config
 git submodule update --init --recursive
 ```
