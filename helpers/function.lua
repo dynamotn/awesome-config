@@ -50,12 +50,15 @@ function trim(string)
 end
 -- }}}
 
--- {{{ Check file exist
+-- {{{ Check file exist and readable
 function file_exists(file)
-    local cmd = "/bin/bash -c 'if [ -e " .. file .. " ]; then echo true; fi;'"
-    local fh = io.popen(cmd)
-    s = trim(fh:read('*a'))
-    if s == 'true' then return true else return nil end
+    local f = io.open(file)
+    if f then
+        local s = f:read()
+        f:close()
+        f = s
+    end
+    return f ~= nil
 end
 -- }}}
 
