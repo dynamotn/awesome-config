@@ -7,7 +7,7 @@ require("helpers.system")
 require("freedesktop.utils")
 
 freedesktop.utils.terminal   = terminal
-freedesktop.utils.icon_theme = 'Moka'
+freedesktop.utils.icon_theme = beautiful.icon_theme
 
 menu_items = freedesktop.menu.new()
 

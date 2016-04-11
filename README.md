@@ -23,3 +23,9 @@ Copyright © 2016 Tran Duc Nam <dynamo.foss@gmail.com>
 
 The project is licensed under Creative Common BY-NC-SA 4.0.
 You can read it online at [here](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+Note
+=======
+
+My configuration is implementing, not recommended for use right now
+* Font: [Terminess Powerline](https://github.com/powerline/fonts/tree/master/Terminus)

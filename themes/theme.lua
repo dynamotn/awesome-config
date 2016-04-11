@@ -1,12 +1,10 @@
----------------------------
--- Default awesome theme --
----------------------------
-
+-- vim:filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:fdm=marker:foldmarker={{{,}}}
 theme = {}
-themes_dir = os.getenv("HOME") .. "/.config/awesome/themes"
+themes_dir = os.getenv("XDG_CONFIG_HOME") .. "/awesome/themes"
 
 theme.font          = "Terminess Powerline 9"
 
+-- {{{ Color
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
 theme.bg_urgent     = "#ff0000"
@@ -22,15 +20,17 @@ theme.border_width  = 1
 theme.border_normal = "#000000"
 theme.border_focus  = "#535d6c"
 theme.border_marked = "#91231c"
+-- }}}
 
 -- Display the taglist squares
 theme.taglist_squares_sel   = themes_dir .. "/taglist/squarefw.png"
 theme.taglist_squares_unsel = themes_dir .. "/taglist/squarew.png"
 
--- Variables set for theming the menu:
+-- {{{ Theming the menu:
 theme.menu_submenu_icon = themes_dir .. "/submenu.png"
 theme.menu_height = 24
 theme.menu_width  = 200
+-- }}}
 
 -- Define the image to load
 theme.titlebar_close_button_normal = themes_dir .. "/titlebar/close_normal.png"
@@ -70,12 +70,10 @@ theme.layout_tiletop = themes_dir .. "/layouts/tiletopw.png"
 theme.layout_spiral  = themes_dir .. "/layouts/spiralw.png"
 theme.layout_dwindle = themes_dir .. "/layouts/dwindlew.png"
 
+-- {{{ Normal icon
 theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
-
--- Define the icon theme for application icons. If not set then the icons 
--- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = "/usr/share/icons/Moka"
+theme.icon_theme = "Moka"
 theme.tux = themes_dir .. "/icons/logo-arch.png"
+-- }}}
 
 return theme
--- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
