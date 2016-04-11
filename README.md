@@ -4,6 +4,7 @@ Feature
 * Autostart application
 * Quake drop-down terminal
 * Freedesktop menu with Moka icon theme (please use other icon themes with correct format of Freedesktop)
+* Confirmation before restart/shutdown/quit
 
 Installation
 =======
@@ -11,7 +12,7 @@ Installation
 ```
 cd ~
 git clone https://github.com/dynamotn/awesomewm-config
-ln -s ~/awesomewm-config $XDG_CONFIG_HOME/awesome
+ln -s ~/awesomewm-config ~/.config/awesome
 cd awesomewm-config
 git submodule update --init --recursive
 ```

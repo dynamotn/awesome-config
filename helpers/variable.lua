@@ -12,7 +12,6 @@ editor_cmd = terminal .. " -e " .. editor
 -- {{{ Default function key on keyboard
 modkey = "Mod4"
 altkey = "Mod1"
-ctrlkey = "Control"
 -- }}}
 
 -- {{{ Table of layouts to cover with awful.layout.inc, order matters.

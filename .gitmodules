@@ -1,3 +1,6 @@
 [submodule "vicious"]
 	path = vicious
 	url = https://github.com/Mic92/vicious.git
+[submodule "redshift"]
+	path = redshift
+	url = https://github.com/YoRyan/awesome-redshift.git

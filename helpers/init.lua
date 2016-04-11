@@ -1,6 +1,6 @@
 require("helpers.debug")
 require("helpers.function")
 require("helpers.variable")
-require("helpers.system")
+require("helpers.dynamo")
 
 module("helpers")

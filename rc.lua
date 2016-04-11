@@ -8,9 +8,11 @@ require("awful.autofocus")
 local wibox = require("wibox")
 local menubar = require("menubar")
 -- Theme handling library
-local beautiful = require("beautiful")
+beautiful = require("beautiful")
 -- Scratch drop
 local drop = require("drop")
+-- Redshift library
+local redshift = require("redshift")
 -- Lua to HTML library
 local html = require("html")
 -- Vicious library
@@ -45,6 +47,10 @@ end)
 wp_timer:start()
 -- }}}
 
+-- {{{ Redshift config
+redshift.redshift = "/sbin/redshift"
+-- }}}
+
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
@@ -58,13 +64,25 @@ end
 -- }}}
 
 -- {{{ Menu
-require('freedesktop/dynamo')
+require_exist("menu")
 -- }}}
 
 -- {{{ Wibox
 -- Create a textclock widget
 clockicon = wibox.widget.imagebox(beautiful.widget_clock)
-mytextclock = awful.widget.textclock(html("#de5e1e", "%H:%M ") .. html("#7788af"," %a %d %b"))
+clockwidget = wibox.widget.textbox()
+vicious.register(clockwidget, vicious.widgets.date, html("#de5e1e", "%H:%M ") .. html("#7788af"," %a %d %b"))
+
+-- MEM
+memicon = wibox.widget.background()
+memicon.icon = wibox.widget.imagebox(beautiful.widget_mem)
+memicon:set_bg("#777e76")
+memicon:set_widget(memicon.icon)
+memwidget = wibox.widget.background()
+memwidget.text = wibox.widget.textbox()
+memwidget:set_bg("#777e76")
+memwidget:set_widget(memwidget.text)
+vicious.register(memwidget.text, vicious.widgets.mem, html("#eeeeee", "$2MB"), 3)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -119,7 +137,7 @@ mytasklist.buttons = awful.util.table.join(
 
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
-    mypromptbox[s] = awful.widget.prompt()
+    mypromptbox[s] = awful.widget.prompt({ prompt = html(beautiful.fg_command, "Lệnh: ") })
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     mylayoutbox[s] = awful.widget.layoutbox(s)
@@ -138,30 +156,34 @@ for s = 1, screen.count() do
     mywibox[s] = awful.wibox({ position = "top", screen = s, height = 18 })
     mybottomwibox[s] = awful.wibox({ position = "bottom", screen = s, height = 25 })
 
-    -- Widgets that are aligned to the left
+    -- Top left panel
     local left_layout = wibox.layout.fixed.horizontal()
     left_layout:add(mylauncher)
     left_layout:add(mypromptbox[s])
 
-    -- Widgets that are aligned to the right
+    -- Top right panel
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(mytextclock)
+    right_layout:add(memicon)
+    right_layout:add(memwidget)
+    right_layout:add(clockwidget)
     right_layout:add(mylayoutbox[s])
 
-    -- Now bring it all together (with the tasklist in the middle)
+    -- Top panel
     local layout = wibox.layout.align.horizontal()
     layout:set_left(left_layout)
     layout:set_right(right_layout)
     mywibox[s]:set_widget(layout)
 
+    -- Bottom right panel
     local bottom_right_layout = wibox.layout.fixed.horizontal()
     bottom_right_layout:add(mytasklist[s])
+
+    -- Bottom panel with left is tag list
     local bottom_layout = wibox.layout.align.horizontal()
     bottom_layout:set_left(mytaglist[s])
     bottom_layout:set_right(bottom_right_layout)
     mybottomwibox[s]:set_widget(bottom_layout)
-
 end
 -- }}}
 
@@ -222,23 +244,16 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey,           }, "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey,           }, "x",     dynamo.calculate                               ),
+    awful.key({ modkey, "Shift"   }, "x",     dynamo.quote                                   ),
 
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run({ prompt = "Máy tính: " },
-                  mypromptbox[mouse.screen].widget,
-                  function (expr)
-                          local result = awful.util.eval("return (" .. trim(expr) .. ")")
-                          naughty.notify({ text = expr .. " = " .. result, timeout = 10 })
-                  end,
-                  nil,
-                  awful.util.getdir("cache") .. "/history_calc")
-              end),
     -- Dropdown terminal
-    awful.key({ modkey, }, "z", function () drop(terminal) end),
+    awful.key({ modkey,           }, "z",     function () drop(terminal)  end),
+    -- Redshift
+    awful.key({ modkey,           }, "d",     redshift.toggle                ),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    awful.key({ modkey,           }, "p",     function () menubar.show()  end)
 )
 
 clientkeys = awful.util.table.join(
@@ -407,6 +422,9 @@ client.connect_signal("manage", function (c, startup)
     end
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("focus", function(c)
+    c.border_color = beautiful.border_focus
+    dbg({vars = c.client, notify = true})
+end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}

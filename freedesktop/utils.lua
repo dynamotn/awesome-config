@@ -84,7 +84,7 @@ function file_exists(filename)
 end
 
 function lookup_icon(arg)
-    if arg.icon:sub(1, 1) == '/' and (arg.icon:find('.+%.png') or arg.icon:find('.+%.xpm')) then
+    if arg.icon:sub(1, 1) == '/' and (arg.icon:find('.+%.png') or arg.icon:find('.+%.xpm') or arg.icon:find('.+%.svg')) then
         -- icons with absolute path and supported (AFAICT) formats
         return arg.icon
     else
@@ -99,6 +99,7 @@ function lookup_icon(arg)
         elseif icon_theme then
             icon_themes = { icon_theme }
         end
+        table.insert(icon_themes, arg.icon_theme)
         table.insert(icon_themes, 'hicolor')
         for i, theme in ipairs(icon_themes) do
             for j, path in ipairs(all_icon_paths) do
@@ -130,12 +131,14 @@ function lookup_icon(arg)
         table.insert(icon_path,  '/usr/share/pixmaps/')
 
         for i, directory in ipairs(icon_path) do
-            if (arg.icon:find('.+%.png') or arg.icon:find('.+%.xpm')) and file_exists(directory .. arg.icon) then
+            if (arg.icon:find('.+%.png') or arg.icon:find('.+%.xpm') or arg.icon:find('.+%.svg')) and file_exists(directory .. arg.icon) then
                 return directory .. arg.icon
             elseif file_exists(directory .. arg.icon .. '.png') then
                 return directory .. arg.icon .. '.png'
             elseif file_exists(directory .. arg.icon .. '.xpm') then
                 return directory .. arg.icon .. '.xpm'
+            elseif file_exists(directory .. arg.icon .. '.svg') then
+                return directory .. arg.icon .. '.svg'
             end
         end
     end
