@@ -35,3 +35,22 @@ wp_timeout = 10
 wp_path = trim(awful.util.pread("xdg-user-dir PICTURES")) .. "/Wallpaper/"
 wp_filter = function(s) return string.match(s,"%.png$") or string.match(s,"%.jpg$") end
 -- }}}
+
+-- {{{ Default launcher, panel
+-- Launcher
+mylauncher = awful.widget.launcher({ menu = {} })
+
+-- Workspace
+tags = {
+    names = { "TERM", "WEB", "NOTE", "M&V", "CHAT", "DOC", "GAME", "SYS", "MORE"},
+    layout = { layouts[3], layouts[2], layouts[5], layouts[1], layouts[3], layouts[4], layouts[3], layouts[1], layouts[1]}
+}
+
+-- Panel
+mywibox = {}
+mybottomwibox = {}
+mypromptbox = {}
+mylayoutbox = {}
+mytaglist = {}
+mytasklist = {}
+-- }}}

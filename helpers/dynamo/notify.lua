@@ -1,5 +1,7 @@
 -- vim:filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:fdm=marker:foldmarker={{{,}}}
+-- Notification library
 local naughty = require("naughty")
+-- Lua to HTML library
 local html = require("html")
 
 dynamo.calculate = function ()

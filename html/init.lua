@@ -32,12 +32,12 @@ end
 
 -- Set the foreground.
 function fg.color(color, text)
-  return '<span foreground="' .. tostring(color) .. '" font="' .. tostring(beautiful.font) ..'">' .. tostring(text) .. '</span>'
+  return '<span foreground="' .. tostring(color) .. '">' .. tostring(text) .. '</span>'
 end
 
 -- Set the background.
 function bg.color(color, text)
-  return '<span background="' .. tostring(color) .. '" font="' .. tostring(beautiful.font_background) ..'">' .. tostring(text) .. '</span>'
+  return '<span background="' .. tostring(color) .. '">' .. tostring(text) .. '</span>'
 end
 
 -- Context: focus
