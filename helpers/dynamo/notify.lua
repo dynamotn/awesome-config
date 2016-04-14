@@ -4,6 +4,7 @@ local naughty = require("naughty")
 -- Lua to HTML library
 local html = require("html")
 
+-- {{{ Calculation
 dynamo.calculate = function ()
     awful.prompt.run({ prompt = html(beautiful.fg_command ,"Máy tính: ") },
     mypromptbox[mouse.screen].widget,
@@ -14,6 +15,7 @@ dynamo.calculate = function ()
     nil,
     awful.util.getdir("cache") .. "/history_calc")
 end
+-- }}}
 
 dynamo.quote = function ()
     local result = awful.util.pread("fortune")

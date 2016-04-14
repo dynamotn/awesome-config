@@ -25,6 +25,18 @@ theme.border_marked = "#91231c"
 -- Text color
 theme.fg_confirm    = '#4caf50'
 theme.fg_command    = '#2196f3'
+
+-- Widget color
+theme.bg_widget     = { '#ececec',
+                        '#7d9f73',
+                        '#124e8a',
+                        '#03396c',
+                        '#011f4b' }
+theme.bg_panel      = '#313131'
+
+theme.fg_mem        = '#696c69'
+theme.fg_hour       = '#de5e1e'
+theme.fg_date       = '#7788af'
 -- }}}
 
 -- Display the taglist squares
@@ -39,8 +51,11 @@ theme.menu_height = 24
 theme.menu_width  = 200
 -- }}}
 
--- {{{ Widget icon
+-- {{{ Theming the widget
+theme.top_panel_height = 18
+theme.bottom_panel_height = 25
 theme.widget_mem = themes_dir .. "/widget/mem.png"
+theme.widget_clock = themes_dir .. "/widget/clock.png"
 -- }}}
 
 -- Define the image to load

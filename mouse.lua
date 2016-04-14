@@ -1,4 +1,5 @@
 -- vim:filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:fdm=marker:foldmarker={{{,}}}
+-- {{{ Workspace button
 mytaglist.buttons = awful.util.table.join(
                     awful.button({ }, 1, awful.tag.viewonly),
                     awful.button({ modkey }, 1, awful.client.movetotag),
@@ -7,6 +8,9 @@ mytaglist.buttons = awful.util.table.join(
                     awful.button({ }, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
                     awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
                     )
+-- }}}
+
+-- {{{ Taskbar button
 mytasklist.buttons = awful.util.table.join(
                      awful.button({ }, 1, function (c)
                                               if c == client.focus then
@@ -43,12 +47,28 @@ mytasklist.buttons = awful.util.table.join(
                                               if client.focus then client.focus:raise() end
                                           end)
                      )
+-- }}}
+
+-- {{{ Windows button
 clientbuttons = awful.util.table.join(
                 awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
                 awful.button({ modkey }, 1, awful.mouse.client.move),
                 awful.button({ modkey }, 3, awful.mouse.client.resize)
                 )
+-- }}}
+
+-- {{{ Layoutbox button
+layoutbuttons = awful.util.table.join(
+                awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
+                awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
+                awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
+                awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)
+                )
+-- }}}
+
+-- {{{ Desktop button
 root.buttons(awful.util.table.join(
              awful.button({ }, 3, function () mymainmenu:toggle() end),
              awful.button({ modkey }, 3, dynamo.quote)
              ))
+-- }}}

@@ -33,6 +33,7 @@ wp_timer:connect_signal("timeout", function()
     for s = 1, screen.count() do
         gears.wallpaper.maximized(wp_path .. wp_files[wp_index], s, true)
     end
+    collectgarbage("collect")
     wp_timer:stop()
     wp_index = math.random(1, #wp_files)
     wp_timer.timeout = wp_timeout
