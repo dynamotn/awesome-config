@@ -22,7 +22,7 @@ require_exist("autorun")
 -- }}}
 
 -- {{{ Themes define colours, icons, font and wallpapers.
-beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/theme.lua")
+beautiful.init(awful.util.getdir("config") .. "/themes/theme.lua")
 -- }}}
 
 -- {{{ Wallpaper

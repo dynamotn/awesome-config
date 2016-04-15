@@ -66,6 +66,12 @@ layoutbuttons = awful.util.table.join(
                 )
 -- }}}
 
+-- {{{ Widget button
+mpdbuttons = awful.util.table.join(
+             awful.button({ }, 1, function () run(music_cmd, screen.count(), 4) end)
+             )
+-- }}}
+
 -- {{{ Desktop button
 root.buttons(awful.util.table.join(
              awful.button({ }, 3, function () mymainmenu:toggle() end),

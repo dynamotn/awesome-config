@@ -16,7 +16,7 @@ end
 -- }}}
 
 -- {{{ Run application only one pid
-function run_once(prg,arg_string,pname,screen)
+function run_once(prg, arg_string, pname, screen)
     if not prg then
         do return nil end
     end
@@ -38,6 +38,26 @@ function run_once(prg,arg_string,pname,screen)
             awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. " ".. arg_string .."' || (" .. prg .. " " .. arg_string .. ")", screen)
         end
     end
+end
+-- }}}
+--
+-- {{{ Run application at specific tag
+function run(prg, screen, tag_number)
+    if not prg then
+        do return nil end
+    end
+
+    if tag_number then
+	local move_client
+        move_client = function(c, startup) 
+            dbg({vars = tag_number})
+            local tag = awful.tag.gettags(screen)[tag_number]
+            awful.client.movetotag(tag, c) 
+            client.disconnect_signal("manage", move_client) 
+	end 
+    end
+
+    awful.util.spawn_with_shell(prg)
 end
 -- }}}
 
@@ -67,6 +87,16 @@ function require_exist(lib)
     if file_exists(awful.util.getdir("config") .. '/' .. lib ..'.lua') or
         file_exists(awful.util.getdir("config") .. '/' .. lib) then
         require(lib)
+    end
+end
+-- }}}
+
+-- {{{ Get element has cyclic index from array
+function cyclic(arr, i)
+    if i % #arr == 0 then
+        return arr[#arr]
+    else
+        return arr[i % #arr]
     end
 end
 -- }}}

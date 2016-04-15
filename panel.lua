@@ -6,20 +6,57 @@ local vicious = require("vicious")
 -- Widget and layout library
 local wibox = require("wibox")
 
-local i = 0
+local index_indicator = 0
+local index_widget = 0
 
--- MEM
-mem = dynamo.section(beautiful.widget_mem, "opaque", beautiful.bg_widget[i + 1])
+-- MPD
+mpd = dynamo.section(beautiful.widget_music_off, cyclic(beautiful.bg_indicator, index_indicator), cyclic(beautiful.bg_indicator, index_indicator + 1))
+vicious.register(mpd.text, vicious.widgets.mpd,
+                 function(widget, args)
+                     if args["{state}"] == "Play" then
+                         mpd.icon:set_widget(wibox.widget.imagebox(beautiful.widget_music_on))
+                         return html("#EA6F81", " " .. args["{Artist}"] .. " ") .. args["{Title}"] .. " "
+                     elseif args["{state}"] == "Pause" then
+                         mpd.icon:set_widget(wibox.widget.imagebox(beautiful.widget_music_off))
+                         return "Tạm dừng"
+                     else
+                         mpd.icon:set_widget(wibox.widget.imagebox(beautiful.widget_music_off))
+                         return ""
+                     end
+                 end)
+mpd.icon:buttons(mpdbuttons)
+index_indicator = index_indicator + 1
+
+-- Volume
+volume = dynamo.section(beautiful.widget_vol, cyclic(beautiful.bg_indicator, index_indicator), cyclic(beautiful.bg_indicator, index_indicator + 1))
+vicious.register(volume.text, vicious.widgets.volume,
+                 function(widget, args)
+                     if args[2] == "♩" then
+                         volume.icon:set_widget(wibox.widget.imagebox(beautiful.widget_vol_mute))
+                     elseif args[1] == 0 then
+                         volume.icon:set_widget(wibox.widget.imagebox(beautiful.widget_vol_no))
+                     elseif args[1] <= 50 then
+                         volume.icon:set_widget(wibox.widget.imagebox(beautiful.widget_vol_low))
+                     else
+                         volume.icon:set_widget(wibox.widget.imagebox(beautiful.widget_vol))
+                     end
+                     return args[1] .. " "
+                 end, 2, "Master")
+index_indicator = index_indicator + 1
+
+-- Memory
+mem = dynamo.section(beautiful.widget_mem, cyclic(beautiful.bg_indicator, index_indicator), cyclic(beautiful.bg_widget, index_widget + 1))
 vicious.register(mem.text, vicious.widgets.mem, html(beautiful.fg_mem, "$2MB "), 3)
-i = i + 1
+index_widget = index_widget + 1
 
 -- Clock
-clock = dynamo.section(beautiful.widget_clock, beautiful.bg_widget[i], beautiful.bg_widget[i + 1])
+clock = dynamo.section(beautiful.widget_clock, cyclic(beautiful.bg_widget, index_widget), cyclic(beautiful.bg_widget, index_widget + 1))
 vicious.register(clock.text, vicious.widgets.date, html(beautiful.fg_hour, " %H:%M ") .. html(beautiful.fg_date," %a %d %b "))
-i = i + 1
+index_widget = index_widget + 1
 
 space = wibox.widget.textbox(' ')
-layoutarrow = dynamo.arrow_left(beautiful.bg_widget[i], "#313131") 
+layoutarrow = dynamo.arrow_left(cyclic(beautiful.bg_widget, index_widget), beautiful.bg_indicator[1]) 
+startarrow = dynamo.arrow_border_left(beautiful.bg_indicator[1])
 -- Create a wibox for each screen and add it
 
 for s = 1, screen.count() do
@@ -47,7 +84,19 @@ for s = 1, screen.count() do
 
     -- Top right panel
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(startarrow)
+    right_layout:add(space)
+    if s == screen.count() then
+        right_layout:add(wibox.widget.systray())
+        right_layout:add(space)
+    end
+    right_layout:add(startarrow)
+    right_layout:add(mpd.arrow)
+    right_layout:add(mpd.icon)
+    right_layout:add(mpd.info)
+    right_layout:add(volume.arrow)
+    right_layout:add(volume.icon)
+    right_layout:add(volume.info)
     right_layout:add(mem.arrow)
     right_layout:add(mem.icon)
     right_layout:add(mem.info)

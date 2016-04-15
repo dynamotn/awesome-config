@@ -22,3 +22,7 @@ run_once("uim-systray")
 -- {{{ Urxvt
 run_once("urxvt")
 -- }}}
+
+-- {{{ Mpd
+run_once("mpd")
+-- }}}

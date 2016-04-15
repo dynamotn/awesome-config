@@ -4,9 +4,12 @@ os.setlocale(os.getenv("LANG"))
 -- }}}
 
 -- {{{ Default application
-terminal = "urxvt"
-editor = os.getenv("EDITOR") or "vim"
-editor_cmd = terminal .. " -e " .. editor
+terminal        = "urxvt"
+editor          = os.getenv("EDITOR") or "vim"
+editor_cmd      = terminal .. " -e " .. editor
+terminal_cmd    = terminal .. " -g 130x34-320+16 -e "
+music_cmd       = terminal_cmd .. "ncmpcpp"
+monitor_cmd     = terminal_cmd .. "htop"
 -- }}}
 
 -- {{{ Default function key on keyboard
@@ -30,10 +33,10 @@ is_fish_shell = string.find(os.getenv("SHELL"), "fish")
 -- }}}
 
 -- {{{ Wallpaper auto change config
-wp_index = 1
+wp_index   = 1
 wp_timeout = 10
-wp_path = trim(awful.util.pread("xdg-user-dir PICTURES")) .. "/Wallpaper/"
-wp_filter = function(s) return string.match(s,"%.png$") or string.match(s,"%.jpg$") end
+wp_path    = trim(awful.util.pread("xdg-user-dir PICTURES")) .. "/Wallpaper/"
+wp_filter  = function(s) return string.match(s,"%.png$") or string.match(s,"%.jpg$") end
 -- }}}
 
 -- {{{ Default launcher, panel
@@ -47,10 +50,10 @@ tags = {
 }
 
 -- Panel
-mywibox = {}
+mywibox       = {}
 mybottomwibox = {}
-mypromptbox = {}
-mylayoutbox = {}
-mytaglist = {}
-mytasklist = {}
+mypromptbox   = {}
+mylayoutbox   = {}
+mytaglist     = {}
+mytasklist    = {}
 -- }}}

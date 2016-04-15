@@ -1,26 +1,25 @@
 -- vim:filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:fdm=marker:foldmarker={{{,}}}
+util = require("awful.util")
 theme = {}
-themes_dir = os.getenv("HOME") .. "/.config/awesome/themes"
+themes_dir = util.getdir("config") .. "/themes"
 
 theme.font            = "Terminess Powerline 9"
 theme.font_background = "Terminess Powerline 13"
 
 -- {{{ Color
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#535d6c"
-theme.bg_urgent     = "#ff0000"
-theme.bg_minimize   = "#444444"
+theme.bg_normal     = "#1a1a1a"
+theme.bg_focus      = "#313131"
+theme.bg_urgent     = "#212121"
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#ffffff"
+theme.fg_normal     = "#ddddff"
+theme.fg_focus      = "#f0dfaf"
+theme.fg_urgent     = "#33b5e5"
 
 theme.border_width  = 1
-theme.border_normal = "#000000"
-theme.border_focus  = "#535d6c"
-theme.border_marked = "#91231c"
+theme.border_normal = "#3f3f3f"
+theme.border_focus  = "#7f7f7f"
+theme.border_marked = "#cc9393"
 
 -- Text color
 theme.fg_confirm    = '#4caf50'
@@ -32,11 +31,26 @@ theme.bg_widget     = { '#ececec',
                         '#124e8a',
                         '#03396c',
                         '#011f4b' }
-theme.bg_panel      = '#313131'
+theme.bg_indicator  = { '#313131', theme.bg_normal}
 
 theme.fg_mem        = '#696c69'
 theme.fg_hour       = '#de5e1e'
 theme.fg_date       = '#7788af'
+
+-- Panel color
+theme.taglist_fg_focus     = "#fff3f3"
+theme.taglist_fg_occupied  = "#acacac"
+theme.taglist_fg_empty     = "#313131"
+theme.taglist_bg_focus     = "png:" .. themes_dir .. "/taglist/bg_focus.png"
+theme.tasklist_bg_minimize = "#444444"
+theme.tasklist_fg_minimize = "#777e76"
+theme.tasklist_bg_focus    = "#313131"
+theme.tasklist_fg_focus    = "#fff3f3"
+
+-- Notify color
+theme.notify_fg     = theme.fg_normal
+theme.notify_bg     = theme.bg_normal
+theme.notify_border = theme.border_focus
 -- }}}
 
 -- Display the taglist squares
@@ -53,9 +67,23 @@ theme.menu_width  = 200
 
 -- {{{ Theming the widget
 theme.top_panel_height = 18
-theme.bottom_panel_height = 25
+theme.bottom_panel_height = 28
 theme.widget_mem = themes_dir .. "/widget/mem.png"
 theme.widget_clock = themes_dir .. "/widget/clock.png"
+theme.widget_music_off = themes_dir .. "/widget/music_off.png"
+theme.widget_music_on = themes_dir .. "/widget/music_on.png"
+theme.widget_vol = themes_dir .. "/widget/vol.png"
+theme.widget_vol_low = themes_dir .. "/widget/vol_low.png"
+theme.widget_vol_no = themes_dir .. "/widget/vol_no.png"
+theme.widget_vol_mute = themes_dir .. "/widget/vol_mute.png"
+-- }}}
+
+-- {{{ Theming taskbar
+theme.tasklist_disable_icon = false
+theme.tasklist_floating = ""
+theme.tasklist_maximized_horizontal = ""
+theme.tasklist_maximized_vertical = ""
+theme.useless_gap_width = 10
 -- }}}
 
 -- Define the image to load

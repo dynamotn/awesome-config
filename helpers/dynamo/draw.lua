@@ -14,33 +14,64 @@ dynamo.arrow_left = function(color1, color2)
     end
 
     widget.draw = function(mycross, wibox, cairo, width, height)
-	if color1 ~= "opaque" then
-	    cairo:set_source_rgb(gears.color.parse_color(color1))
-	    cairo:new_path()
-	    cairo:move_to(0, height / 2)
-	    cairo:line_to(width, 0)
-	    cairo:line_to(0, 0)
-	    cairo:close_path()
-	    cairo:fill()
+        if color1 ~= "opaque" then
+            cairo:set_source_rgb(gears.color.parse_color(color1))
+            cairo:new_path()
+            cairo:move_to(0, height / 2)
+            cairo:line_to(width, 0)
+            cairo:line_to(0, 0)
+            cairo:close_path()
+            cairo:fill()
 
-	    cairo:new_path()
-	    cairo:move_to(0, height / 2)
-	    cairo:line_to(width, height)
-	    cairo:line_to(0, height)
-	    cairo:close_path()
-	    cairo:fill()
-	end
+            cairo:new_path()
+            cairo:move_to(0, height / 2)
+            cairo:line_to(width, height)
+            cairo:line_to(0, height)
+            cairo:close_path()
+            cairo:fill()
+        end
 
-	if color2 ~= "opaque" then
-	    cairo:set_source_rgb(gears.color.parse_color(color2))
-	    cairo:new_path()
-	    cairo:move_to(width, 0)
-	    cairo:line_to(0, height / 2)
-	    cairo:line_to(width, height)
-	    cairo:close_path()
+        if color2 ~= "opaque" then
+            cairo:set_source_rgb(gears.color.parse_color(color2))
+            cairo:new_path()
+            cairo:move_to(width, 0)
+            cairo:line_to(0, height / 2)
+            cairo:line_to(width, height)
+            cairo:close_path()
 
-	    cairo:fill()
-	end
+            cairo:fill()
+        end
+   end
+
+   return widget
+end
+-- }}}
+
+-- {{{ Draw arrow not fill
+dynamo.arrow_border_left = function(color)
+    -- Create new widget
+    local widget = wibox.widget.base.make_widget()
+
+    -- Get width and height same with base widget that current widget put on
+    widget.fit = function(widget, width, height)
+        return height / 2, height
+    end
+
+    widget.draw = function(mycross, wibox, cairo, width, height)
+        cairo:set_source_rgb(gears.color.parse_color(color))
+        cairo:new_path()
+        cairo:move_to(width, 0)
+        cairo:line_to(width - 1, 0)
+        cairo:line_to(0, height / 2 - 1)
+        cairo:line_to(0, height / 2 + 1)
+        cairo:line_to(width - 1, height)
+        cairo:line_to(width, height)
+        cairo:line_to(width, height - 1)
+        cairo:line_to(1, height / 2)
+        cairo:line_to(width, 1)
+        cairo:close_path()
+
+        cairo:fill()
    end
 
    return widget
