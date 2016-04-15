@@ -23,7 +23,7 @@ vicious.register(mpd.text, vicious.widgets.mpd,
                          mpd.icon:set_widget(wibox.widget.imagebox(beautiful.widget_music_off))
                          return ""
                      end
-                 end)
+                 end, 1)
 mpd.icon:buttons(mpdbuttons)
 index_indicator = index_indicator + 1
 
@@ -41,17 +41,17 @@ vicious.register(volume.text, vicious.widgets.volume,
                          volume.icon:set_widget(wibox.widget.imagebox(beautiful.widget_vol))
                      end
                      return args[1] .. " "
-                 end, 2, "Master")
+                 end, 0.1, "Master")
 index_indicator = index_indicator + 1
 
 -- Memory
 mem = dynamo.section(beautiful.widget_mem, cyclic(beautiful.bg_indicator, index_indicator), cyclic(beautiful.bg_widget, index_widget + 1))
-vicious.register(mem.text, vicious.widgets.mem, html(beautiful.fg_mem, "$2MB "), 3)
+vicious.register(mem.text, vicious.widgets.mem, html(beautiful.fg_mem, "$2MB "), 1)
 index_widget = index_widget + 1
 
 -- Clock
 clock = dynamo.section(beautiful.widget_clock, cyclic(beautiful.bg_widget, index_widget), cyclic(beautiful.bg_widget, index_widget + 1))
-vicious.register(clock.text, vicious.widgets.date, html(beautiful.fg_hour, " %H:%M ") .. html(beautiful.fg_date," %a %d %b "))
+vicious.register(clock.text, vicious.widgets.date, html(beautiful.fg_hour, " %H:%M ") .. html(beautiful.fg_date," %a %d %b "), 1)
 index_widget = index_widget + 1
 
 space = wibox.widget.textbox(' ')
