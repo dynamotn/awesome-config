@@ -1,24 +1,45 @@
 -- vim:filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:fdm=marker:foldmarker={{{,}}}
 -- Scratch drop
 local drop = require("drop")
+-- Vicious
+local vicious = require("vicious")
 
 -- Global keys
 globalkeys = awful.util.table.join(
+
+    -- Workspace browsing
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
+    -- Screen move
+    awful.key({ modkey, "Control" }, "Left",   function() awful.screen.focus(mouse.screen - 1) end),
+    awful.key({ modkey, "Control" }, "Right",  function() awful.screen.focus(mouse.screen + 1) end),
+
+    -- Client focus
     awful.key({ modkey,           }, "j",
         function ()
-            awful.client.focus.byidx( 1)
+            awful.client.focus.bydirection("down")
             if client.focus then client.focus:raise() end
         end),
     awful.key({ modkey,           }, "k",
         function ()
-            awful.client.focus.byidx(-1)
+            awful.client.focus.bydirection("up")
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
+    awful.key({ modkey,           }, "h",
+        function ()
+            awful.client.focus.bydirection("left")
+            if client.focus then client.focus:raise() end
+        end),
+    awful.key({ modkey,           }, "l",
+        function ()
+            awful.client.focus.bydirection("right")
+            if client.focus then client.focus:raise() end
+        end),
+
+    -- Show menu
+    awful.key({ modkey,           }, "F2", function () mymainmenu:show() end),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
@@ -33,14 +54,8 @@ globalkeys = awful.util.table.join(
                 client.focus:raise()
             end
         end),
-
-    -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey, "Control" }, "r", awesome.restart),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
-
-    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
-    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
+    awful.key({ altkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
+    awful.key({ altkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
     awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
@@ -50,10 +65,59 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
+    -- Standard program
+    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey, "Control" }, "r", awesome.restart),
+    --awful.key({ modkey, "Shift"   }, "q", awesome.quit),
+
     -- Prompt
-    awful.key({ modkey,           }, "r",     function () mypromptbox[mouse.screen]:run() end),
-    awful.key({ modkey,           }, "x",     dynamo.calculate                               ),
-    awful.key({ modkey, "Shift"   }, "x",     dynamo.quote                                   ),
+    awful.key({ altkey,           }, "F2",    function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ altkey,           }, "F3",     dynamo.calculate                               ),
+    awful.key({ modkey,           }, "x",     dynamo.quote                                   ),
+
+    -- ALSA volume control
+    awful.key({ altkey,           }, "Up",
+    function ()
+        awful.util.spawn("amixer -q set Master 1%+")
+        vicious.force(volume.text)
+    end),
+    awful.key({ altkey,           }, "Down",
+    function ()
+        awful.util.spawn("amixer -q set Master 1%-")
+        vicious.force(volume.text)
+    end),
+    awful.key({ altkey,           }, "m",
+    function ()
+        awful.util.spawn("amixer -q set Master playback toggle")
+        vicious.force(volume.text)
+    end),
+    awful.key({ altkey, "Control" }, "m",
+    function ()
+        awful.util.spawn("amixer -q set Master playback 100%")
+        vicious.force(volume.text)
+    end),
+
+    -- MPD control
+    awful.key({ altkey, "Control" }, "Up",
+    function ()
+        awful.util.spawn_with_shell("mpc toggle")
+        vicious.force(mpd.text)
+    end),
+    awful.key({ altkey, "Control" }, "Down",
+    function ()
+        awful.util.spawn_with_shell("mpc stop")
+        vicious.force(mpd.text)
+    end),
+    awful.key({ altkey, "Control" }, "Left",
+    function ()
+        awful.util.spawn_with_shell("mpc prev")
+        vicious.force(mpd.text)
+    end),
+    awful.key({ altkey, "Control" }, "Right",
+    function ()
+        awful.util.spawn_with_shell("mpc next")
+        vicious.force(mpd.text)
+    end),
 
     -- Dropdown terminal
     awful.key({ modkey,           }, "z",     function () drop(terminal)  end),
@@ -65,7 +129,7 @@ globalkeys = awful.util.table.join(
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
-    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
+    awful.key({ altkey,           }, "F4",     function (c) c:kill()                         end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
