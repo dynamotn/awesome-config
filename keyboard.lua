@@ -3,6 +3,8 @@
 local drop = require("drop")
 -- Vicious
 local vicious = require("vicious")
+-- Menubar
+local menubar = require("menubar")
 
 -- Global keys
 globalkeys = awful.util.table.join(

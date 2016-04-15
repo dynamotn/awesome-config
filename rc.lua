@@ -4,8 +4,6 @@ local gears = require("gears")
 awful = require("awful")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
--- Menubar
-local menubar = require("menubar")
 -- Theme handling library
 beautiful = require("beautiful")
 -- }}}
