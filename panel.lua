@@ -94,6 +94,14 @@ clock = dynamo.section(beautiful.widget_clock, cyclic(beautiful.bg_widget, index
 vicious.register(clock.text, vicious.widgets.date, html(beautiful.fg_hour, " %H:%M ") .. html(beautiful.fg_date," %a %d %b "), 10)
 index_widget = index_widget + 1
 
+-- Prompt
+prompt = {}
+prompt.text = wibox.widget.textbox()
+prompt.info = wibox.widget.background(prompt.text, beautiful.bg_command)
+prompt.arrow = dynamo.arrow_right(beautiful.bg_command, beautiful.bg_normal)
+launcher = wibox.widget.background(mylauncher, beautiful.bg_command)
+vicious.register(prompt.text, vicious.widgets.os, html(beautiful.fg_command, " $3@$4"))
+
 space = wibox.widget.textbox(' ')
 layoutarrow = dynamo.arrow_left(cyclic(beautiful.bg_widget, index_widget), beautiful.bg_indicator[1]) 
 startarrow = dynamo.arrow_border_left(beautiful.bg_indicator[1])
@@ -101,7 +109,7 @@ startarrow = dynamo.arrow_border_left(beautiful.bg_indicator[1])
 
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
-    mypromptbox[s] = awful.widget.prompt({ prompt = html(beautiful.fg_command, "Lệnh: ") })
+    mypromptbox[s] = awful.widget.prompt({ prompt = "" })
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     mylayoutbox[s] = awful.widget.layoutbox(s)
@@ -118,7 +126,9 @@ for s = 1, screen.count() do
 
     -- Top left panel
     local left_layout = wibox.layout.fixed.horizontal()
-    left_layout:add(mylauncher)
+    left_layout:add(launcher)
+    left_layout:add(prompt.info)
+    left_layout:add(prompt.arrow)
     left_layout:add(space)
     left_layout:add(mypromptbox[s])
 

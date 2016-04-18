@@ -21,7 +21,9 @@ theme.border_normal = "#3f3f3f"
 theme.border_focus  = "#7f7f7f"
 theme.border_marked = "#cc9393"
 
--- Text color
+-- Prompt color
+theme.bg_command    = "#f0f0f0"
+
 theme.fg_confirm    = "#4caf50"
 theme.fg_command    = "#2196f3"
 

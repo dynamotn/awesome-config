@@ -45,6 +45,48 @@ dynamo.arrow_left = function(color1, color2)
 
    return widget
 end
+
+dynamo.arrow_right = function(color1, color2)
+    -- Create new widget
+    local widget = wibox.widget.base.make_widget()
+
+    -- Get width and height same with base widget that current widget put on
+    widget.fit = function(widget, width, height)
+        return height / 2, height
+    end
+
+    widget.draw = function(mycross, wibox, cairo, width, height)
+        if color2 ~= "opaque" then
+            cairo:set_source_rgb(gears.color.parse_color(color2))
+            cairo:new_path()
+            cairo:move_to(width, height / 2)
+            cairo:line_to(0, 0)
+            cairo:line_to(width, 0)
+            cairo:close_path()
+            cairo:fill()
+
+            cairo:new_path()
+            cairo:move_to(width, height / 2)
+            cairo:line_to(0, height)
+            cairo:line_to(width, height)
+            cairo:close_path()
+            cairo:fill()
+        end
+
+        if color1 ~= "opaque" then
+            cairo:set_source_rgb(gears.color.parse_color(color1))
+            cairo:new_path()
+            cairo:move_to(0, 0)
+            cairo:line_to(width, height / 2)
+            cairo:line_to(0, height)
+            cairo:close_path()
+
+            cairo:fill()
+        end
+   end
+
+   return widget
+end
 -- }}}
 
 -- {{{ Draw arrow not fill
@@ -69,6 +111,35 @@ dynamo.arrow_border_left = function(color)
         cairo:line_to(width, height - 1)
         cairo:line_to(1, height / 2)
         cairo:line_to(width, 1)
+        cairo:close_path()
+
+        cairo:fill()
+   end
+
+   return widget
+end
+
+dynamo.arrow_border_right = function(color)
+    -- Create new widget
+    local widget = wibox.widget.base.make_widget()
+
+    -- Get width and height same with base widget that current widget put on
+    widget.fit = function(widget, width, height)
+        return height / 2, height
+    end
+
+    widget.draw = function(mycross, wibox, cairo, width, height)
+        cairo:set_source_rgb(gears.color.parse_color(color))
+        cairo:new_path()
+        cairo:move_to(0, 0)
+        cairo:line_to(1, 0)
+        cairo:line_to(width, height / 2 - 1)
+        cairo:line_to(width, height / 2 + 1)
+        cairo:line_to(1, height)
+        cairo:line_to(0, height)
+        cairo:line_to(0, height - 1)
+        cairo:line_to(width - 1, height / 2)
+        cairo:line_to(0, 1)
         cairo:close_path()
 
         cairo:fill()
