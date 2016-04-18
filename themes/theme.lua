@@ -22,20 +22,27 @@ theme.border_focus  = "#7f7f7f"
 theme.border_marked = "#cc9393"
 
 -- Text color
-theme.fg_confirm    = '#4caf50'
-theme.fg_command    = '#2196f3'
+theme.fg_confirm    = "#4caf50"
+theme.fg_command    = "#2196f3"
 
 -- Widget color
-theme.bg_widget     = { '#ececec',
-                        '#7d9f73',
-                        '#124e8a',
-                        '#03396c',
-                        '#011f4b' }
-theme.bg_indicator  = { '#313131', theme.bg_normal}
+theme.bg_widget     = { "#0c273d",
+                        "#44c0dd",
+                        "#fffef1",
+                        "#70b85d",
+                        "#2c5e2e" }
+theme.bg_indicator  = { "#313131", theme.bg_normal}
 
-theme.fg_mem        = '#696c69'
-theme.fg_hour       = '#de5e1e'
-theme.fg_date       = '#7788af'
+theme.fg_widget     = { "#f3f3ff",
+                        "#f3f3ff",
+                        "#c44c51",
+                        "#f3fff3",
+                        "#f3fff3" }
+theme.fg_hour       = theme.bg_widget[3]
+theme.fg_date       = theme.bg_widget[1]
+theme.fg_artist     = "#ea6f81"
+theme.fg_net_down   = theme.bg_widget[2]
+theme.fg_net_up     = theme.bg_widget[4]
 
 -- Panel color
 theme.taglist_fg_focus     = "#fff3f3"
@@ -53,11 +60,12 @@ theme.notify_bg     = theme.bg_normal
 theme.notify_border = theme.border_focus
 -- }}}
 
--- Display the taglist squares
+-- {{{ Theming workspace 
 theme.taglist_squares_sel   = themes_dir .. "/taglist/squarefw.png"
 theme.taglist_squares_unsel = themes_dir .. "/taglist/squarew.png"
+-- }}}
 
--- {{{ Theming the menu:
+-- {{{ Theming the menu
 theme.menu_submenu_icon = themes_dir .. "/menu/submenu.png"
 theme.menu_edit_icon = themes_dir .. "/menu/edit.svg"
 theme.menu_refresh_icon = themes_dir .. "/menu/refresh.svg"
@@ -69,6 +77,14 @@ theme.menu_width  = 200
 theme.top_panel_height = 18
 theme.bottom_panel_height = 28
 theme.widget_mem = themes_dir .. "/widget/mem.png"
+theme.widget_cpu = themes_dir .. "/widget/cpu.png"
+theme.widget_temp = themes_dir .. "/widget/temp.png"
+theme.widget_hdd = themes_dir .. "/widget/hdd.png"
+theme.widget_battery_no = themes_dir .. "/widget/battery_no.png"
+theme.widget_battery_empty = themes_dir .. "/widget/battery_empty.png"
+theme.widget_battery_low = themes_dir .. "/widget/battery_low.png"
+theme.widget_battery_normal = themes_dir .. "/widget/battery_normal.png"
+theme.widget_net = themes_dir .. "/widget/net.png"
 theme.widget_clock = themes_dir .. "/widget/clock.png"
 theme.widget_music_off = themes_dir .. "/widget/music_off.png"
 theme.widget_music_on = themes_dir .. "/widget/music_on.png"
@@ -86,36 +102,13 @@ theme.tasklist_maximized_vertical = ""
 theme.useless_gap_width = 10
 -- }}}
 
--- Define the image to load
-theme.titlebar_close_button_normal = themes_dir .. "/titlebar/close_normal.png"
-theme.titlebar_close_button_focus  = themes_dir .. "/titlebar/close_focus.png"
-
-theme.titlebar_ontop_button_normal_inactive = themes_dir .. "/titlebar/ontop_normal_inactive.png"
-theme.titlebar_ontop_button_focus_inactive  = themes_dir .. "/titlebar/ontop_focus_inactive.png"
-theme.titlebar_ontop_button_normal_active = themes_dir .. "/titlebar/ontop_normal_active.png"
-theme.titlebar_ontop_button_focus_active  = themes_dir .. "/titlebar/ontop_focus_active.png"
-
-theme.titlebar_sticky_button_normal_inactive = themes_dir .. "/titlebar/sticky_normal_inactive.png"
-theme.titlebar_sticky_button_focus_inactive  = themes_dir .. "/titlebar/sticky_focus_inactive.png"
-theme.titlebar_sticky_button_normal_active = themes_dir .. "/titlebar/sticky_normal_active.png"
-theme.titlebar_sticky_button_focus_active  = themes_dir .. "/titlebar/sticky_focus_active.png"
-
-theme.titlebar_floating_button_normal_inactive = themes_dir .. "/titlebar/floating_normal_inactive.png"
-theme.titlebar_floating_button_focus_inactive  = themes_dir .. "/titlebar/floating_focus_inactive.png"
-theme.titlebar_floating_button_normal_active = themes_dir .. "/titlebar/floating_normal_active.png"
-theme.titlebar_floating_button_focus_active  = themes_dir .. "/titlebar/floating_focus_active.png"
-
-theme.titlebar_maximized_button_normal_inactive = themes_dir .. "/titlebar/maximized_normal_inactive.png"
-theme.titlebar_maximized_button_focus_inactive  = themes_dir .. "/titlebar/maximized_focus_inactive.png"
-theme.titlebar_maximized_button_normal_active = themes_dir .. "/titlebar/maximized_normal_active.png"
-theme.titlebar_maximized_button_focus_active  = themes_dir .. "/titlebar/maximized_focus_active.png"
-
--- You can use your own layout icons like this:
+-- {{{ Theming layout
 theme.layout_fairv = themes_dir .. "/layouts/fairv.png"
 theme.layout_floating  = themes_dir .. "/layouts/floating.png"
 theme.layout_magnifier = themes_dir .. "/layouts/magnifier.png"
 theme.layout_tileleft   = themes_dir .. "/layouts/tileleft.png"
 theme.layout_tile = themes_dir .. "/layouts/tile.png"
+-- }}}
 
 -- {{{ Normal icon
 theme.awesome_icon = themes_dir .. "/icons/awesome-icon.png"

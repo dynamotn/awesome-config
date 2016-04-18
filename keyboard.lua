@@ -74,51 +74,46 @@ globalkeys = awful.util.table.join(
 
     -- Prompt
     awful.key({ altkey,           }, "F2",    function () mypromptbox[mouse.screen]:run() end),
-    awful.key({ altkey,           }, "F3",     dynamo.calculate                               ),
-    awful.key({ modkey,           }, "x",     dynamo.quote                                   ),
+    awful.key({ altkey,           }, "F3",    dynamo.calculate                               ),
+    awful.key({                   }, "XF86Launch1",dynamo.quote                              ),
 
     -- ALSA volume control
-    awful.key({ altkey,           }, "Up",
+    awful.key({                   }, "XF86AudioRaiseVolume",
     function ()
         awful.util.spawn("amixer -q set Master 1%+")
-        vicious.force(volume.text)
+        vicious.force({vol.text})
     end),
-    awful.key({ altkey,           }, "Down",
+    awful.key({                   }, "XF86AudioLowerVolume",
     function ()
         awful.util.spawn("amixer -q set Master 1%-")
-        vicious.force(volume.text)
+        vicious.force({vol.text})
     end),
-    awful.key({ altkey,           }, "m",
+    awful.key({                   }, "XF86AudioMute",
     function ()
         awful.util.spawn("amixer -q set Master playback toggle")
-        vicious.force(volume.text)
-    end),
-    awful.key({ altkey, "Control" }, "m",
-    function ()
-        awful.util.spawn("amixer -q set Master playback 100%")
-        vicious.force(volume.text)
+        vicious.force({vol.text})
     end),
 
     -- MPD control
-    awful.key({ altkey, "Control" }, "Up",
+    awful.key({                   }, "XF86AudioPlay",
     function ()
         awful.util.spawn_with_shell("mpc toggle")
-        vicious.force(mpd.text)
+        vicious.force({mpd.text})
     end),
-    awful.key({ altkey, "Control" }, "Down",
+    awful.key({                   }, "XF86AudioStop",
     function ()
         awful.util.spawn_with_shell("mpc stop")
-        vicious.force(mpd.text)
+        vicious.force({mpd.text})
     end),
-    awful.key({ altkey, "Control" }, "Left",
+    awful.key({                   }, "XF86AudioPrev",
     function ()
         awful.util.spawn_with_shell("mpc prev")
-        vicious.force(mpd.text)
+        vicious.force({mpd.text})
     end),
-    awful.key({ altkey, "Control" }, "Right",
+    awful.key({                   }, "XF86AudioNext",
     function ()
         awful.util.spawn_with_shell("mpc next")
-        vicious.force(mpd.text)
+        vicious.force({mpd.text})
     end),
 
     -- Dropdown terminal

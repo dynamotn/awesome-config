@@ -50,14 +50,15 @@ function run(prg, screen, tag_number)
     if tag_number then
 	local move_client
         move_client = function(c, startup) 
-            dbg({vars = tag_number})
             local tag = awful.tag.gettags(screen)[tag_number]
             awful.client.movetotag(tag, c) 
             client.disconnect_signal("manage", move_client) 
 	end 
+
+        client.connect_signal("manage", move_client)
     end
 
-    awful.util.spawn_with_shell(prg)
+    awful.util.spawn_with_shell(prg, false)
 end
 -- }}}
 

@@ -84,14 +84,10 @@ dynamo.section = function(image, color_prev, color_current)
 
     section.arrow = dynamo.arrow_left(color_prev, color_current)
 
-    section.icon = wibox.widget.background()
-    section.icon:set_bg(color_current)
-    section.icon:set_widget(wibox.widget.imagebox(image))
+    section.icon = wibox.widget.background(wibox.widget.imagebox(image), color_current)
 
     section.text = wibox.widget.textbox()
-    section.info = wibox.widget.background()
-    section.info:set_bg(color_current)
-    section.info:set_widget(section.text)
+    section.info = wibox.widget.background(section.text, color_current)
 
     return section
 end

@@ -3,6 +3,7 @@
 local html = require("html")
 -- Vicious library
 local vicious = require("vicious")
+vicious.contrib = require("vicious.contrib")
 -- Widget and layout library
 local wibox = require("wibox")
 
@@ -15,43 +16,82 @@ vicious.register(mpd.text, vicious.widgets.mpd,
                  function(widget, args)
                      if args["{state}"] == "Play" then
                          mpd.icon:set_widget(wibox.widget.imagebox(beautiful.widget_music_on))
-                         return html("#EA6F81", " " .. args["{Artist}"] .. " ") .. args["{Title}"] .. " "
+                         return html(beautiful.fg_artist, " " .. args["{Artist}"] .. " ") .. args["{Title}"] .. " "
                      elseif args["{state}"] == "Pause" then
                          mpd.icon:set_widget(wibox.widget.imagebox(beautiful.widget_music_off))
-                         return "Tạm dừng"
+                         return "Pause"
                      else
                          mpd.icon:set_widget(wibox.widget.imagebox(beautiful.widget_music_off))
-                         return ""
+                         return "Stop"
                      end
-                 end, 1)
-mpd.icon:buttons(mpdbuttons)
+                 end, 2)
+mpd.info:buttons(mpdbuttons)
 index_indicator = index_indicator + 1
 
 -- Volume
-volume = dynamo.section(beautiful.widget_vol, cyclic(beautiful.bg_indicator, index_indicator), cyclic(beautiful.bg_indicator, index_indicator + 1))
-vicious.register(volume.text, vicious.widgets.volume,
+vol = dynamo.section(beautiful.widget_vol, cyclic(beautiful.bg_indicator, index_indicator), cyclic(beautiful.bg_indicator, index_indicator + 1))
+vicious.register(vol.text, vicious.widgets.volume,
                  function(widget, args)
                      if args[2] == "♩" then
-                         volume.icon:set_widget(wibox.widget.imagebox(beautiful.widget_vol_mute))
+                         vol.icon:set_widget(wibox.widget.imagebox(beautiful.widget_vol_mute))
                      elseif args[1] == 0 then
-                         volume.icon:set_widget(wibox.widget.imagebox(beautiful.widget_vol_no))
+                         vol.icon:set_widget(wibox.widget.imagebox(beautiful.widget_vol_no))
                      elseif args[1] <= 50 then
-                         volume.icon:set_widget(wibox.widget.imagebox(beautiful.widget_vol_low))
+                         vol.icon:set_widget(wibox.widget.imagebox(beautiful.widget_vol_low))
                      else
-                         volume.icon:set_widget(wibox.widget.imagebox(beautiful.widget_vol))
+                         vol.icon:set_widget(wibox.widget.imagebox(beautiful.widget_vol))
                      end
                      return args[1] .. " "
-                 end, 0.1, "Master")
+                 end, 2, "Master")
 index_indicator = index_indicator + 1
 
 -- Memory
 mem = dynamo.section(beautiful.widget_mem, cyclic(beautiful.bg_indicator, index_indicator), cyclic(beautiful.bg_widget, index_widget + 1))
-vicious.register(mem.text, vicious.widgets.mem, html(beautiful.fg_mem, "$2MB "), 1)
+vicious.register(mem.text, vicious.widgets.mem, html(cyclic(beautiful.fg_widget, index_widget + 1), "$2MB "), 2)
+index_widget = index_widget + 1
+
+-- CPU
+cpu = dynamo.section(beautiful.widget_cpu, cyclic(beautiful.bg_widget, index_widget), cyclic(beautiful.bg_widget, index_widget + 1))
+vicious.register(cpu.text, vicious.widgets.cpu, html(cyclic(beautiful.fg_widget, index_widget + 1), "$1% "), 2)
+index_widget = index_widget + 1
+
+-- Temperature
+temp = dynamo.section(beautiful.widget_temp, cyclic(beautiful.bg_widget, index_widget), cyclic(beautiful.bg_widget, index_widget + 1))
+vicious.register(temp.text, vicious.widgets.thermal, html(cyclic(beautiful.fg_widget, index_widget + 1), "$1°C "), 2, "thermal_zone0")
+index_widget = index_widget + 1
+
+-- Disk space
+hdd = dynamo.section(beautiful.widget_hdd, cyclic(beautiful.bg_widget, index_widget), cyclic(beautiful.bg_widget, index_widget + 1))
+vicious.register(hdd.text, vicious.widgets.fs, html(cyclic(beautiful.fg_widget, index_widget + 1), "${/home used_gb}GB "), 60)
+index_widget = index_widget + 1
+
+-- Power
+bat = dynamo.section(beautiful.widget_bat, cyclic(beautiful.bg_widget, index_widget), cyclic(beautiful.bg_widget, index_widget + 1))
+local battery_index = index_widget + 1
+vicious.register(bat.text, vicious.widgets.bat, 
+                 function(widget, args)
+                     if args[1] == "⌁" then
+                         bat.icon:set_widget(wibox.widget.imagebox(beautiful.widget_battery_no))
+                         return html(cyclic(beautiful.fg_widget, battery_index), "AC ")
+                     elseif args[2] <= 5 then
+                         bat.icon:set_widget(wibox.widget.imagebox(beautiful.widget_battery_empty))
+                     elseif args[2] <= 15 then
+                         bat.icon:set_widget(wibox.widget.imagebox(beautiful.widget_battery_low))
+                     else
+                         bat.icon:set_widget(wibox.widget.imagebox(beautiful.widget_battery_normal))
+                     end
+                     return html(cyclic(beautiful.fg_widget, battery_index), args[2] .. "% ")
+                 end, 1, "BAT0")
+index_widget = index_widget + 1
+
+-- Network
+net = dynamo.section(beautiful.widget_net, cyclic(beautiful.bg_widget, index_widget), cyclic(beautiful.bg_widget, index_widget + 1))
+vicious.register(net.text, vicious.contrib.net, html(beautiful.fg_net_down, "${total down_kb}") .. " ↓↑ " .. html(beautiful.fg_net_up, "${total up_kb} "), 1)
 index_widget = index_widget + 1
 
 -- Clock
 clock = dynamo.section(beautiful.widget_clock, cyclic(beautiful.bg_widget, index_widget), cyclic(beautiful.bg_widget, index_widget + 1))
-vicious.register(clock.text, vicious.widgets.date, html(beautiful.fg_hour, " %H:%M ") .. html(beautiful.fg_date," %a %d %b "), 1)
+vicious.register(clock.text, vicious.widgets.date, html(beautiful.fg_hour, " %H:%M ") .. html(beautiful.fg_date," %a %d %b "), 10)
 index_widget = index_widget + 1
 
 space = wibox.widget.textbox(' ')
@@ -94,12 +134,27 @@ for s = 1, screen.count() do
     right_layout:add(mpd.arrow)
     right_layout:add(mpd.icon)
     right_layout:add(mpd.info)
-    right_layout:add(volume.arrow)
-    right_layout:add(volume.icon)
-    right_layout:add(volume.info)
+    right_layout:add(vol.arrow)
+    right_layout:add(vol.icon)
+    right_layout:add(vol.info)
     right_layout:add(mem.arrow)
     right_layout:add(mem.icon)
     right_layout:add(mem.info)
+    right_layout:add(cpu.arrow)
+    right_layout:add(cpu.icon)
+    right_layout:add(cpu.info)
+    right_layout:add(temp.arrow)
+    right_layout:add(temp.icon)
+    right_layout:add(temp.info)
+    right_layout:add(hdd.arrow)
+    right_layout:add(hdd.icon)
+    right_layout:add(hdd.info)
+    right_layout:add(bat.arrow)
+    right_layout:add(bat.icon)
+    right_layout:add(bat.info)
+    right_layout:add(net.arrow)
+    right_layout:add(net.icon)
+    right_layout:add(net.info)
     right_layout:add(clock.arrow)
     right_layout:add(clock.icon)
     right_layout:add(clock.info)

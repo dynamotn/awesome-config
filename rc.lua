@@ -42,6 +42,7 @@ wp_timer:start()
 
 -- {{{ Redshift config
 redshift.redshift = "/sbin/redshift"
+redshift.toggle()
 -- }}}
 
 -- {{{ Tags
