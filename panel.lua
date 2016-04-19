@@ -19,10 +19,10 @@ vicious.register(mpd.text, vicious.widgets.mpd,
                          return html(beautiful.fg_artist, " " .. args["{Artist}"] .. " ") .. args["{Title}"] .. " "
                      elseif args["{state}"] == "Pause" then
                          mpd.icon:set_widget(wibox.widget.imagebox(beautiful.widget_music_off))
-                         return "Pause"
+                         return "Pause "
                      else
                          mpd.icon:set_widget(wibox.widget.imagebox(beautiful.widget_music_off))
-                         return "Stop"
+                         return "Stop "
                      end
                  end, 2)
 mpd.info:buttons(mpdbuttons)
@@ -79,9 +79,12 @@ vicious.register(bat.text, vicious.widgets.bat,
                          bat.icon:set_widget(wibox.widget.imagebox(beautiful.widget_battery_low))
                      else
                          bat.icon:set_widget(wibox.widget.imagebox(beautiful.widget_battery_normal))
+                         if args[1] == '↯' then
+                             return html(cyclic(beautiful.fg_widget, battery_index), "Full ")
+                         end
                      end
                      return html(cyclic(beautiful.fg_widget, battery_index), args[2] .. "% ")
-                 end, 1, "BAT0")
+                 end, 1, "BAT1")
 index_widget = index_widget + 1
 
 -- Network
@@ -91,7 +94,7 @@ index_widget = index_widget + 1
 
 -- Clock
 clock = dynamo.section(beautiful.widget_clock, cyclic(beautiful.bg_widget, index_widget), cyclic(beautiful.bg_widget, index_widget + 1))
-vicious.register(clock.text, vicious.widgets.date, html(beautiful.fg_hour, " %H:%M ") .. html(beautiful.fg_date," %a %d %b "), 10)
+vicious.register(clock.text, vicious.widgets.date, html(beautiful.fg_hour, " %I:%M %p ") .. html(beautiful.fg_date," %a %d %b "), 10)
 index_widget = index_widget + 1
 
 -- Prompt
