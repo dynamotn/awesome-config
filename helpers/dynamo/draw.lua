@@ -165,11 +165,6 @@ dynamo.section = function(image, color_prev, color_current)
 end
 -- }}} 
 
--- {{{
-dynamo.label_text = function(wibox, cr, width, height)
-end
--- }}}
-
 -- {{{ Update taglist
 dynamo.update_taglist = function(w, buttons, label, data, objects)
     -- update the widgets, creating them if needed
@@ -184,7 +179,7 @@ dynamo.update_taglist = function(w, buttons, label, data, objects)
             m   = cache.m
         else
             ib = wibox.widget.imagebox()
-            tb = wibox.widget.textbox()
+            tb = dynamo.widget.label()
             bgb = wibox.widget.background()
             m = wibox.layout.margin(tb, 4, 4)
             l = wibox.layout.fixed.horizontal()
