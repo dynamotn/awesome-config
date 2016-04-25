@@ -6,6 +6,8 @@ Feature
 * Freedesktop menu with Moka icon theme (please use other icon themes with correct format of Freedesktop)
 * Confirmation before restart/shutdown/quit
 
+Screenshot: ![screenshot](http://i.imgur.com/WitOCYJ.png)
+
 Installation
 =======
 
