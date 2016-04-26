@@ -5,7 +5,10 @@ Feature
 * Quake drop-down terminal
 * Freedesktop menu with Moka icon theme (please use other icon themes with correct format of Freedesktop)
 * Confirmation before restart/shutdown/quit
-
+* Autochange wallpaper in `$XDG_PICTURES_DIR/Wallpaper`
+* Redshift support
+* MPD, volume support (require mpc, ncmpcpp)
+* Colorful powerline statusbar
 Screenshot: ![screenshot](http://i.imgur.com/WitOCYJ.png)
 
 Installation
