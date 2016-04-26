@@ -9,6 +9,7 @@ Feature
 * Redshift support
 * MPD, volume support (require mpc, ncmpcpp)
 * Colorful powerline statusbar
+
 Screenshot: ![screenshot](http://i.imgur.com/WitOCYJ.png)
 
 Installation
