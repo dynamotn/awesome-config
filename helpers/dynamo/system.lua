@@ -17,7 +17,7 @@ dynamo.quit = function()
                      function (t)
                          awesome.emit_signal("exit", nil)
                          if os.getenv("DESKTOP_SESSION") == "awesome-gnome" then
-                             awful.util.spawn("gnome-session-quit --logout")
+                             awful.util.spawn("gnome-session-quit --no-prompt")
                          else
                              awesome.quit()
                          end
