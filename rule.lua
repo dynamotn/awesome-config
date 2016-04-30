@@ -25,4 +25,7 @@ awful.rules.rules = {
     -- mpv must be floating window
     { rule = { class = "mpv" },
       properties = { floating = true } },
+    -- Set Steam to always map on tags number 7 of screen 1
+    { rule = { class = "Steam" },
+      properties = { tag = tags[screen.count()][7] } },
 }
