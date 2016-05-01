@@ -13,7 +13,7 @@ awful.rules.rules = {
     -- Set urxvt transparent
     { rule = { class = "urxvt" },
       properties = { opacity = 0.1 } },
-    -- Set Firefox to always map on tags number 2 of screen 1.
+    -- Set Firefox to always map on tags number 2 of last screen
     { rule = { class = "Firefox" },
       properties = { tag = tags[screen.count()][2] } },
     -- Plugin of firefox must be floating window
@@ -25,7 +25,16 @@ awful.rules.rules = {
     -- mpv must be floating window
     { rule = { class = "mpv" },
       properties = { floating = true } },
-    -- Set Steam to always map on tags number 7 of screen 1
+    -- Set Steam to always map on tags number 7 of last screen
     { rule = { class = "Steam" },
       properties = { tag = tags[screen.count()][7] } },
+    -- Set Zim to always map on tags number 9 of last screen
+    { rule = { class = "Zim" },
+      properties = { tag = tags[screen.count()][9] } },
+    -- Set Desktop of Gnome must be share all workspace
+    { rule = { class = "Nautilus", instance = "desktop_window" },
+      properties = { sticky = true } },
+    -- Set File manager of Gnome to always map on tags number 8 of last screen
+    { rule = { class = "Nautilus", instance = "nautilus" },
+      properties = { tag = tags[screen.count()][8] } },
 }

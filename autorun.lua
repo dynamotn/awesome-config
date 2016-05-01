@@ -26,7 +26,11 @@ run_once("urxvt")
 -- {{{ Mpd
 run_once("mpd")
 -- }}}
---
+
 -- {{{ Composite manager
 run_once("compton")
+-- }}}
+
+-- {{{ Note
+run_once("zim")
 -- }}}

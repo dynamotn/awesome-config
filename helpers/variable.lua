@@ -45,8 +45,8 @@ mylauncher = awful.widget.launcher({ menu = {} })
 
 -- Workspace
 tags = {
-    names = { "TERM", "WEB", "NOTE", "M&V", "CHAT", "DOC", "GAME", "SYS", "MORE"},
-    layout = { layouts[3], layouts[2], layouts[5], layouts[1], layouts[3], layouts[4], layouts[3], layouts[1], layouts[1]}
+    names = { "TERM", "WEB", "CODE", "M&V", "CHAT", "DOC", "GAME", "SYS", "MORE"},
+    layout = { layouts[3], layouts[2], layouts[5], layouts[1], layouts[3], layouts[4], layouts[3], layouts[4], layouts[5]}
 }
 
 -- Panel
