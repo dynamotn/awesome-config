@@ -26,18 +26,20 @@ beautiful.init(awful.util.getdir("config") .. "/themes/theme.lua")
 -- {{{ Wallpaper
 -- Auto change wallpaper after wp_timeout second(s)
 wp_files = scandir(wp_path, wp_filter)
-wp_timer = timer { timeout = 0 }
-wp_timer:connect_signal("timeout", function()
-    wp_timer:stop()
-    wp_timer.timeout = wp_timeout
+if next(wp_files) ~= nil then
+    wp_timer = timer { timeout = 0 }
+    wp_timer:connect_signal("timeout", function()
+        wp_timer:stop()
+        wp_timer.timeout = wp_timeout
+        wp_timer:start()
+        for s = 1, screen.count() do
+            wp_index = math.random(1, #wp_files)
+            gears.wallpaper.maximized(wp_path .. wp_files[wp_index], s, true)
+        end
+        collectgarbage("collect")
+    end)
     wp_timer:start()
-    for s = 1, screen.count() do
-        wp_index = math.random(1, #wp_files)
-        gears.wallpaper.maximized(wp_path .. wp_files[wp_index], s, true)
-    end
-    collectgarbage("collect")
-end)
-wp_timer:start()
+end
 -- }}}
 
 -- {{{ Redshift config
