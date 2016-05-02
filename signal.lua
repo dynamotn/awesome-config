@@ -9,6 +9,14 @@ client.connect_signal("manage", function (c, startup)
         end
     end)
 
+    --Fix some weird reload bugs
+    if c.size_hints.user_size and startup then
+        c:geometry({width = c.size_hints.user_size.width,height = c.size_hints.user_size.height, x = c:geometry().x})
+    end
+    if c.size_hints.max_height and c.size_hints.max_height < screen[c.screen].geometry.height / 2 then
+        awful.client.setslave(c)
+    end
+
     if not startup then
         -- Set the windows at the slave,
         -- i.e. put it at the end of others instead of setting it master.
