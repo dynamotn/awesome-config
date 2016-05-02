@@ -71,6 +71,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     --awful.key({ modkey, "Shift"   }, "q", awesome.quit),
+ 
+    -- Screenshot
+    awful.key({                   }, "Print", function () os.execute(screenshot) end),
 
     -- Prompt
     awful.key({ altkey,           }, "F2",    function () mypromptbox[mouse.screen]:run() end),
