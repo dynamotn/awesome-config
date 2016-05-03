@@ -4,6 +4,7 @@ local wibox = require("wibox")
 local gears = require("gears")
 local common = require("awful.widget.common")
 local util = require("awful.util")
+local html = require("html")
 
 -- {{{ Draw arrow same powerline
 dynamo.arrow_left = function(color1, color2)
@@ -178,7 +179,7 @@ local function get_text_and_background(t)
     local bg_empty = theme.taglist_bg_empty
     local fg_empty = theme.taglist_fg_empty
     local font = theme.taglist_font or theme.font or ""
-    local text = "<span font_desc='"..font.."'>"
+    local text = ""
     local sel = client.focus
     local bg_color = nil
     local fg_color = nil
@@ -206,13 +207,7 @@ local function get_text_and_background(t)
         fg_color = fg_focus
         state = "focus"
     end
-    if fg_color then
-        text = text .. "<span color='"..util.color_strip_alpha(fg_color).."'>" ..
-        (util.escape(t.name) or "") .. "</span>"
-    else
-        text = text .. (util.escape(t.name) or "")
-    end
-    text = text .. "</span>"
+    text = html.font(font, html(fg_color, util.escape(t.name)))
 
     return text, bg_color, state
 end

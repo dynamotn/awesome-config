@@ -40,7 +40,7 @@ function run_once(prg, arg_string, pname, screen)
     end
 end
 -- }}}
---
+
 -- {{{ Run application at specific tag
 function run(prg, screen, tag_number)
     if not prg then

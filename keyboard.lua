@@ -78,7 +78,10 @@ globalkeys = awful.util.table.join(
     -- Prompt
     awful.key({ altkey,           }, "F2",    function () mypromptbox[mouse.screen]:run() end),
     awful.key({ altkey,           }, "F3",    dynamo.calculate                               ),
-    awful.key({                   }, "XF86Launch1",dynamo.quote                              ),
+    awful.key({                   }, "XF86Launch1", dynamo.quote                             ),
+
+    -- Touchpad
+    awful.key({                   }, "XF86TouchpadToggle", dynamo.touchpad_toggle            ),
 
     -- ALSA volume control
     awful.key({                   }, "XF86AudioRaiseVolume",
@@ -94,6 +97,11 @@ globalkeys = awful.util.table.join(
     awful.key({                   }, "XF86AudioMute",
     function ()
         awful.util.spawn("amixer -q set Master playback toggle")
+        vicious.force({vol.text})
+    end),
+    awful.key({                   }, "XF86AudioMicMute",
+    function ()
+        awful.util.spawn("amixer -q set Capture toggle")
         vicious.force({vol.text})
     end),
 
@@ -117,6 +125,16 @@ globalkeys = awful.util.table.join(
     function ()
         awful.util.spawn_with_shell("mpc next")
         vicious.force({mpd.text})
+    end),
+
+    -- Brightness control
+    awful.key({                   }, "XF86MonBrightnessUp",
+    function ()
+        awful.util.spawn_with_shell("xbacklight -inc 10")
+    end),
+    awful.key({                   }, "XF86MonBrightnessDown",
+    function ()
+        awful.util.spawn_with_shell("xbacklight -dec 10")
     end),
 
     -- Dropdown terminal
