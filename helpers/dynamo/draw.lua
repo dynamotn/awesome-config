@@ -3,6 +3,7 @@
 local wibox = require("wibox")
 local gears = require("gears")
 local common = require("awful.widget.common")
+local util = require("awful.util")
 
 -- {{{ Draw arrow same powerline
 dynamo.arrow_left = function(color1, color2)
@@ -166,28 +167,81 @@ end
 -- }}} 
 
 -- {{{ Update taglist
+local function get_text_and_background(t)
+    local theme = beautiful.get()
+    local fg_focus = theme.taglist_fg_focus or theme.fg_focus
+    local bg_focus = theme.taglist_bg_focus or theme.bg_focus
+    local fg_urgent = theme.taglist_fg_urgent or theme.fg_urgent
+    local bg_urgent = theme.taglist_bg_urgent or theme.bg_urgent
+    local bg_occupied = theme.taglist_bg_occupied
+    local fg_occupied = theme.taglist_fg_occupied
+    local bg_empty = theme.taglist_bg_empty
+    local fg_empty = theme.taglist_fg_empty
+    local font = theme.taglist_font or theme.font or ""
+    local text = "<span font_desc='"..font.."'>"
+    local sel = client.focus
+    local bg_color = nil
+    local fg_color = nil
+    local state = nil
+    local cls = t:clients()
+    if #cls > 0 then
+        if bg_occupied then bg_color = bg_occupied end
+        if fg_occupied then fg_color = fg_occupied end
+        state = "occupied"
+    else
+        if bg_empty then bg_color = bg_empty end
+        if fg_empty then fg_color = fg_empty end
+        state = "empty"
+    end
+    for k, c in pairs(cls) do
+        if c.urgent then
+            if bg_urgent then bg_color = bg_urgent end
+            if fg_urgent then fg_color = fg_urgent end
+            state = "urgent"
+            break
+        end
+    end
+    if t.selected then
+        bg_color = bg_focus
+        fg_color = fg_focus
+        state = "focus"
+    end
+    if fg_color then
+        text = text .. "<span color='"..util.color_strip_alpha(fg_color).."'>" ..
+        (util.escape(t.name) or "") .. "</span>"
+    else
+        text = text .. (util.escape(t.name) or "")
+    end
+    text = text .. "</span>"
+
+    return text, bg_color, state
+end
+
 dynamo.update_taglist = function(w, buttons, label, data, objects)
     -- update the widgets, creating them if needed
     w:reset()
     for i, o in ipairs(objects) do
         local cache = data[o]
-        local ib, tb, bgb, m, l
+        local tb, bgb, l
+        local text, bg, state = get_text_and_background(o)
+        local interval = 0
+        if state == "urgent" then
+            interval = beautiful.taglist_blink_interval
+        else
+            interval = 0
+        end
+
         if cache then
-            ib = cache.ib
             tb = cache.tb
             bgb = cache.bgb
-            m   = cache.m
         else
-            ib = wibox.widget.imagebox()
             tb = dynamo.widget.label()
             bgb = wibox.widget.background()
-            m = wibox.layout.margin(tb, 4, 4)
             l = wibox.layout.fixed.horizontal()
 
             -- All of this is added in a fixed widget
             l:fill_space(true)
-            l:add(ib)
-            l:add(m)
+            l:add(tb)
 
             -- And all of this gets a background
             bgb:set_widget(l)
@@ -195,24 +249,16 @@ dynamo.update_taglist = function(w, buttons, label, data, objects)
             bgb:buttons(common.create_buttons(buttons, o))
 
             data[o] = {
-                ib = ib,
                 tb = tb,
                 bgb = bgb,
-                m   = m
             }
         end
 
-        local text, bg, bg_image, icon = label(o)
         -- The text might be invalid, so use pcall
         if not pcall(tb.set_markup, tb, text) then
             tb:set_markup("<i>&lt;Invalid text&gt;</i>")
         end
-        bgb:set_bg(bg)
-        if type(bg_image) == "function" then
-            bg_image = bg_image(tb,o,m,objects,i)
-        end
-        bgb:set_bgimage(bg_image)
-        ib:set_image(icon)
+        tb:set_color(bg, interval)
         w:add(bgb)
    end
 end

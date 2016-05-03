@@ -10,7 +10,7 @@ Feature
 * MPD, volume support (require mpc, ncmpcpp)
 * Colorful powerline statusbar
 
-Screenshot: ![screenshot](http://i.imgur.com/WitOCYJ.png)
+Screenshot: ![screenshot](http://i.imgur.com/vz96Yqs.png)
 
 Installation
 =======

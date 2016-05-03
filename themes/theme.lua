@@ -15,7 +15,6 @@ theme.fg_normal     = "#ddddff"
 theme.fg_focus      = "#f0dfaf"
 theme.fg_urgent     = "#33b5e5"
 
-theme.border_width  = 1
 theme.border_normal = "#3f3f3f"
 theme.border_focus  = "#7f7f7f"
 theme.border_marked = "#cc9393"
@@ -29,7 +28,7 @@ theme.fg_command    = "#2196f3"
 -- Widget color
 theme.bg_widget     = { "#0c273d",
                         "#44c0dd",
-                        "#fffef1",
+                        "#f0f0f0",
                         "#70b85d",
                         "#2c5e2e" }
 theme.bg_indicator  = { "#313131", theme.bg_normal}
@@ -46,10 +45,13 @@ theme.fg_net_down   = theme.bg_widget[2]
 theme.fg_net_up     = theme.bg_widget[4]
 
 -- Panel color
+theme.taglist_bg_empty     = "#313131"
+theme.taglist_bg_focus     = "#45aacc"
+theme.taglist_bg_urgent    = "#45bf55"
 theme.taglist_fg_focus     = "#fff3f3"
 theme.taglist_fg_occupied  = "#acacac"
-theme.taglist_fg_empty     = "#313131"
-theme.taglist_bg_focus     = "png:" .. themes_dir .. "/taglist/bg_focus.png"
+theme.taglist_fg_empty     = "#1a1a1a"
+theme.taglist_fg_urgent    = "#fff3f3"
 theme.tasklist_bg_minimize = "#444444"
 theme.tasklist_fg_minimize = "#777e76"
 theme.tasklist_bg_focus    = "#313131"
@@ -61,9 +63,16 @@ theme.notify_bg     = theme.bg_normal
 theme.notify_border = theme.border_focus
 -- }}}
 
+-- {{{ Theming client
+theme.border_width  = 1
+-- }}}
+
 -- {{{ Theming workspace 
-theme.taglist_squares_sel   = themes_dir .. "/taglist/squarefw.png"
-theme.taglist_squares_unsel = themes_dir .. "/taglist/squarew.png"
+theme.taglist_margin_left    = 3
+theme.taglist_margin_top     = 8
+theme.taglist_small_corner   = 2
+theme.taglist_large_corner   = 6
+theme.taglist_blink_interval = 0.5
 -- }}}
 
 -- {{{ Theming the menu
