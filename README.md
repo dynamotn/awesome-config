@@ -8,7 +8,9 @@ Feature
 * Autochange wallpaper in `$XDG_PICTURES_DIR/Wallpaper`
 * Redshift support
 * MPD, volume support (require mpc, ncmpcpp)
-* Colorful powerline statusbar
+* Colorful powerline statusbar to monitor: volume, network, battery...
+* Elegant workspace panel
+* Some bonus feature: Qoute from fortune-mod
 
 Screenshot: ![screenshot](http://i.imgur.com/vz96Yqs.png)
 
@@ -36,3 +38,4 @@ Note
 
 My configuration is implementing, not recommended for use right now
 * Font: [Terminess Powerline](https://github.com/powerline/fonts/tree/master/Terminus)
+* Icon: [Moka](https://github.com/moka-project/moka-icon-theme)
