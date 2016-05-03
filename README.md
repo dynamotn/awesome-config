@@ -10,7 +10,7 @@ Feature
 * MPD, volume support (require mpc, ncmpcpp)
 * Colorful powerline statusbar to monitor: volume, network, battery...
 * Elegant workspace panel
-* Some bonus feature: Qoute from fortune-mod
+* Some bonus feature: Quote from fortune-mod
 
 Screenshot: ![screenshot](http://i.imgur.com/vz96Yqs.png)
 
