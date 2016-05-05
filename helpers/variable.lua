@@ -6,6 +6,7 @@ os.setlocale(os.getenv("LANG"))
 -- {{{ Default application
 terminal        = "urxvt"
 screenshot      = "scrot"
+file_manager    = "nautilus"
 editor          = os.getenv("EDITOR") or "vim"
 editor_cmd      = terminal .. " -e " .. editor
 terminal_cmd    = terminal .. " -g 130x34-320+16 -e "

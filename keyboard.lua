@@ -137,10 +137,15 @@ globalkeys = awful.util.table.join(
         awful.util.spawn_with_shell("xbacklight -dec 10")
     end),
 
+    -- Application
+    awful.key({ modkey,           }, "i",     function () awful.util.spawn(file_manager) end),
+
     -- Dropdown terminal
     awful.key({ modkey,           }, "z",     function () drop(terminal)  end),
+
     -- Redshift
     awful.key({ modkey,           }, "d",     redshift.toggle                ),
+
     -- Menubar
     awful.key({ modkey,           }, "p",     function () menubar.show()  end)
 )
