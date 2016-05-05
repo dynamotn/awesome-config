@@ -168,7 +168,7 @@ end
 -- }}} 
 
 -- {{{ Update taglist
-local function get_text_and_background(t)
+local function decorate_taglist(t)
     local theme = beautiful.get()
     local fg_focus = theme.taglist_fg_focus or theme.fg_focus
     local bg_focus = theme.taglist_bg_focus or theme.bg_focus
@@ -218,7 +218,7 @@ dynamo.update_taglist = function(w, buttons, label, data, objects)
     for i, o in ipairs(objects) do
         local cache = data[o]
         local tb, bgb, l
-        local text, bg, state = get_text_and_background(o)
+        local text, bg, state = decorate_taglist(o)
         local interval = 0
         if state == "urgent" then
             interval = beautiful.taglist_blink_interval
@@ -254,6 +254,92 @@ dynamo.update_taglist = function(w, buttons, label, data, objects)
             tb:set_markup("<i>&lt;Invalid text&gt;</i>")
         end
         tb:set_color(bg, interval)
+        w:add(bgb)
+   end
+end
+-- }}}
+
+-- {{{ Update the tasklist
+local function decorate_tasklist(c)
+    local theme = beautiful.get()
+    local fg_normal = theme.tasklist_fg_normal or theme.fg_normal
+    local bg_normal = theme.tasklist_bg_normal or theme.bg_normal
+    local fg_focus = theme.tasklist_fg_focus or theme.fg_focus
+    local bg_focus = theme.tasklist_bg_focus or theme.bg_focus
+    local fg_urgent = theme.tasklist_fg_urgent or theme.fg_urgent
+    local bg_urgent = theme.tasklist_bg_urgent or theme.bg_urgent
+    local fg_minimize = theme.tasklist_fg_minimize or theme.fg_minimize
+    local bg_minimize = theme.tasklist_bg_minimize or theme.bg_minimize
+    local font = theme.tasklist_font or theme.font or ""
+    local bg, fg = nil, nil
+    local text = ""
+    local name = c.name or "<untitled>"
+    if client.focus == c then
+        bg = bg_focus
+        if fg_focus then
+            fg = fg_focus
+        else
+            fg = fg_normal
+        end
+    elseif c.urgent and fg_urgent then
+        bg = bg_urgent
+        fg = fg_urgent
+    elseif c.minimized and fg_minimize and bg_minimize then
+        bg = bg_minimize
+        fg = fg_minimize
+    else
+        bg = bg_normal
+        fg = fg_normal
+    end
+    text = html.font(font, html(fg, util.escape(name)))
+
+    return text, bg, c.icon or nil
+end
+
+dynamo.update_tasklist = function (w, buttons, label, data, objects)
+    -- update the widgets, creating them if needed
+    w:reset()
+    for i, o in ipairs(objects) do
+        local cache = data[o]
+        local ib, tb, bgb, m, l
+        local text, bg, icon = decorate_tasklist(o)
+
+        if cache then
+            ib = cache.ib
+            tb = cache.tb
+            bgb = cache.bgb
+            m   = cache.m
+        else
+            ib = wibox.widget.imagebox()
+            tb = wibox.widget.textbox()
+            bgb = wibox.widget.background()
+            m = wibox.layout.margin(tb, 4, 4)
+            l = wibox.layout.fixed.horizontal()
+
+            -- All of this is added in a fixed widget
+            l:fill_space(true)
+            l:add(ib)
+            l:add(m)
+
+            -- And all of this gets a background
+            bgb:set_widget(l)
+
+            bgb:buttons(common.create_buttons(buttons, o))
+
+            data[o] = {
+                ib = ib,
+                tb = tb,
+                bgb = bgb,
+                m   = m
+            }
+        end
+
+        -- The text might be invalid, so use pcall
+        if not pcall(tb.set_markup, tb, text) then
+            tb:set_markup("<i>&lt;Invalid text&gt;</i>")
+        end
+        bgb:set_bg(bg)
+        ib:set_image(icon)
         w:add(bgb)
    end
 end
