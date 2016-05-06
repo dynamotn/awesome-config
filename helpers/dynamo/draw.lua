@@ -163,6 +163,11 @@ dynamo.section = function(image, color_prev, color_current)
     section.text = wibox.widget.textbox()
     section.info = wibox.widget.background(section.text, color_current)
 
+    function section:buttons(_buttons)
+        section.icon:buttons(_buttons)
+        section.info:buttons(_buttons)
+    end
+
     return section
 end
 -- }}} 

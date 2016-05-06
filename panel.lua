@@ -25,7 +25,7 @@ vicious.register(mpd.text, vicious.widgets.mpd,
                          return "Stop "
                      end
                  end, 2)
-mpd.info:buttons(mpdbuttons)
+mpd:buttons(mpdbuttons)
 index_indicator = index_indicator + 1
 
 -- Volume
