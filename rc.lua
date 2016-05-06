@@ -13,6 +13,7 @@ beautiful = require("beautiful")
 redshift = require("redshift")
 -- Error handling, variable definitions and function definitions
 require("helpers")
+require("dynamo")
 -- }}}
 
 -- {{{ Autostart applications
