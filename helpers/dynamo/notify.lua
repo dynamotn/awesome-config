@@ -26,7 +26,23 @@ dynamo.calculate = function ()
 end
 -- }}}
 
+-- {{{ Quote
 dynamo.quote = function ()
     local result = awful.util.pread("fortune")
     naughty.notify({ text = result, timeout = 10, screen = mouse.screen })
 end
+-- }}}
+
+-- {{{ Turn on/off touchpad
+local touchpad_state = 1
+dynamo.touchpad_toggle = function()
+    awful.util.spawn_with_shell("synclient TouchpadOff=" .. touchpad_state)
+    if touchpad_state == 1 then
+        naughty.notify({ text = "Tắt touchpad", timeout = 1, screen = mouse.screen })
+        touchpad_state = 0
+    else
+        naughty.notify({ text = "Bật touchpad", timeout = 1, screen = mouse.screen })
+        touchpad_state = 1
+    end
+end
+-- }}}
