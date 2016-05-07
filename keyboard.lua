@@ -10,9 +10,11 @@ local menubar = require("menubar")
 globalkeys = awful.util.table.join(
 
     -- Workspace browsing
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
-    awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
+    awful.key({ modkey,           }, "Left",   function() dynamo.switch_tag(-1) end),
+    awful.key({ modkey,           }, "Right",  function() dynamo.switch_tag( 1) end),
+    awful.key({ altkey,           }, "Left",   awful.tag.viewprev                  ),
+    awful.key({ altkey,           }, "Right",  awful.tag.viewnext                  ),
+    awful.key({ modkey,           }, "Escape", awful.tag.history.restore           ),
 
     -- Screen move
     awful.key({ modkey, "Control" }, "Left",   function() awful.screen.focus(mouse.screen - 1) end),
