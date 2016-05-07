@@ -113,7 +113,7 @@ theme.useless_gap_width = 10
 -- }}}
 
 -- {{{ Theming layout
-theme.layout_fairv = themes_dir .. "/layouts/fairv.png"
+theme.layout_centerworkd = themes_dir .. "/layouts/centerworkd.png"
 theme.layout_floating  = themes_dir .. "/layouts/floating.png"
 theme.layout_magnifier = themes_dir .. "/layouts/magnifier.png"
 theme.layout_tileleft   = themes_dir .. "/layouts/tileleft.png"

@@ -25,7 +25,7 @@ layouts =
     awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
-    awful.layout.suit.fair,
+    layout.centerworkd,
     awful.layout.suit.magnifier
 }
 -- }}}

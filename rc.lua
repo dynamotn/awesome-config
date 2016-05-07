@@ -11,6 +11,8 @@ beautiful = require("beautiful")
 -- {{{ Other library
 -- Redshift library
 redshift = require("redshift")
+-- Layout library
+layout = require("layout")
 -- Error handling, variable definitions and function definitions
 require("helpers")
 require("dynamo")
