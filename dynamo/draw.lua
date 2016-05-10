@@ -306,46 +306,27 @@ dynamo.update_tasklist = function (w, buttons, label, data, objects)
     w:reset()
     for i, o in ipairs(objects) do
         local cache = data[o]
-        local ib, tb, bgb, m, l
+        local box
         local text, bg, icon = decorate_tasklist(o)
 
         if cache then
-            ib = cache.ib
-            tb = cache.tb
-            bgb = cache.bgb
-            m   = cache.m
+            box = cache.box
         else
-            ib = wibox.widget.imagebox()
-            tb = wibox.widget.textbox()
-            bgb = wibox.widget.background()
-            m = wibox.layout.margin(tb, 4, 4)
-            l = wibox.layout.fixed.horizontal()
+            box = dynamo.widget.box()
 
-            -- All of this is added in a fixed widget
-            l:fill_space(true)
-            l:add(ib)
-            l:add(m)
-
-            -- And all of this gets a background
-            bgb:set_widget(l)
-
-            bgb:buttons(common.create_buttons(buttons, o))
+            box:buttons(common.create_buttons(buttons, o))
 
             data[o] = {
-                ib = ib,
-                tb = tb,
-                bgb = bgb,
-                m   = m
+                box = box
             }
         end
 
         -- The text might be invalid, so use pcall
-        if not pcall(tb.set_markup, tb, text) then
-            tb:set_markup("<i>&lt;Invalid text&gt;</i>")
+        if not pcall(box.text.set_markup, box.text, text) then
+            box.text:set_markup("<i>&lt;Invalid text&gt;</i>")
         end
-        bgb:set_bg(bg)
-        ib:set_image(icon)
-        w:add(bgb)
+        box.image:set_image(icon)
+        w:add(box)
    end
 end
 -- }}}

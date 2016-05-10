@@ -4,6 +4,7 @@ theme = {}
 themes_dir = util.getdir("config") .. "/themes"
 
 theme.font            = "Terminess Powerline 9"
+theme.tasklist_font   = "Ubuntu Regular 9"
 
 -- {{{ Color
 theme.bg_normal     = "#1a1a1a"

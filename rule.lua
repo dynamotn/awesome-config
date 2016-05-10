@@ -28,9 +28,9 @@ awful.rules.rules = {
     -- Set Steam to always map on tags number 7 of last screen
     { rule = { class = "Steam" },
       properties = { tag = tags[screen.count()][7] } },
-    -- Set Zim to always map on tags number 9 of last screen
+    -- Set Zim to always map on tags number 6 of last screen
     { rule = { class = "Zim" },
-      properties = { tag = tags[screen.count()][9] } },
+      properties = { tag = tags[screen.count()][6] } },
     -- Set Desktop of Gnome must be share all workspace
     { rule = { class = "Nautilus", instance = "desktop_window" },
       properties = { sticky = true } },
