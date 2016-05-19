@@ -20,7 +20,8 @@ run_once("uim-systray")
 -- }}}
 
 -- {{{ Urxvt
-run_once("urxvt")
+run_once("urxvtd", "-o -q -f")
+run_once("urxvtc")
 -- }}}
 
 -- {{{ Mpd

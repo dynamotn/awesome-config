@@ -4,7 +4,7 @@ os.setlocale(os.getenv("LANG"))
 -- }}}
 
 -- {{{ Default application
-terminal        = "urxvt"
+terminal        = "urxvtc"
 screenshot      = "scrot"
 file_manager    = "nautilus"
 editor          = os.getenv("EDITOR") or "vim"
