@@ -19,10 +19,8 @@ Installation
 
 ```
 cd ~
-git clone https://github.com/dynamotn/awesomewm-config
+git clone --recursive https://github.com/dynamotn/awesomewm-config
 ln -s ~/awesomewm-config ~/.config/awesome
-cd awesomewm-config
-git submodule update --init --recursive
 ```
 
 License
