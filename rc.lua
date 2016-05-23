@@ -18,8 +18,8 @@ require("helpers")
 require("dynamo")
 -- }}}
 
--- {{{ Autostart applications
-require_exist("autorun")
+-- {{{ Autostart before to save time
+require_exist("before")
 -- }}}
 
 -- {{{ Themes define colours, icons, font and wallpapers.
@@ -75,4 +75,8 @@ require("rule")
 
 -- Signals
 require("signal")
+-- }}}
+
+-- {{{ Autostart after init all
+require_exist("after")
 -- }}}
