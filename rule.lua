@@ -37,4 +37,10 @@ awful.rules.rules = {
     -- Set File manager of Gnome to always map on tags number 8 of last screen
     { rule = { class = "Nautilus", instance = "nautilus" },
       properties = { tag = tags[screen.count()][8] } },
+    -- Set Franz to always maps on tags number 5 of last screen
+    { rule = { class = "Franz" },
+      properties = { tag = tags[screen.count()][5] } },
+    -- Set Zeal to always maps on tags number 6 of last screen
+    { rule = { class = "Zeal" },
+      properties = { tag = tags[screen.count()][6] } },
 }
