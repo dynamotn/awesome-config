@@ -70,9 +70,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal)     end),
-    awful.key({ modkey, "Control" }, "r",      awesome.restart                               ),
-    awful.key({ modkey,           }, "i",      function () awful.util.spawn(file_manager) end),
+    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal_tmux) end),
+    awful.key({ modkey, "Control" }, "r",      awesome.restart                                ),
+    awful.key({ modkey,           }, "i",      function () awful.util.spawn(file_manager)  end),
  
     -- Screenshot
     awful.key({                   }, "Print", function () os.execute(screenshot) end),

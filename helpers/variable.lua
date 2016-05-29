@@ -3,13 +3,23 @@
 os.setlocale(os.getenv("LANG"))
 -- }}}
 
+-- {{{ If current shell is fish then use not POSIX syntax
+is_fish_shell = string.find(os.getenv("SHELL"), "fish")
+-- }}}
+
 -- {{{ Default application
 terminal        = "urxvtc"
+if is_fish_shell then 
+    tmux = " -e fish -c 'tmux -q has-session; and exec tmux attach-session -d; or exec tmux new-session -nwtf -s$USER@$HOSTNAME'"
+else
+    tmux = " -e sh -c 'tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -nwtf -s$USER@$HOSTNAME'"
+end
 screenshot      = "scrot"
 file_manager    = "nautilus"
 editor          = os.getenv("EDITOR") or "vim"
 editor_cmd      = terminal .. " -e " .. editor
 terminal_cmd    = terminal .. " -g 130x34-320+16 -e "
+terminal_tmux   = terminal .. tmux
 music_cmd       = terminal_cmd .. "ncmpcpp"
 monitor_cmd     = terminal_cmd .. "htop"
 -- }}}
@@ -28,10 +38,6 @@ layouts =
     layout.centerworkd,
     awful.layout.suit.magnifier
 }
--- }}}
-
--- {{{ If current shell is fish then use not POSIX syntax
-is_fish_shell = string.find(os.getenv("SHELL"), "fish")
 -- }}}
 
 -- {{{ Wallpaper auto change config
