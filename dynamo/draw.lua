@@ -170,7 +170,7 @@ dynamo.section = function(image, color_prev, color_current)
 
     return section
 end
--- }}} 
+-- }}}
 
 -- {{{ Update taglist
 local function decorate_taglist(t)
@@ -325,6 +325,7 @@ dynamo.update_tasklist = function (w, buttons, label, data, objects)
         if not pcall(box.text.set_markup, box.text, text) then
             box.text:set_markup("<i>&lt;Invalid text&gt;</i>")
         end
+        box:set_color(bg)
         box.image:set_image(icon)
         w:add(box)
    end

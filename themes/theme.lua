@@ -53,10 +53,14 @@ theme.taglist_fg_focus     = "#fff3f3"
 theme.taglist_fg_occupied  = "#acacac"
 theme.taglist_fg_empty     = "#1a1a1a"
 theme.taglist_fg_urgent    = "#fff3f3"
-theme.tasklist_bg_minimize = "#444444"
+theme.tasklist_bg_normal   = themes_dir .. '/background/gray.png'
+theme.tasklist_bg_minimize = themes_dir .. '/background/black.png'
+theme.tasklist_bg_focus    = themes_dir .. '/background/white.png'
+theme.tasklist_bg_urgent   = themes_dir .. '/background/blue.png'
+theme.tasklist_fg_normal   = "#fff3f3"
 theme.tasklist_fg_minimize = "#777e76"
-theme.tasklist_bg_focus    = "#313131"
-theme.tasklist_fg_focus    = "#fff3f3"
+theme.tasklist_fg_focus    = "#212121"
+theme.tasklist_fg_urgent   = "#f0f0f0"
 
 -- Notify color
 theme.notify_fg     = theme.fg_normal
@@ -66,6 +70,7 @@ theme.notify_border = theme.border_focus
 
 -- {{{ Theming client
 theme.border_width  = 1
+theme.useless_gap_width = 10
 -- }}}
 
 -- {{{ Theming workspace 
@@ -110,14 +115,14 @@ theme.tasklist_disable_icon = false
 theme.tasklist_floating = ""
 theme.tasklist_maximized_horizontal = ""
 theme.tasklist_maximized_vertical = ""
-theme.useless_gap_width = 10
+theme.tasklist_margin_top = theme.taglist_margin_top
 -- }}}
 
 -- {{{ Theming layout
 theme.layout_centerworkd = themes_dir .. "/layouts/centerworkd.png"
-theme.layout_floating  = themes_dir .. "/layouts/floating.png"
+theme.layout_floating = themes_dir .. "/layouts/floating.png"
 theme.layout_magnifier = themes_dir .. "/layouts/magnifier.png"
-theme.layout_tileleft   = themes_dir .. "/layouts/tileleft.png"
+theme.layout_tileleft = themes_dir .. "/layouts/tileleft.png"
 theme.layout_tile = themes_dir .. "/layouts/tile.png"
 -- }}}
 
