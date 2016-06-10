@@ -12,7 +12,7 @@ Feature
 * Elegant workspace panel
 * Some bonus feature: Quote from fortune-mod
 
-Screenshot: ![screenshot](http://i.imgur.com/vz96Yqs.png)
+Screenshot: ![screenshot](http://i.imgur.com/7Ub1sZa.png)
 
 Installation
 =======
