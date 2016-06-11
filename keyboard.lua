@@ -45,6 +45,13 @@ globalkeys = awful.util.table.join(
     -- Show menu
     awful.key({ modkey,           }, "F2", function () mymainmenu:show() end),
 
+    -- Show/Hide Wibox
+    awful.key({ modkey,           }, "b",
+        function ()
+            mywibox[mouse.screen].visible = not mywibox[mouse.screen].visible
+            mybottomwibox[mouse.screen].visible = not mybottomwibox[mouse.screen].visible
+    end),
+
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
@@ -66,16 +73,17 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
-
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal_tmux) end),
     awful.key({ modkey, "Control" }, "r",      awesome.restart                                ),
     awful.key({ modkey,           }, "i",      function () awful.util.spawn(file_manager)  end),
+    awful.key({ modkey,           }, "q",      function () awful.util.spawn(browser)  end),
  
     -- Screenshot
     awful.key({                   }, "Print", function () os.execute(screenshot) end),
+    awful.key({ altkey,           }, "Print", function () os.execute(screenshot .. ' -s') end),
 
     -- Prompt
     awful.key({ altkey,           }, "F2",    function () mypromptbox[mouse.screen]:run() end),
