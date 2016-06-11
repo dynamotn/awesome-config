@@ -66,3 +66,9 @@ mylayoutbox   = {}
 mytaglist     = {}
 mytasklist    = {}
 -- }}}
+
+-- {{{ Default config for notify
+local naughty = require('naughty')
+naughty.config.defaults.timeout = 10
+naughty.config.defaults.screen = screen.count()
+-- }}}

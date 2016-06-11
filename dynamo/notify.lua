@@ -5,6 +5,7 @@ local naughty = require("naughty")
 local html = require("html")
 -- Vicious library
 local vicious = require("vicious")
+local wibox = require("wibox")
 
 -- {{{ Calculation
 dynamo.calculate = function ()
@@ -50,27 +51,56 @@ end
 -- {{{ Show popup
 local dynamo_popup = nil
 
-local function hide_popup()
+local function hide_popup(is_widget)
     if dynamo_popup ~= nil then
-        naughty.destroy(dynamo_popup)
+        if is_widget then
+            dynamo_popup.visible = false
+            dynamo_popup = nil
+        else
+            naughty.destroy(dynamo_popup)
+        end
         dynamo_popup = nil
     end
 end
 
-local function show_popup()
-    hide_popup()
-    dynamo_popup = naughty.notify({ text = result, timeout = 0, hover_timeout = 0.5, screen = mouse.screen })
+local function show_popup(is_widget, result)
+    hide_popup(is_widget)
+    if is_widget then
+        dynamo_popup = wibox({ height = 300, width = 500, ontop = true, x = 1000, y = 18})
+        dynamo_popup:set_widget(result)
+        dynamo_popup.visible = true
+    else
+        dynamo_popup = naughty.notify({ text = result, timeout = 0, hover_timeout = 0.5, screen = mouse.screen })
+    end
 end
 
 dynamo.popup = function(widget, callback, args)
+    local original_args = args
     local args = args or {}
     local result = nil
+    local is_widget = false
     if type(callback) == "function" then
         result = callback(args)
+    elseif type(callback) == "table" then
+        for k, v in pairs(callback) do
+            if k == "draw" then
+                is_widget = true
+                break
+            end
+        end
+        if is_widget then -- Table is a widget
+            if original_args == nil then
+                result = callback
+            else
+                result = callback(args)
+            end
+        else -- Table is normal array
+            result = callback
+        end
     else
         result = callback
     end
-    widget:connect_signal("mouse::enter", show_popup)
-    widget:connect_signal("mouse::leave", hide_popup)
+    widget:connect_signal("mouse::enter", function() show_popup(is_widget, result) end)
+    widget:connect_signal("mouse::leave", function() hide_popup(is_widget) end)
 end
 -- }}}
