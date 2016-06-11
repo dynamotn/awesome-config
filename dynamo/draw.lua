@@ -41,7 +41,6 @@ dynamo.arrow_left = function(color1, color2)
             cairo:line_to(0, height / 2)
             cairo:line_to(width, height)
             cairo:close_path()
-
             cairo:fill()
         end
    end
@@ -83,7 +82,6 @@ dynamo.arrow_right = function(color1, color2)
             cairo:line_to(width, height / 2)
             cairo:line_to(0, height)
             cairo:close_path()
-
             cairo:fill()
         end
    end
@@ -166,6 +164,11 @@ dynamo.section = function(image, color_prev, color_current)
     function section:buttons(_buttons)
         section.icon:buttons(_buttons)
         section.info:buttons(_buttons)
+    end
+
+    function section:connect_signal(signal, execute)
+        section.icon:connect_signal(signal, execute)
+        section.info:connect_signal(signal, execute)
     end
 
     return section

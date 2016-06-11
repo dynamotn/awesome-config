@@ -46,3 +46,31 @@ dynamo.touchpad_toggle = function()
     end
 end
 -- }}}
+
+-- {{{ Show popup
+local dynamo_popup = nil
+
+local function hide_popup()
+    if dynamo_popup ~= nil then
+        naughty.destroy(dynamo_popup)
+        dynamo_popup = nil
+    end
+end
+
+local function show_popup()
+    hide_popup()
+    dynamo_popup = naughty.notify({ text = result, timeout = 0, hover_timeout = 0.5, screen = mouse.screen })
+end
+
+dynamo.popup = function(widget, callback, args)
+    local args = args or {}
+    local result = nil
+    if type(callback) == "function" then
+        result = callback(args)
+    else
+        result = callback
+    end
+    widget:connect_signal("mouse::enter", show_popup)
+    widget:connect_signal("mouse::leave", hide_popup)
+end
+-- }}}

@@ -56,8 +56,9 @@ local function array_to_text(arr, depth)
     return result
 end
 
-function dbg(args)
-    local vars = args.vars or ""
+function dbg(vars, args)
+    local vars = vars or ""
+    local args = args or {}
     local notify = args.notify or false
     local text = array_to_text(vars, 0)
     if notify then

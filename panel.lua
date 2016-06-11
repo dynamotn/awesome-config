@@ -10,7 +10,7 @@ local wibox = require("wibox")
 local index_indicator = 0
 local index_widget = 0
 
--- MPD
+-- {{{ MPD
 mpd = dynamo.section(beautiful.widget_music_off, cyclic(beautiful.bg_indicator, index_indicator), cyclic(beautiful.bg_indicator, index_indicator + 1))
 vicious.register(mpd.text, vicious.widgets.mpd,
                  function(widget, args)
@@ -27,8 +27,9 @@ vicious.register(mpd.text, vicious.widgets.mpd,
                  end, 2)
 mpd:buttons(mpdbuttons)
 index_indicator = index_indicator + 1
+-- }}}
 
--- Volume
+-- {{{ Volume
 vol = dynamo.section(beautiful.widget_vol, cyclic(beautiful.bg_indicator, index_indicator), cyclic(beautiful.bg_indicator, index_indicator + 1))
 vicious.register(vol.text, vicious.widgets.volume,
                  function(widget, args)
@@ -44,31 +45,36 @@ vicious.register(vol.text, vicious.widgets.volume,
                      return args[1] .. " "
                  end, 2, "Master")
 index_indicator = index_indicator + 1
+-- }}}
 
--- Memory
+-- {{{ Memory
 mem = dynamo.section(beautiful.widget_mem, cyclic(beautiful.bg_indicator, index_indicator), cyclic(beautiful.bg_widget, index_widget + 1))
 vicious.register(mem.text, vicious.widgets.mem, html(cyclic(beautiful.fg_widget, index_widget + 1), "$2MB "), 2)
 index_widget = index_widget + 1
+-- }}}
 
--- CPU
+-- {{{ CPU
 cpu = dynamo.section(beautiful.widget_cpu, cyclic(beautiful.bg_widget, index_widget), cyclic(beautiful.bg_widget, index_widget + 1))
 vicious.register(cpu.text, vicious.widgets.cpu, html(cyclic(beautiful.fg_widget, index_widget + 1), "$1% "), 2)
 index_widget = index_widget + 1
+-- }}}
 
--- Temperature
+-- {{{ Temperature
 temp = dynamo.section(beautiful.widget_temp, cyclic(beautiful.bg_widget, index_widget), cyclic(beautiful.bg_widget, index_widget + 1))
 vicious.register(temp.text, vicious.widgets.thermal, html(cyclic(beautiful.fg_widget, index_widget + 1), "$1°C "), 2, "thermal_zone0")
 index_widget = index_widget + 1
+-- }}}
 
--- Disk space
+-- {{{ Disk space
 hdd = dynamo.section(beautiful.widget_hdd, cyclic(beautiful.bg_widget, index_widget), cyclic(beautiful.bg_widget, index_widget + 1))
 vicious.register(hdd.text, vicious.widgets.fs, html(cyclic(beautiful.fg_widget, index_widget + 1), "${/home used_gb}GB "), 60)
 index_widget = index_widget + 1
+-- }}}
 
--- Power
+-- {{{ Power
 bat = dynamo.section(beautiful.widget_bat, cyclic(beautiful.bg_widget, index_widget), cyclic(beautiful.bg_widget, index_widget + 1))
 local battery_index = index_widget + 1
-vicious.register(bat.text, vicious.widgets.bat, 
+vicious.register(bat.text, vicious.widgets.bat,
                  function(widget, args)
                      if args[1] == "⌁" then
                          bat.icon:set_widget(wibox.widget.imagebox(beautiful.widget_battery_no))
@@ -86,30 +92,36 @@ vicious.register(bat.text, vicious.widgets.bat,
                      return html(cyclic(beautiful.fg_widget, battery_index), args[2] .. "% ")
                  end, 1, "BAT1")
 index_widget = index_widget + 1
+-- }}}
 
--- Network
+-- {{{ Network
 net = dynamo.section(beautiful.widget_net, cyclic(beautiful.bg_widget, index_widget), cyclic(beautiful.bg_widget, index_widget + 1))
 vicious.register(net.text, vicious.contrib.net, html(beautiful.fg_net_down, "${total down_kb}") .. " ↓↑ " .. html(beautiful.fg_net_up, "${total up_kb} "), 1)
 index_widget = index_widget + 1
+-- }}}
 
--- Clock
+-- {{{ Clock
 clock = dynamo.section(beautiful.widget_clock, cyclic(beautiful.bg_widget, index_widget), cyclic(beautiful.bg_widget, index_widget + 1))
 vicious.register(clock.text, vicious.widgets.date, html(beautiful.fg_hour, " %I:%M %p ") .. html(beautiful.fg_date," %a %d %b "), 10)
 index_widget = index_widget + 1
+-- }}}
 
--- Prompt
+-- {{{ Prompt
 prompt = {}
 prompt.text = wibox.widget.textbox()
 prompt.info = wibox.widget.background(prompt.text, beautiful.bg_command)
 prompt.arrow = dynamo.arrow_right(beautiful.bg_command, beautiful.bg_normal)
 launcher = wibox.widget.background(mylauncher, beautiful.bg_command)
 vicious.register(prompt.text, vicious.widgets.os, html(beautiful.fg_command, " $3@$4"))
+-- }}}
 
+-- {{{ Miscelaneous
 space = wibox.widget.textbox(' ')
-layoutarrow = dynamo.arrow_left(cyclic(beautiful.bg_widget, index_widget), beautiful.bg_indicator[1]) 
+layoutarrow = dynamo.arrow_left(cyclic(beautiful.bg_widget, index_widget), beautiful.bg_indicator[1])
 startarrow = dynamo.arrow_border_left(beautiful.bg_indicator[1])
--- Create a wibox for each screen and add it
+-- }}}
 
+-- {{{ Create a wibox for each screen and add it
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt({ prompt = "" })
@@ -190,3 +202,4 @@ for s = 1, screen.count() do
     bottom_layout:set_right(bottom_right_layout)
     mybottomwibox[s]:set_widget(bottom_layout)
 end
+-- }}}

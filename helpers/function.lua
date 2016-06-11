@@ -94,6 +94,9 @@ end
 
 -- {{{ Get element has cyclic index from array
 function cyclic(arr, i)
+    if type(arr) ~= "table" then
+        return nil
+    end
     if i % #arr == 0 then
         return arr[#arr]
     else
