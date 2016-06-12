@@ -43,26 +43,22 @@ local function array_to_text(arr, depth)
     local result = print_tab(depth)
     if type(arr) == "table" then
         result = result .. "array {\n"
-        for i = 1, #arr do
-            if i == #arr then
-                result = result .. tostring(array_to_text(arr[i], depth + 1)) .. "\n" .. print_tab(depth) .. "}"
-            else
-                result = result .. tostring(array_to_text(arr[i], depth + 1)) .. "\n"
-            end
+        for k, v in pairs(arr) do
+            result = result .. print_tab(depth + 1) .. k .. " = " .. tostring(array_to_text(v, depth + 1)) .. "\n"
         end
+        result = result .. print_tab(depth) .. "}"
     else
-        result = result .. tostring(arr) 
+        result = tostring(arr) 
     end
     return result
 end
 
-function dbg(vars, args)
+function dbg(vars, notify)
     local vars = vars or ""
-    local args = args or {}
-    local notify = args.notify or false
+    local notify = notify or false
     local text = array_to_text(vars, 0)
     if notify then
-        naughty.notify({ text = text, timeout = 5 })
+        naughty.notify({ text = text, timeout = 10 })
     else
         local file = io.open(".awesome_dbg", "a")
         io.output(file)

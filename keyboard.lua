@@ -86,6 +86,7 @@ globalkeys = awful.util.table.join(
     awful.key({ altkey,           }, "Print", function () os.execute(screenshot .. ' -s') end),
 
     -- Prompt
+    awful.key({ altkey,           }, "F1",    dynamo.xprop                                   ),
     awful.key({ altkey,           }, "F2",    function () mypromptbox[mouse.screen]:run() end),
     awful.key({ altkey,           }, "F3",    dynamo.calculate                               ),
     awful.key({                   }, "XF86Launch1", dynamo.quote                             ),
