@@ -112,7 +112,7 @@ prompt.text = wibox.widget.textbox()
 prompt.info = wibox.widget.background(prompt.text, beautiful.bg_command)
 prompt.arrow = dynamo.arrow_right(beautiful.bg_command, beautiful.bg_normal)
 launcher = wibox.widget.background(mylauncher, beautiful.bg_command)
-vicious.register(prompt.text, vicious.widgets.os, html(beautiful.fg_command, " $3@$4"))
+dynamo.prompt()
 -- }}}
 
 -- {{{ Miscelaneous

@@ -1,4 +1,9 @@
 -- vim:filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:fdm=marker:foldmarker={{{,}}}
+-- Lua to HTML library
+local html = require("html")
+-- Vicious library
+local vicious = require("vicious")
+
 -- {{{ Non-empty tag browsing
 dynamo.switch_tag = function (direction)
     local screen = mouse.screen or 1
@@ -12,5 +17,17 @@ dynamo.switch_tag = function (direction)
         end
     end
     awful.tag.viewonly(tag)
+end
+-- }}}
+
+-- {{{ Re-show default prompt
+dynamo.prompt = function(text)
+    local text = text or nil
+    if not text then
+        vicious.register(prompt.text, vicious.widgets.os, html(beautiful.fg_command, " $3@$4"))
+    else
+        prompt.text:set_markup(html(beautiful.fg_command, text))
+        vicious.unregister(prompt.text)
+    end
 end
 -- }}}

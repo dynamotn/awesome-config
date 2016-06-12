@@ -3,18 +3,16 @@
 local naughty = require("naughty")
 -- Lua to HTML library
 local html = require("html")
--- Vicious library
-local vicious = require("vicious")
+-- Wibox library
 local wibox = require("wibox")
 
 -- {{{ Calculation
 dynamo.calculate = function ()
-    prompt.text:set_markup(html(beautiful.fg_command ," Máy tính"))
-    vicious.unregister(prompt.text)
+    dynamo.prompt(" Máy tính")
     awful.prompt.run({ prompt = "" },
                      mypromptbox[mouse.screen].widget,
                      function (expr) -- Execute callback
-                         vicious.register(prompt.text, vicious.widgets.os, html(beautiful.fg_command, " $3@$4"))
+                         dynamo.prompt()
                          local result = awful.util.eval("return (" .. trim(expr) .. ")")
                          naughty.notify({ text = html(beautiful.fg_focus, expr .. " = " .. result), timeout = 10, screen = mouse.screen })
                      end,
@@ -22,7 +20,7 @@ dynamo.calculate = function ()
                      awful.util.getdir("cache") .. "/history_calc",
                      nil,
                      function (expr) -- Done callback
-                         vicious.register(prompt.text, vicious.widgets.os, html(beautiful.fg_command, " $3@$4"))
+                         dynamo.prompt()
                      end)
 end
 -- }}}
@@ -50,6 +48,7 @@ end
 
 -- {{{ Show properties of windows
 dynamo.xprop = function()
+    dynamo.prompt(" Thuộc tính cửa sổ")
     if not mousegrabber.isrunning() then
         mousegrabber.run(function(_mouse)
             for k, v in ipairs(_mouse.buttons) do
@@ -65,6 +64,7 @@ dynamo.xprop = function()
                         pid = c.pid,
                     }
                     dbg(result, true)
+                    dynamo.prompt()
                     return false
                 end
             end
