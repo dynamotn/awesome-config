@@ -72,3 +72,5 @@ local naughty = require('naughty')
 naughty.config.defaults.timeout = 10
 naughty.config.defaults.screen = screen.count()
 -- }}}
+--
+number_of_process = 25

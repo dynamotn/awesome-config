@@ -66,6 +66,9 @@ theme.tasklist_fg_urgent   = "#f0f0f0"
 theme.notify_fg     = theme.fg_normal
 theme.notify_bg     = theme.bg_normal
 theme.notify_border = theme.border_focus
+
+-- Popup color
+theme.popup_htop_title = "#4aa651"
 -- }}}
 
 -- {{{ Theming client

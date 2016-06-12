@@ -50,7 +50,10 @@ index_indicator = index_indicator + 1
 -- {{{ Memory
 mem = dynamo.section(beautiful.widget_mem, cyclic(beautiful.bg_indicator, index_indicator), cyclic(beautiful.bg_widget, index_widget + 1))
 vicious.register(mem.text, vicious.widgets.mem, html(cyclic(beautiful.fg_widget, index_widget + 1), "$2MB "), 2)
+mem:buttons(membuttons)
 index_widget = index_widget + 1
+
+dynamo.popup(mem, get_process_info, 0)
 -- }}}
 
 -- {{{ CPU

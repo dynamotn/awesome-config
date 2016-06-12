@@ -1,4 +1,5 @@
 -- vim:filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:fdm=marker:foldmarker={{{,}}}
+local html = require("html")
 -- {{{ Scan directory, and optionally filter outputs
 function scandir(directory, filter)
     local i, t, popen = 0, {}, io.popen
@@ -102,5 +103,21 @@ function cyclic(arr, i)
     else
         return arr[i % #arr]
     end
+end
+-- }}}
+
+-- {{{ Get process info
+function get_process_info(delta)
+    number_of_process = number_of_process + delta
+    dbg(number_of_process)
+    local stats = awful.util.pread('ps --sort -c,-s -eo fname,%cpu,%mem,user,pid,tname,etime | head -n ' .. number_of_process)
+    stats = string.gsub(stats, "COMMAND", html(beautiful.popup_htop_title, "%1"))
+    stats = string.gsub(stats, "%%CPU", html(beautiful.popup_htop_title, "%1"))
+    stats = string.gsub(stats, "%%MEM", html(beautiful.popup_htop_title, "%1"))
+    stats = string.gsub(stats, "USER", html(beautiful.popup_htop_title, "%1"))
+    stats = string.gsub(stats, "PID", html(beautiful.popup_htop_title, "%1"))
+    stats = string.gsub(stats, "TTY", html(beautiful.popup_htop_title, "%1"))
+    stats = string.gsub(stats, "ELAPSED", html(beautiful.popup_htop_title, "%1"))
+    return stats
 end
 -- }}}

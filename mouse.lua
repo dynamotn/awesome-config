@@ -68,6 +68,19 @@ layoutbuttons = awful.util.table.join(
 mpdbuttons = awful.util.table.join(
              awful.button({ }, 1, function () run(music_cmd, screen.count(), 4) end)
              )
+membuttons = awful.util.table.join(
+             awful.button({ }, 1, function () run(monitor_cmd, screen.count(), 8) end),
+             awful.button({ }, 4, function ()
+                 -- Not use dynamo.popup(mem, get_process_info, -1) because have signal mouse::enter will decrease infinite
+                 number_of_process = number_of_process - 1
+                 dynamo.popup(mem, get_process_info, 0)
+             end),
+             awful.button({ }, 5, function ()
+                 -- Not use dynamo.popup(mem, get_process_info, 1) because have signal mouse::enter will decrease infinite
+                 number_of_process = number_of_process + 1
+                 dynamo.popup(mem, get_process_info, 0)
+             end)
+             )
 -- }}}
 
 -- {{{ Desktop button
