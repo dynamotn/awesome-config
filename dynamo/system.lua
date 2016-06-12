@@ -65,7 +65,7 @@ end
 -- {{{ Shutdown when at a time
 dynamo.shutdown_schedule = function()
     confirm_prompt(" Tắt máy", function (t)
-        awful.util.spawn("shutdown -P " .. trim(t))
-    end,"Nhập vào thời gian ")
+        awful.util.pread("shutdown -P " .. trim(t))
+    end, "Nhập vào thời gian ")
 end
 -- }}}
