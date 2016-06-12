@@ -50,26 +50,27 @@ end
 
 -- {{{ Show properties of windows
 dynamo.xprop = function()
-    --local result = awful.util.pread("xprop")
-    --naughty.notify({ text = result, timeout = 10, screen = mouse.screen })
-    mousegrabber.run(function(_mouse)
-        for k, v in ipairs(_mouse.buttons) do
-            if v then
-                local c = client.focus
-                local result = {
-                    name = c.name,
-                    class = c.class,
-                    instance = c.instance,
-                    type = c.type,
-                    window = c.window,
-                    role = c.role,
-                }
-                dbg(result, true)
-                return false
+    if not mousegrabber.isrunning() then
+        mousegrabber.run(function(_mouse)
+            for k, v in ipairs(_mouse.buttons) do
+                if v then
+                    local c = client.focus
+                    local result = {
+                        name = c.name,
+                        class = c.class,
+                        instance = c.instance,
+                        type = c.type,
+                        window = c.window,
+                        role = c.role,
+                        pid = c.pid,
+                    }
+                    dbg(result, true)
+                    return false
+                end
             end
             return true
-        end
-    end, "target")
+        end, "target")
+    end
 end
 -- }}}
 
