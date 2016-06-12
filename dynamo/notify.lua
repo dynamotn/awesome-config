@@ -53,6 +53,7 @@ dynamo.xprop = function()
         mousegrabber.run(function(_mouse)
             for k, v in ipairs(_mouse.buttons) do
                 if v then
+                    dynamo.prompt()
                     local c = client.focus
                     local result = {
                         name = c.name,
@@ -64,7 +65,6 @@ dynamo.xprop = function()
                         pid = c.pid,
                     }
                     dbg(result, true)
-                    dynamo.prompt()
                     return false
                 end
             end
