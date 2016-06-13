@@ -17,7 +17,7 @@ local function confirm_prompt(text_prompt, callback, text_confirm)
 end
 -- {{{ Lock function when using LightDM
 dynamo.lock = function()
-    confirm_prompt(" Khóa màn hình", function()
+    confirm_prompt("Khóa màn hình", function()
         awful.util.spawn("dm-tool switch-to-greeter")
     end)
 end
@@ -25,7 +25,7 @@ end
 
 -- {{{ Quit function when using GNOME session
 dynamo.quit = function()
-    confirm_prompt(" Thoát phiên", function ()
+    confirm_prompt("Thoát phiên", function ()
         awesome.emit_signal("exit", nil)
         if os.getenv("DESKTOP_SESSION") == "awesome-gnome" then
             awful.util.spawn("gnome-session-quit --no-prompt")
@@ -38,7 +38,7 @@ end
 
 -- {{{ Hibernate using systemd
 dynamo.hibernate = function()
-    confirm_prompt(" Ngủ đông", function ()
+    confirm_prompt("Ngủ đông", function ()
         awful.util.spawn("systemctl hibernate")
     end)
 end
@@ -46,7 +46,7 @@ end
 
 -- {{{ Reboot
 dynamo.reboot = function()
-    confirm_prompt(" Khởi động lại", function ()
+    confirm_prompt("Khởi động lại", function ()
         awesome.emit_signal("exit", nil)
         awful.util.spawn("reboot")
     end)
@@ -55,7 +55,7 @@ end
 
 -- {{{ Shutdown
 dynamo.shutdown = function()
-    confirm_prompt(" Tắt máy", function ()
+    confirm_prompt("Tắt máy", function ()
         awesome.emit_signal("exit", nil)
         awful.util.spawn("shutdown -P now")
     end)
@@ -64,7 +64,7 @@ end
 
 -- {{{ Shutdown when at a time
 dynamo.shutdown_schedule = function()
-    confirm_prompt(" Tắt máy", function (t)
+    confirm_prompt("Tắt máy", function (t)
         awful.util.pread("shutdown -P " .. trim(t))
     end, "Nhập vào thời gian ")
 end

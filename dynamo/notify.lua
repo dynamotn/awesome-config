@@ -8,7 +8,7 @@ local wibox = require("wibox")
 
 -- {{{ Calculation
 dynamo.calculate = function ()
-    dynamo.prompt(" Máy tính")
+    dynamo.prompt("Máy tính")
     awful.prompt.run({ prompt = "" },
                      mypromptbox[mouse.screen].widget,
                      function (expr) -- Execute callback
@@ -48,7 +48,7 @@ end
 
 -- {{{ Show properties of windows
 dynamo.xprop = function()
-    dynamo.prompt(" Thuộc tính cửa sổ")
+    dynamo.prompt("Thuộc tính cửa sổ")
     if not mousegrabber.isrunning() then
         mousegrabber.run(function(_mouse)
             for k, v in ipairs(_mouse.buttons) do

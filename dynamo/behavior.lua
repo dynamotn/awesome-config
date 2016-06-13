@@ -27,7 +27,7 @@ dynamo.prompt = function(text)
         vicious.register(prompt.text, vicious.widgets.os, html(beautiful.fg_command, " $3@$4"))
     else
         vicious.unregister(prompt.text)
-        prompt.text:set_markup(html(beautiful.fg_command, text))
+        prompt.text:set_markup(html(beautiful.fg_command, ' ' .. text))
     end
 end
 -- }}}
