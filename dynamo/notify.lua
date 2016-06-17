@@ -99,7 +99,7 @@ local function show_popup(is_widget, callback, args)
     elseif type(callback) == "table" then
         if is_widget then -- Table is a widget
             if original_args == nil then
-                result = callback
+                result = callback()
             else
                 result = callback(args)
             end
@@ -118,8 +118,8 @@ local function show_popup(is_widget, callback, args)
     end
 end
 
-dynamo.popup = function(widget, callback, args)
-    local is_widget = false
+dynamo.popup = function(widget, callback, args, is_widget)
+    local is_widget = is_widget or false
     if type(callback) == "table" then
         for k, v in pairs(callback) do
             if k == "draw" then
