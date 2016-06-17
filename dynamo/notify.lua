@@ -110,7 +110,8 @@ local function show_popup(is_widget, callback, args)
         result = callback
     end
     if is_widget then
-        dynamo_popup = wibox({ height = 300, width = 500, ontop = true, x = 1000, y = 18})
+        local w, h = result:fit(-1, -1)
+        dynamo_popup = wibox({ height = h, width = 200, ontop = true, x = 1000, y = 18})
         dynamo_popup:set_widget(result)
         dynamo_popup.visible = true
     else

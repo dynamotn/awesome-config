@@ -10,8 +10,8 @@ local Pango = lgi.Pango
 local label = { mt = {} }
 
 -- Setup a pango layout for the given textbox and cairo context
-local function setup_layout(box, width, height)
-    local layout = box._layout
+local function setup_layout(label, width, height)
+    local layout = label._layout
     layout.width = Pango.units_from_double(width)
     layout.height = Pango.units_from_double(height)
 end
