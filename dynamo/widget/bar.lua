@@ -32,13 +32,14 @@ function box:draw(wibox, cr, width, height)
     self:_draw(wibox, cr, width, height)
 end
 
-local function new()
+local function new(color)
     local text = wibox.widget.textbox()
     local image = wibox.widget.imagebox()
     local layout = wibox.layout.fixed.horizontal()
     local background = wibox.widget.background()
     local margin_text = wibox.layout.margin(text, 4, 4)
     local margin_image = wibox.layout.margin(image, 4 + beautiful.bottom_panel_height / 2, 0)
+    background.color = color or beautiful.tasklist_bg_normal
 
     background._draw = background.draw
 

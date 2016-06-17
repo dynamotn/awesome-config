@@ -82,9 +82,10 @@ function label:set_color(color, blink_interval)
     self:emit_signal("widget::updated")
 end
 
-local function new()
+local function new(color, blink_interval)
     local ret = textbox()
-    ret.color = beautiful.taglist_bg_empty
+    ret.color = color or beautiful.taglist_bg_empty
+    ret.blink_interval = blink_interval or 0
 
     for k, v in pairs(label) do
         if type(v) == "function" then

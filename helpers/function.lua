@@ -109,8 +109,7 @@ end
 -- {{{ Get process info
 function get_process_info(delta)
     number_of_process = number_of_process + delta
-    dbg(number_of_process)
-    local stats = awful.util.pread('ps --sort -c,-s -eo fname,%cpu,%mem,user,pid,tname,etime | head -n ' .. number_of_process)
+    local stats = awful.util.pread('ps --sort -c,-s -eo fname,%cpu,%mem,user,pid,etime,tname | head -n ' .. number_of_process)
     stats = string.gsub(stats, "COMMAND", html(beautiful.popup_htop_title, "%1"))
     stats = string.gsub(stats, "%%CPU", html(beautiful.popup_htop_title, "%1"))
     stats = string.gsub(stats, "%%MEM", html(beautiful.popup_htop_title, "%1"))

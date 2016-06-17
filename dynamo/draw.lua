@@ -309,28 +309,28 @@ dynamo.update_tasklist = function (w, buttons, label, data, objects)
     w:reset()
     for i, o in ipairs(objects) do
         local cache = data[o]
-        local box
+        local bar
         local text, bg, icon = decorate_tasklist(o)
 
         if cache then
-            box = cache.box
+            bar = cache.bar
         else
-            box = dynamo.widget.box()
+            bar = dynamo.widget.bar()
 
-            box:buttons(common.create_buttons(buttons, o))
+            bar:buttons(common.create_buttons(buttons, o))
 
             data[o] = {
-                box = box
+                bar = bar
             }
         end
 
         -- The text might be invalid, so use pcall
-        if not pcall(box.text.set_markup, box.text, text) then
-            box.text:set_markup("<i>&lt;Invalid text&gt;</i>")
+        if not pcall(bar.text.set_markup, bar.text, text) then
+            bar.text:set_markup("<i>&lt;Invalid text&gt;</i>")
         end
-        box:set_color(bg)
-        box.image:set_image(icon)
-        w:add(box)
+        bar:set_color(bg)
+        bar.image:set_image(icon)
+        w:add(bar)
    end
 end
 -- }}}
