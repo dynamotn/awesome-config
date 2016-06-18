@@ -77,6 +77,43 @@ end
 -- {{{ Show popup
 local dynamo_popup = nil
 
+local function get_offset(scr, position, idx, width, height)
+    local ws = screen[scr].workarea
+    local v = {}
+    local idx = idx or #naughty.notifications[scr][position] + 1
+    local width = width or naughty.notifications[scr][position][idx].width
+
+    -- calculate x
+    if position:match("left") then
+        v.x = ws.x + naughty.config.padding
+    else
+        v.x = ws.x + ws.width - (width + naughty.config.padding)
+    end
+
+    -- calculate existing popups' height
+    local existing = 0
+    for i = 1, idx-1, 1 do
+        existing = existing + naughty.notifications[scr][position][i].height + naughty.config.spacing
+    end
+
+    -- calculate y
+    if position:match("top") then
+        v.y = ws.y + naughty.config.padding + existing
+    else
+        v.y = ws.y + ws.height - (naughty.config.padding + height + existing)
+    end
+
+    -- if positioned outside workarea, destroy oldest popup and recalculate
+    if v.y + height > ws.y + ws.height or v.y < ws.y then
+        idx = idx - 1
+        naughty.destroy(naughty.notifications[scr][position][1])
+        v = get_offset(scr, position, idx, width, height)
+    end
+    if not v.idx then v.idx = idx end
+
+    return v
+end
+
 local function hide_popup(is_widget)
     if dynamo_popup ~= nil then
         if is_widget then
@@ -111,7 +148,8 @@ local function show_popup(is_widget, callback, args)
     end
     if is_widget then
         local w, h = result:fit(-1, -1)
-        dynamo_popup = wibox({ height = h, width = 200, ontop = true, x = 1000, y = 18})
+        local offset = get_offset(mouse.screen, naughty.config.defaults.position, nil, w, h)
+        dynamo_popup = wibox({ height = h, width = w, ontop = true, x = offset.x, y = offset.y})
         dynamo_popup:set_widget(result)
         dynamo_popup.visible = true
     else

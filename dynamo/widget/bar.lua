@@ -4,7 +4,6 @@ local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
 -- Pango library
-local lgi = require("lgi")
 local cairo = require("lgi").cairo
 local math = math
 

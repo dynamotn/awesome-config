@@ -4,8 +4,7 @@ local textbox = require("wibox.widget.textbox")
 local gears = require("gears")
 local beautiful = require("beautiful")
 -- Pango library
-local lgi = require("lgi")
-local Pango = lgi.Pango
+local Pango = require("lgi").Pango
 
 local label = { mt = {} }
 

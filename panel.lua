@@ -107,6 +107,8 @@ index_widget = index_widget + 1
 clock = dynamo.section(beautiful.widget_clock, cyclic(beautiful.bg_widget, index_widget), cyclic(beautiful.bg_widget, index_widget + 1))
 vicious.register(clock.text, vicious.widgets.date, html(beautiful.fg_hour, " %I:%M %p ") .. html(beautiful.fg_date," %a %d %b "), 10)
 index_widget = index_widget + 1
+
+dynamo.popup(clock, dynamo.widget.calendar, nil, true)
 -- }}}
 
 -- {{{ Prompt
