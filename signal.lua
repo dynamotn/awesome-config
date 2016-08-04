@@ -36,7 +36,6 @@ client.connect_signal("focus", function(c)
         c.border_width = 0
         c.border_color = beautiful.border_normal
     else
-        c.border_width = beautiful.border_width
         c.border_color = beautiful.border_focus
     end
 end)
