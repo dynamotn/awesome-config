@@ -21,7 +21,7 @@ run_once("uim-systray")
 
 -- {{{ Urxvt
 run_once("urxvtd", "-o -q -f")
-run_once(terminal, tmux, "tmux")
+run_once(terminal_tmux, null, "tmux attach-session -d")
 -- }}}
 
 -- {{{ Mpd
