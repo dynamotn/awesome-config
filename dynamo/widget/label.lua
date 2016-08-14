@@ -58,7 +58,7 @@ function label:set_color(color, blink_interval)
     self.color = color or beautiful.taglist_bg_empty
     self.blink_interval = blink_interval or 0
 
-    if self.blink_interval ~= 0 and self.blink_timer == nil then
+    if self.blink_interval ~= 0 and (self.blink_timer == nil or self.blink_timer.started == false) then
         self.value = 1
         self.blink_timer = timer { timeout = self.blink_interval }
         self.blink_timer:connect_signal("timeout", function()
