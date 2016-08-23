@@ -37,6 +37,9 @@ awful.rules.rules = {
     -- Set File manager of Gnome to always map on tags number 8 of last screen
     { rule = { class = "Nautilus", instance = "nautilus" },
       properties = { tag = tags[screen.count()][8] } },
+    -- Set Double Commander to always map on tags number 8 of last screen
+    { rule = { class = "Doublecmd" },
+      properties = { tag = tags[screen.count()][8] } },
     -- Set Franz to always maps on tags number 5 of last screen
     { rule = { class = "Franz" },
       properties = { tag = tags[screen.count()][5] } },
