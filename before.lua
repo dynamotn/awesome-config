@@ -34,7 +34,3 @@ run_once("compton")
 -- {{{ Note
 run_once("zim")
 -- }}}
-
--- {{{ Dev docs
-run_once("zeal")
--- }}}
