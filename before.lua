@@ -15,8 +15,8 @@ run_once(browser)
 run_once("clipit")
 -- }}}
 
--- {{{ Uim
-run_once("uim-systray")
+-- {{{ Ibus
+run_once("ibus-daemon", "-drx")
 -- }}}
 
 -- {{{ Urxvt
