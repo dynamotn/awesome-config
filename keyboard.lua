@@ -91,6 +91,9 @@ globalkeys = awful.util.table.join(
     awful.key({ altkey,           }, "F3",    dynamo.calculate                               ),
     awful.key({                   }, "XF86Launch1", dynamo.quote                             ),
 
+    -- Lock screen
+    awful.key({                   }, "XF86ScreenSaver", dynamo.lock                          ),
+    
     -- Touchpad
     awful.key({                   }, "XF86TouchpadToggle", dynamo.touchpad_toggle            ),
 
