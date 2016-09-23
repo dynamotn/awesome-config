@@ -40,10 +40,16 @@ awful.rules.rules = {
     -- Set Double Commander to always map on tags number 8 of last screen
     { rule = { class = "Doublecmd" },
       properties = { tag = tags[screen.count()][8] } },
-    -- Set Franz to always maps on tags number 5 of last screen
-    { rule = { class = "Franz" },
+    -- Set Rambox to always maps on tags number 5 of last screen
+    { rule = { class = "Rambox" },
       properties = { tag = tags[screen.count()][5] } },
     -- Set Zeal to always maps on tags number 6 of last screen
     { rule = { class = "Zeal" },
       properties = { tag = tags[screen.count()][6] } },
+    -- Set Intellij IDEA to always maps on tags number 3 of last screen
+    { rule = { class = "jetbrains-studio" },
+      properties = { tag = tags[screen.count()][3] } },
+    -- Set KeepassX2 to always maps on tags number 9 of last screen
+    { rule = { class = "Keepassx2" },
+      properties = { tag = tags[screen.count()][9] } },
 }

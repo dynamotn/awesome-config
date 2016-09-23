@@ -4,7 +4,7 @@ run_once("unclutter")
 -- }}}
 
 -- {{{ Chat
-run_once("franz")
+run_once("rambox")
 -- }}}
 
 -- {{{ Web Browser
