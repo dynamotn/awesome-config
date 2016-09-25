@@ -93,7 +93,7 @@ vicious.register(bat.text, vicious.widgets.bat,
                          end
                      end
                      return html(cyclic(beautiful.fg_widget, battery_index), args[2] .. "% ")
-                 end, 1, "BAT1")
+                 end, 1, "BAT0")
 index_widget = index_widget + 1
 -- }}}
 
