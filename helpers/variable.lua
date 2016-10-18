@@ -16,7 +16,7 @@ else
 end
 screenshot      = "scrot"
 file_manager    = "doublecmd"
-browser         = "firefox"
+browser         = "chromium"
 editor          = os.getenv("EDITOR") or "vim"
 editor_cmd      = terminal .. " -e " .. editor
 terminal_cmd    = terminal .. " -g 130x34-320+16 -e "
