@@ -14,8 +14,8 @@ awful.rules.rules = {
     { rule = { class = "urxvt" },
       properties = { opacity = 0.1 } },
     -- Set Chromium to always map on tags number 2 of last screen
-    { rule = { class = "chromium" },
-      properties = { tag = tags[screen.count()][2] } },
+    { rule = { class = "Chromium" },
+      properties = { tag = tags[screen.count()][2], border_width = 0 } },
     -- Plugin of firefox must be floating window
     { rule = { instance = "plugin-container" },
       properties = { floating = true } },
