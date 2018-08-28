@@ -3,20 +3,20 @@
 run_once("unclutter")
 -- }}}
 
--- {{{ Chat
-run_once("rambox")
--- }}}
-
--- {{{ Web Browser
-run_once(browser)
+-- {{{ Composite manager
+run_once("compton")
 -- }}}
 
 -- {{{ Clipboard
 run_once("clipit")
 -- }}}
 
--- {{{ Ibus
-run_once("ibus-daemon", "-drx")
+-- {{{ Fcitx
+run_once("fcitx")
+-- }}}
+
+-- {{{ Network Manager Applet
+run_once("nm-applet")
 -- }}}
 
 -- {{{ Urxvt
@@ -27,8 +27,8 @@ run_once("urxvtd", "-o -q -f")
 run_once("mpd")
 -- }}}
 
--- {{{ Composite manager
-run_once("compton")
+-- {{{ KeepassXC
+run_once("keepassxc")
 -- }}}
 
 -- {{{ Note

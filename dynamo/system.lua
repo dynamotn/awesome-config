@@ -18,7 +18,7 @@ end
 -- {{{ Lock function when using LightDM
 dynamo.lock = function()
     confirm_prompt("Khóa màn hình", function()
-        awful.util.spawn("dm-tool switch-to-greeter")
+        awful.util.spawn("light-locker-command -l")
     end)
 end
 -- }}}

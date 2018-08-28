@@ -13,8 +13,8 @@ awful.rules.rules = {
     -- Set urxvt transparent
     { rule = { class = "urxvt" },
       properties = { opacity = 0.1 } },
-    -- Set Chromium to always map on tags number 2 of last screen
-    { rule = { class = "Chromium" },
+    -- Set Chrome to always map on tags number 2 of first screen
+    { rule = { class = "Google-chrome" },
       properties = { tag = tags[screen.count()][2], border_width = 0 } },
     -- Plugin of firefox must be floating window
     { rule = { instance = "plugin-container" },
@@ -37,9 +37,6 @@ awful.rules.rules = {
     -- Set File manager of Gnome to always map on tags number 8 of last screen
     { rule = { class = "Nautilus", instance = "nautilus" },
       properties = { tag = tags[screen.count()][8] } },
-    -- Set Double Commander to always map on tags number 8 of last screen
-    { rule = { class = "Doublecmd" },
-      properties = { tag = tags[screen.count()][8] } },
     -- Set Rambox to always maps on tags number 5 of last screen
     { rule = { class = "Rambox" },
       properties = { tag = tags[screen.count()][5] } },
@@ -49,7 +46,4 @@ awful.rules.rules = {
     -- Set Intellij IDEA to always maps on tags number 3 of last screen
     { rule = { class = "jetbrains-studio" },
       properties = { tag = tags[screen.count()][3] } },
-    -- Set KeepassX2 to always maps on tags number 9 of last screen
-    { rule = { class = "Keepassx2" },
-      properties = { tag = tags[screen.count()][9] } },
 }

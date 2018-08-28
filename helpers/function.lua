@@ -6,7 +6,7 @@ function scandir(directory, filter)
     if not filter then
         filter = function(s) return true end
     end
-    for filename in popen('ls -a "'..directory..'"'):lines() do
+    for filename in popen('ls -a "' .. directory .. '"'):lines() do
         if filter(filename) then
             i = i + 1
             t[i] = filename
@@ -26,18 +26,16 @@ function run_once(prg, arg_string, pname, screen)
        pname = prg
     end
 
-    if not arg_string then 
-        if is_fish_shell then
-            awful.util.spawn_with_shell("pgrep -u $USER -x '" .. pname .. "'; or " .. prg, screen)
-        else
-            awful.util.spawn_with_shell("pgrep -u $USER -x '" .. pname .. "' || (" .. prg .. ")", screen)
-        end
+    if not arg_string or not not tostring(arg_string):find("^%s*$") then 
+        arg_string = ""
     else
-        if is_fish_shell then
-            awful.util.spawn_with_shell("pgrep -u $USER -x '" .. pname .. " ".. arg_string .."'; or " .. prg .. " " .. arg_string, screen)
-        else
-            awful.util.spawn_with_shell("pgrep -u $USER -x '" .. pname .. " ".. arg_string .."' || (" .. prg .. " " .. arg_string .. ")", screen)
-        end
+        arg_string = " " .. arg_string 
+    end
+
+    if is_fish_shell then
+        awful.util.spawn_with_shell("pgrep -u $USER -x '" .. pname .. arg_string .. "'; or " .. prg .. arg_string, screen)
+    else
+        awful.util.spawn_with_shell("pgrep -u $USER -x '" .. pname .. arg_string .. "' || (" .. prg .. arg_string .. ")", screen)
     end
 end
 -- }}}

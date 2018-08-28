@@ -15,8 +15,8 @@ else
     tmux = " -e sh -c 'tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -nwtf -s$USER@$HOSTNAME'"
 end
 screenshot      = "scrot"
-file_manager    = "doublecmd"
-browser         = "chromium"
+file_manager    = "nautilus"
+browser         = "google-chrome-stable"
 editor          = os.getenv("EDITOR") or "vim"
 editor_cmd      = terminal .. " -e " .. editor
 terminal_cmd    = terminal .. " -g 130x34-320+16 -e "

@@ -3,8 +3,8 @@ util = require("awful.util")
 theme = {}
 themes_dir = util.getdir("config") .. "/themes"
 
-theme.font            = "Terminess Powerline 9"
-theme.tasklist_font   = "Ubuntu Regular 9"
+theme.font            = "xos4 Terminess Powerline 9"
+theme.tasklist_font   = "Monofur Nerd Font 11"
 
 -- {{{ Color
 theme.bg_normal     = "#1a1a1a"
