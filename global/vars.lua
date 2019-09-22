@@ -3,10 +3,26 @@ local gears = require("gears")
 theme_location = gears.filesystem.get_themes_dir() .. "default/theme.lua"
 -- }
 
--- { Default application
+-- { Shell helper
+-- If current shell is fish then use not POSIX syntax
+is_fish_shell = string.find(os.getenv("SHELL"), "fish")
+
+-- Some strings in command line
+local and_operator = is_fish_shell and "; and " or " && "
+local or_operator = is_fish_shell and "; or " or " || "
+local space = " "
+local command_option = " -c "
+
+-- Default application
 terminal = "kitty"
 editor = os.getenv("EDITOR") or "vim"
-editor_cmd = terminal .. editor
+browser = "firefox"
+
+-- Terminal command
+tmux = "'" .. "tmux -q has-session" .. and_operator .. "exec tmux attach-session -d" .. or_operator .. "exec tmux new-session -nwtf -s$USER@$HOSTNAME" .. "'"
+
+editor_cmd = terminal .. space .. editor
+terminal_tmux = terminal .. space .. os.getenv("SHELL") .. command_option .. tmux
 -- }
 
 -- { Default functional key

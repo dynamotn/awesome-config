@@ -19,6 +19,11 @@ require("awful.hotkeys_popup.keys")
 -- { Custom library
 -- Error handling, variable definitions, pre-setup
 require("global")
+local dynamo = require("dynamo")
+-- }
+
+-- { Autostart application at startup
+require("autostart")
 -- }
 
 -- {{{ Menu
