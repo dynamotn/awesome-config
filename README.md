@@ -11,6 +11,7 @@ Features
 
 * Autostart application
 * Auto change wallpaper in `$XDG_PITURES_DIR/Wallpaper` (must install xdg-user-dirs)
+* 2 panels (top, bottom), avoid glitzy when use
 
 Note
 =====

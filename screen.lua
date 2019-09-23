@@ -1,5 +1,7 @@
 -- AwesomeWM standard library
 local awful = require("awful")
+-- Theme handling library
+local beautiful = require("beautiful")
 -- Widget and layout library
 local wibox = require("wibox")
 -- Custom library
@@ -33,18 +35,18 @@ awful.screen.connect_for_each_screen(function(s)
   }
 
   -- Create the wibox
-  s.mywibox = awful.wibar({ position = "top", screen = s })
+  s.mytopwibox = awful.wibar({ position = "top", screen = s, height = beautiful.top_panel_height })
+  s.mybottomwibox = awful.wibar({ position = "bottom", screen = s, height = beautiful.bottom_panel_height })
 
   -- Add widgets to the wibox
-  s.mywibox:setup {
+  s.mytopwibox:setup {
     layout = wibox.layout.align.horizontal,
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
       mylauncher,
-      s.mytaglist,
       s.mypromptbox,
     },
-    s.mytasklist, -- Middle widget
+    nil, -- Middle widget
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       mykeyboardlayout,
@@ -52,5 +54,13 @@ awful.screen.connect_for_each_screen(function(s)
       mytextclock,
       s.mylayoutbox,
     },
+  }
+  s.mybottomwibox:setup {
+    layout = wibox.layout.align.horizontal,
+    { -- Left widgets
+      layout = wibox.layout.fixed.horizontal,
+      s.mytaglist,
+    },
+    s.mytasklist, -- Middle widget
   }
 end)

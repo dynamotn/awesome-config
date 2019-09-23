@@ -29,6 +29,10 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 -- Menu
 theme.menu_height = dpi(20)
 theme.menu_width  = dpi(150)
+
+-- Panel
+theme.top_panel_height = dpi(18)
+theme.bottom_panel_height = dpi(28)
 -- }
 
 -- { Color
