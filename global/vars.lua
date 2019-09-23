@@ -53,3 +53,12 @@ layouts = {
 -- Workspace
 workspaces = { "TERM", "WEB", "CODE", "M&V", "CHAT", "DOC", "GAME", "SYS", "MORE" }
 -- }
+
+-- { Wallpaper auto change config
+local filesystem = require("dynamo.filesystem")
+local gears = require("gears")
+wallpaper = {
+  files = filesystem.scan_dir_by_mime(filesystem.xdg_user_dirs("PICTURES") .. "/Wallpaper", "image"),
+  timer = gears.timer { timeout = 10 },
+}
+-- }

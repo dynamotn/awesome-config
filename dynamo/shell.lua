@@ -28,6 +28,31 @@ local function run_one_pid(prg, arg_string, pname)
 end
 -- }
 
+-- { Run command and get result
+-- @param ... List arguments of io.popen
+-- @return table Result of command line by line
+local function run_command(...)
+  local pipe = io.popen(...)
+  return function ()
+    local result = pipe:read()
+    if result == nil then pipe:close() end
+    return result
+  end
+end
+-- }
+
+-- { Run command and get first line of result
+-- @param ... List arguments of io.popen
+-- @return table First line of result of command
+local function run_command_first_line(...)
+  for line in run_command(...) do
+    return line
+  end
+end
+-- }
+
 return {
   run_one_pid = run_one_pid,
+  run_command = run_command,
+  run_command_first_line = run_command_first_line,
 }

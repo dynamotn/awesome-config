@@ -108,11 +108,11 @@ local function set_wallpaper(s)
 end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-screen.connect_signal("property::geometry", set_wallpaper)
+screen.connect_signal("property::geometry", dynamo.misc.auto_change_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
-    -- Wallpaper
-    set_wallpaper(s)
+  -- Wallpaper
+  dynamo.misc.auto_change_wallpaper(s)
 
     -- Each screen has its own tag table.
     awful.tag(workspaces, s, layouts[1])
