@@ -7,37 +7,15 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "sans 8"
+-- { Font
+theme.font          = "Terminus 9"
+theme.tasklist_font = "Monofur Nerd Font 11"
+-- }
 
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#535d6c"
-theme.bg_urgent     = "#ff0000"
-theme.bg_minimize   = "#444444"
-theme.bg_systray    = theme.bg_normal
-
-theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#ffffff"
-
+-- { Size
+-- Border
 theme.useless_gap   = dpi(0)
 theme.border_width  = dpi(1)
-theme.border_normal = "#000000"
-theme.border_focus  = "#535d6c"
-theme.border_marked = "#91231c"
-
--- There are other variable sets
--- overriding the default one when
--- defined, the sets are:
--- taglist_[bg|fg]_[focus|urgent|occupied|empty|volatile]
--- tasklist_[bg|fg]_[focus|urgent]
--- titlebar_[bg|fg]_[normal|focus]
--- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
--- mouse_finder_[color|timeout|animate_timeout|radius|factor]
--- prompt_[fg|bg|fg_cursor|bg_cursor|font]
--- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
--- Example:
---theme.taglist_bg_focus = "#ff0000"
 
 -- Generate taglist squares:
 local taglist_square_size = dpi(4)
@@ -48,25 +26,50 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
     taglist_square_size, theme.fg_normal
 )
 
--- Variables set for theming notifications:
--- notification_font
--- notification_[bg|fg]
--- notification_[width|height|margin]
--- notification_[border_color|border_width|shape|opacity]
+-- Menu
+theme.menu_height = dpi(20)
+theme.menu_width  = dpi(150)
+-- }
 
--- Variables set for theming the menu:
--- menu_[bg|fg]_[normal|focus]
--- menu_[border_color|border_width]
-theme.menu_submenu_icon = themes_path.."default/submenu.png"
-theme.menu_height = dpi(15)
-theme.menu_width  = dpi(100)
+-- { Color
+-- Background
+theme.bg_normal   = "#1a1a1a"
+theme.bg_focus    = "#313131"
+theme.bg_urgent   = "#212121"
+theme.bg_minimize = "#414141"
+theme.bg_systray  = theme.bg_normal
 
--- You can add as many variables as
--- you wish and access them by using
--- beautiful.variable in your rc.lua
---theme.bg_widget = "#cc0000"
+-- Foreground
+theme.fg_normal   = "#ddddff"
+theme.fg_focus    = "#f0dfaf"
+theme.fg_urgent   = "#33b5e5"
+theme.fg_minimize = "#ffffff"
 
+-- Border
+theme.border_normal = "#3f3f3f"
+theme.border_focus  = "#7f7f7f"
+theme.border_marked = "#cc9393"
+
+-- Workspace panel
+theme.taglist_bg_empty    = "#313131"
+theme.taglist_bg_focus    = "#45aacc"
+theme.taglist_bg_urgent   = "#45bf55"
+theme.taglist_fg_focus    = "#fff3f3"
+theme.taglist_fg_occupied = "#acacac"
+theme.taglist_fg_empty    = "#1a1a1a"
+theme.taglist_fg_urgent   = "#fff3f3"
+
+-- Window panel
+theme.tasklist_fg_normal   = "#fff3f3"
+theme.tasklist_fg_minimize = "#777e76"
+theme.tasklist_fg_focus    = "#212121"
+theme.tasklist_fg_urgent   = "#f0f0f0"
+-- }
+
+-- { Image
 -- Define the image to load
+theme.menu_submenu_icon = themes_path.."default/submenu.png"
+
 theme.titlebar_close_button_normal = themes_path.."default/titlebar/close_normal.png"
 theme.titlebar_close_button_focus  = themes_path.."default/titlebar/close_focus.png"
 
@@ -93,9 +96,6 @@ theme.titlebar_maximized_button_focus_inactive  = themes_path.."default/titlebar
 theme.titlebar_maximized_button_normal_active = themes_path.."default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = themes_path.."default/background.png"
-
--- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
 theme.layout_fairv = themes_path.."default/layouts/fairvw.png"
 theme.layout_floating  = themes_path.."default/layouts/floatingw.png"
@@ -120,6 +120,7 @@ theme.awesome_icon = theme_assets.awesome_icon(
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = nil
+theme.icon_theme = "Moka"
+-- }
 
 return theme
