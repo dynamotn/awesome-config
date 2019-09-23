@@ -1,6 +1,6 @@
 -- { Theme config location
-local gears = require("gears")
-theme_location = gears.filesystem.get_themes_dir() .. "default/theme.lua"
+local awful = require("awful")
+theme_location = awful.util.getdir("config") .. "/theme/theme.lua"
 -- }
 
 -- { Shell helper
