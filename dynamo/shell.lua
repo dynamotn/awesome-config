@@ -14,7 +14,7 @@ local function run_one_pid(prg, arg_string, pname)
     pname = prg
   end
 
-  if not arg_string or not not tostring(arg_string):find("^%s*$") then
+  if not arg_string or tostring(arg_string):find("^%s*$") then
     arg_string = ""
   else
     arg_string = " " .. arg_string
@@ -43,7 +43,7 @@ end
 
 -- { Run command and get first line of result
 -- @param ... List arguments of io.popen
--- @return table First line of result of command
+-- @return string First line of result of command
 local function run_command_first_line(...)
   for line in run_command(...) do
     return line

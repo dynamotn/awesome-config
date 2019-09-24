@@ -1,5 +1,7 @@
 -- Wallpaper library
 local wallpaper_lib = require("gears.wallpaper")
+-- Custom shell library
+local shell = require("dynamo.shell")
 
 -- { Set wallpaper
 -- Set random wallpaper to screen from list files
@@ -25,6 +27,31 @@ local function auto_change_wallpaper(s)
 end
 -- }
 
+-- { Linux distribution detection
+-- Check is specify distribution
+-- @param string Distribution detection name
+-- @return string Result of check command
+local function is_linux_distribution(distribution_name)
+  return shell.run_command_first_line("cat /etc/os-release | grep '" .. distribution_name .. "'")
+end
+
+-- Get Linux distribution name
+-- @return string Name of distribution
+local function linux_distribution()
+  if is_linux_distribution("Ubuntu") then
+    return "ubuntu"
+  elseif is_linux_distribution("Arch Linux") then
+    return "archlinux"
+  elseif is_linux_distribution("Gentoo") then
+    return "gentoo"
+  else
+    -- FIXME: Add other distribution if needed
+    return "linux"
+  end
+end
+-- }
+
 return {
   auto_change_wallpaper = auto_change_wallpaper,
+  linux_distribution = linux_distribution,
 }

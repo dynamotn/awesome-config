@@ -4,12 +4,16 @@ local dpi = xresources.apply_dpi
 
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
+local util = require("awful.util")
+local local_theme_path = util.getdir("config") .. "/theme/"
 
 local theme = {}
 
 -- { Font
-theme.font          = "Terminus 9"
-theme.tasklist_font = "Monofur Nerd Font 11"
+theme.font                     = "Terminus 9"
+theme.tasklist_font            = "Monofur Nerd Font 11"
+theme.hotkeys_font             = "Terminus 9"
+theme.hotkeys_description_font = "Terminus 9"
 -- }
 
 -- { Size
@@ -71,8 +75,10 @@ theme.tasklist_fg_urgent   = "#f0f0f0"
 -- }
 
 -- { Image
--- Define the image to load
-theme.menu_submenu_icon = themes_path.."default/submenu.png"
+-- Menu
+theme.menu_submenu_icon = local_theme_path.."menu/submenu.png"
+theme.menu_edit_icon = local_theme_path.."menu/edit.svg"
+theme.menu_restart_icon = local_theme_path.."menu/restart.svg"
 
 theme.titlebar_close_button_normal = themes_path.."default/titlebar/close_normal.png"
 theme.titlebar_close_button_focus  = themes_path.."default/titlebar/close_focus.png"
@@ -118,9 +124,8 @@ theme.layout_cornersw = themes_path.."default/layouts/cornersww.png"
 theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
 
 -- Generate Awesome icon:
-theme.awesome_icon = theme_assets.awesome_icon(
-    theme.menu_height, theme.bg_focus, theme.fg_focus
-)
+theme.launcher_icon = local_theme_path .. "icons/" .. linux_distribution .. ".png"
+theme.awesome_icon  = local_theme_path .. "icons/awesome.png"
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.

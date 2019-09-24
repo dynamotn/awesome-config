@@ -23,6 +23,10 @@ tmux = "'" .. "tmux -q has-session" .. and_operator .. "exec tmux attach-session
 
 editor_cmd = terminal .. space .. editor
 terminal_tmux = terminal .. space .. os.getenv("SHELL") .. command_option .. tmux
+
+-- Get Linux distribution name
+local misc = require("dynamo.misc")
+linux_distribution = misc.linux_distribution()
 -- }
 
 -- { Default functional key
