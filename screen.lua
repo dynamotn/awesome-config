@@ -15,52 +15,52 @@ awful.screen.connect_for_each_screen(function(s)
   awful.tag(workspaces, s, layouts[1])
 
   -- Create a promptbox for each screen
-  s.mypromptbox = awful.widget.prompt()
+  s.dynamo_promptbox = awful.widget.prompt()
   -- Create an imagebox widget which will contain an icon indicating which layout we're using.
   -- We need one layoutbox per screen.
-  s.mylayoutbox = awful.widget.layoutbox(s)
-  s.mylayoutbox:buttons(layoutbuttons)
+  s.dynamo_layoutbox = awful.widget.layoutbox(s)
+  s.dynamo_layoutbox:buttons(layoutbuttons)
   -- Create a taglist widget
-  s.mytaglist = awful.widget.taglist {
+  s.dynamo_taglist = awful.widget.taglist {
     screen  = s,
     filter  = awful.widget.taglist.filter.all,
     buttons = taglist_buttons
   }
 
   -- Create a tasklist widget
-  s.mytasklist = awful.widget.tasklist {
+  s.dynamo_tasklist = awful.widget.tasklist {
     screen  = s,
     filter  = awful.widget.tasklist.filter.currenttags,
     buttons = tasklist_buttons
   }
 
   -- Create the wibox
-  s.mytopwibox = awful.wibar({ position = "top", screen = s, height = beautiful.top_panel_height })
-  s.mybottomwibox = awful.wibar({ position = "bottom", screen = s, height = beautiful.bottom_panel_height })
+  s.dynamo_top_wibox = awful.wibar({ position = "top", screen = s, height = beautiful.top_panel_height })
+  s.dynamo_bottom_wibox = awful.wibar({ position = "bottom", screen = s, height = beautiful.bottom_panel_height })
 
   -- Add widgets to the wibox
-  s.mytopwibox:setup {
+  s.dynamo_top_wibox:setup {
     layout = wibox.layout.align.horizontal,
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
-      mylauncher,
-      s.mypromptbox,
+      dynamo_launcher,
+      s.dynamo_promptbox,
     },
     nil, -- Middle widget
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      mykeyboardlayout,
+      dynamo_keyboard_layout,
       wibox.widget.systray(),
-      mytextclock,
-      s.mylayoutbox,
+      dynamo_text_clock,
+      s.dynamo_layoutbox,
     },
   }
-  s.mybottomwibox:setup {
+  s.dynamo_bottom_wibox:setup {
     layout = wibox.layout.align.horizontal,
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
-      s.mytaglist,
+      s.dynamo_taglist,
     },
-    s.mytasklist, -- Middle widget
+    s.dynamo_tasklist, -- Middle widget
   }
 end)

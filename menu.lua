@@ -4,18 +4,18 @@ local awful = require("awful")
 local beautiful = require("beautiful")
 
 -- Create a launcher widget and a main menu
-myawesomemenu = {
+dynamo_awesome_menu = {
   { "Hot&keys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
   { "Edit &configuration", editor_cmd .. " " .. awesome.conffile },
   { "&Restart", awesome.restart },
 }
 
-mysystemmenu = {
+dynamo_system_menu = {
 }
 
-mymainmenu = awful.menu({items = {
-      { "&Awesome", myawesomemenu, beautiful.awesome_icon },
-      { "&System", mysystemmenu },
+dynamo_main_menu = awful.menu({items = {
+      { "&Awesome", dynamo_awesome_menu, beautiful.awesome_icon },
+      { "&System", dynamo_system_menu },
   }})
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
+dynamo_launcher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = dynamo_main_menu })
