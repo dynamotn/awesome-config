@@ -23,8 +23,8 @@ require("key_bindings")
 require("menu")
 -- Panel
 require("panel")
--- Screen
-require("screen")
+-- Monitor
+require("monitor")
 -- }
 
 -- { On-the-fly setup
