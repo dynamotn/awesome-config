@@ -10,10 +10,10 @@ local local_theme_path = util.getdir("config") .. "/theme/"
 local theme = {}
 
 -- { Font
-theme.font                     = "Terminus 9"
+theme.font                     = "xos4 Terminus 9"
 theme.tasklist_font            = "Monofur Nerd Font 11"
-theme.hotkeys_font             = "Terminus 9"
-theme.hotkeys_description_font = "Terminus 9"
+theme.hotkeys_font             = theme.font
+theme.hotkeys_description_font = theme.font
 -- }
 
 -- { Size
