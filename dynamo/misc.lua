@@ -32,7 +32,7 @@ end
 -- @param string Distribution detection name
 -- @return string Result of check command
 local function is_linux_distribution(distribution_name)
-  return shell.run_command_first_line("cat /etc/os-release | grep '" .. distribution_name .. "'")
+  return shell.run_command_one_line("cat /etc/os-release | grep '" .. distribution_name .. "'") ~= ""
 end
 
 -- Get Linux distribution name
