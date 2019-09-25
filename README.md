@@ -4,6 +4,7 @@ Features
 * Autostart application
 * Auto change wallpaper in `$XDG_PITURES_DIR/Wallpaper`
 * 2 panels (top, bottom), avoid glitzy when use
+* Redshift support
 
 Installation
 =============
@@ -13,6 +14,7 @@ You must install:
 * [Moka icon theme](https://github.com/snwh/moka-icon-theme)
 * [Terminus font](http://terminus-font.sourceforge.net): some Linux distros already have this font
 * [Monofur Nerd font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Monofur)
+* [Redshift](http://jonls.dk/redshift/)
 
 Clone this repository to ~/.config/awesome
 ```

@@ -6,10 +6,14 @@ local table = require("gears.table")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Menubar library
 local menubar = require("menubar")
+-- Custom libray
+local dynamo = require("dynamo")
 
 -- { Global key bindings
 globalkeys = table.join(
   awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+    { description="show help", group="awesome" }),
+  awful.key({ modkey,           }, "d",      dynamo.misc.redshift_toggle,
     { description="show help", group="awesome" }),
   awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
     { description = "view previous", group = "tag" }),

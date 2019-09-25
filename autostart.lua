@@ -18,3 +18,7 @@ run_one_pid("keepassxc")
 -- { Browser
 run_one_pid(browser)
 -- }
+
+-- { Redshift
+require("dynamo.misc").redshift_init()
+-- }
