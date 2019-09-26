@@ -49,6 +49,7 @@ awful.screen.connect_for_each_screen(function(s)
     nil, -- Middle widget
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
+      dynamo_powerline_prompt_box,
       dynamo_keyboard_layout,
       wibox.widget.systray(),
       dynamo_text_clock,

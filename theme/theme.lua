@@ -72,6 +72,9 @@ theme.tasklist_fg_normal   = "#fff3f3"
 theme.tasklist_fg_minimize = "#777e76"
 theme.tasklist_fg_focus    = "#212121"
 theme.tasklist_fg_urgent   = "#f0f0f0"
+
+-- Prompt panel
+theme.prompt_bg_normal = "#f0f0f0"
 -- }
 
 -- { Image
