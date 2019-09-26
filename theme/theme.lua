@@ -84,6 +84,12 @@ elseif linux_distribution == "ubuntu" then
 else
   theme.prompt_fg_normal = "#feb50f"
 end
+
+-- Menu
+theme.menu_bg_normal = theme.prompt_fg_normal
+theme.menu_bg_focus  = theme.prompt_bg_normal
+theme.menu_fg_normal = theme.prompt_bg_normal
+theme.menu_fg_focus  = theme.prompt_fg_normal
 -- }
 
 -- { Image

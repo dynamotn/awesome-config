@@ -5,6 +5,7 @@ Features
 * Auto change wallpaper in `$XDG_PITURES_DIR/Wallpaper`
 * 2 panels (top, bottom), avoid glitzy when use
 * Redshift support
+* Colorful powerline panel
 
 Installation
 =============
