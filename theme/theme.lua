@@ -75,6 +75,15 @@ theme.tasklist_fg_urgent   = "#f0f0f0"
 
 -- Prompt panel
 theme.prompt_bg_normal = "#f0f0f0"
+if linux_distribution == "archlinux" then
+  theme.prompt_fg_normal = "#2196f3"
+elseif linux_distribution == "gentoo" then
+  theme.prompt_fg_normal = "#846bcc"
+elseif linux_distribution == "ubuntu" then
+  theme.prompt_fg_normal = "#fd6835"
+else
+  theme.prompt_fg_normal = "#feb50f"
+end
 -- }
 
 -- { Image

@@ -18,8 +18,16 @@ local function extract_lines(s)
 end
 -- }
 
+-- { Markup text
+-- @param string s String is needed to markup
+-- @return string Marked up text
+local function markup_text(s, color)
+  return '<span foreground="' .. color .. '">' .. s .. '</span>'
+end
+-- }
+
 return {
   trim = trim,
   extract_lines = extract_lines,
+  markup_text = markup_text,
 }
-

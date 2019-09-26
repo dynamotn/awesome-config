@@ -4,4 +4,5 @@ return {
   misc = require("dynamo.misc"),
   string = require("dynamo.string"),
   widget = require("dynamo.widget"),
+  bar = require("dynamo.bar"),
 }
