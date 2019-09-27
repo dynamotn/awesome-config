@@ -13,18 +13,18 @@ local panel_index = 0
 
 panel_index = panel_index + 1
 -- Menu button
-dynamo_launcher_section = wibox.container.background(dynamo_launcher, beautiful.prompt_bg_normal)
+dynamo_launcher = wibox.container.background(launcher, beautiful.prompt_bg_normal)
 -- Powerline prompt
-dynamo_prompt_section = dynamo.bar.powerline_section(panel_index, nil, beautiful.prompt_bg_normal, "opaque")
-vicious.register(dynamo_prompt_section.text, vicious.widgets.os, dynamo.string.markup_text(" $3@$4", beautiful.prompt_fg_normal))
+dynamo_prompt = dynamo.bar.powerline_section(panel_index, nil, beautiful.prompt_bg_normal, "opaque")
+vicious.register(dynamo_prompt.text, vicious.widgets.os, dynamo.string.markup_text(" $3@$4", beautiful.prompt_fg_normal))
 -- }
 
 -- { Right panel
 -- Keyboard map indicator and switcher
-dynamo_keyboard_layout = awful.widget.keyboardlayout()
+dynamo_keyboard = awful.widget.keyboardlayout()
 
 -- Create a textclock widget
-dynamo_text_clock = wibox.widget.textclock()
+dynamo_clock = wibox.widget.textclock()
 -- }
 
 -- { Miscellaneous

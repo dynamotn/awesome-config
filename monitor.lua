@@ -15,55 +15,55 @@ awful.screen.connect_for_each_screen(function(s)
   awful.tag(workspaces, s, layouts[1])
 
   -- Create a promptbox for each screen
-  s.dynamo_promptbox = awful.widget.prompt()
+  s.promptbox = awful.widget.prompt()
   -- Create an imagebox widget which will contain an icon indicating which layout we're using.
   -- We need one layoutbox per screen.
-  s.dynamo_layoutbox = awful.widget.layoutbox(s)
-  s.dynamo_layoutbox:buttons(layoutbuttons)
+  s.layoutbox = awful.widget.layoutbox(s)
+  s.layoutbox:buttons(layoutbuttons)
   -- Create a taglist widget
-  s.dynamo_taglist = awful.widget.taglist {
+  s.taglist = awful.widget.taglist {
     screen  = s,
     filter  = awful.widget.taglist.filter.all,
     buttons = taglist_buttons
   }
 
   -- Create a tasklist widget
-  s.dynamo_tasklist = awful.widget.tasklist {
+  s.tasklist = awful.widget.tasklist {
     screen  = s,
     filter  = awful.widget.tasklist.filter.currenttags,
     buttons = tasklist_buttons
   }
 
   -- Create the wibox
-  s.dynamo_top_wibox = awful.wibar({ position = "top", screen = s, height = beautiful.top_panel_height })
-  s.dynamo_bottom_wibox = awful.wibar({ position = "bottom", screen = s, height = beautiful.bottom_panel_height })
+  s.top_wibox = awful.wibar({ position = "top", screen = s, height = beautiful.top_panel_height })
+  s.bottom_wibox = awful.wibar({ position = "bottom", screen = s, height = beautiful.bottom_panel_height })
 
   -- Add widgets to the wibox
-  s.dynamo_top_wibox:setup {
+  s.top_wibox:setup {
     layout = wibox.layout.align.horizontal,
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
-      dynamo_launcher_section,
-      dynamo_prompt_section.background,
-      dynamo_prompt_section.separator,
+      dynamo_launcher,
+      dynamo_prompt.background,
+      dynamo_prompt.separator,
       space,
-      s.dynamo_promptbox,
+      s.promptbox,
     },
     nil, -- Middle widget
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      dynamo_keyboard_layout,
+      dynamo_keyboard,
       wibox.widget.systray(),
-      dynamo_text_clock,
-      s.dynamo_layoutbox,
+      dynamo_clock,
+      s.layoutbox,
     },
   }
-  s.dynamo_bottom_wibox:setup {
+  s.bottom_wibox:setup {
     layout = wibox.layout.align.horizontal,
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
-      s.dynamo_taglist,
+      s.taglist,
     },
-    s.dynamo_tasklist, -- Middle widget
+    s.tasklist, -- Middle widget
   }
 end)
