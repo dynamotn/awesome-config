@@ -105,36 +105,33 @@ local function create(symbol, direction, style, fg_color, bg_color)
     return
   end
 
-  -- Create new widget
-  local widget = wibox.widget.base.make_widget()
-
-  -- Get width and height same with base widget that current widget put on
-  function widget:fit(_, width, height)
-    return height / 2, height
-  end
-
-  function widget:draw(_, cairo, width, height)
-    if bg_color ~= "opaque" then
-      cairo:set_source_rgb(gears.color.parse_color(bg_color))
-      cairo:new_path()
-      cairo:move_to(0, 0)
-      cairo:line_to(width, 0)
-      cairo:line_to(width, height)
-      cairo:line_to(0, height)
-      cairo:close_path()
-      cairo:fill()
-    end
-
-    if fg_color ~= "opaque" then
-      if symbol == "arrow" then
-        draw_arrow(cairo, width, height, direction, style, fg_color)
-      elseif symbol == "curve" then
-        draw_curve(cairo, width, height, direction, style, fg_color, bg_color)
+  return {
+    layout = wibox.widget.base.make_widget,
+    fit = function(_, _, width, height)
+      -- Get width and height same with base widget that current widget put on
+      return height / 2, height
+    end,
+    draw = function(_, _, cairo, width, height)
+      if bg_color ~= "opaque" then
+        cairo:set_source_rgb(gears.color.parse_color(bg_color))
+        cairo:new_path()
+        cairo:move_to(0, 0)
+        cairo:line_to(width, 0)
+        cairo:line_to(width, height)
+        cairo:line_to(0, height)
+        cairo:close_path()
+        cairo:fill()
       end
-    end
-  end
 
-  return widget
+      if fg_color ~= "opaque" then
+        if symbol == "arrow" then
+          draw_arrow(cairo, width, height, direction, style, fg_color)
+        elseif symbol == "curve" then
+          draw_curve(cairo, width, height, direction, style, fg_color, bg_color)
+        end
+      end
+    end,
+  }
 end
 -- }
 

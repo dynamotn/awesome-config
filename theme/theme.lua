@@ -45,7 +45,7 @@ theme.bg_normal   = "#1a1a1a"
 theme.bg_focus    = "#313131"
 theme.bg_urgent   = "#212121"
 theme.bg_minimize = "#414141"
-theme.bg_systray  = theme.bg_normal
+theme.bg_systray  = theme.bg_focus
 
 -- Foreground
 theme.fg_normal   = "#ddddff"
@@ -90,6 +90,13 @@ theme.menu_bg_normal = theme.prompt_fg_normal
 theme.menu_bg_focus  = theme.prompt_bg_normal
 theme.menu_fg_normal = theme.prompt_bg_normal
 theme.menu_fg_focus  = theme.prompt_fg_normal
+
+-- Layout panel
+theme.layout_bg_normal = theme.bg_systray
+
+-- Vicious panel
+theme.clock_fg_date = theme.prompt_bg_normal
+theme.clock_fg_hour = theme.prompt_fg_normal
 -- }
 
 -- { Image
