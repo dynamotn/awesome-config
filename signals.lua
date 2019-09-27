@@ -12,9 +12,13 @@ local misc = require("dynamo.misc")
 -- { Client signal
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
+  c.shape = function(cairo, width, height)
+    gears.shape.rounded_rect(cairo, width, height, beautiful.border_radius)
+  end
+
   -- Set the windows at the slave,
   -- i.e. put it at the end of others instead of setting it master.
-  -- if not awesome.startup then awful.client.setslave(c) end
+  if not awesome.startup then awful.client.setslave(c) end
 
   if awesome.startup
     and not c.size_hints.user_position
@@ -53,10 +57,10 @@ client.connect_signal("request::titlebars", function(c)
       layout  = wibox.layout.flex.horizontal
     },
     { -- Right
+      awful.titlebar.widget.ontopbutton    (c),
+      awful.titlebar.widget.stickybutton   (c),
       awful.titlebar.widget.floatingbutton (c),
       awful.titlebar.widget.maximizedbutton(c),
-      awful.titlebar.widget.stickybutton   (c),
-      awful.titlebar.widget.ontopbutton    (c),
       awful.titlebar.widget.closebutton    (c),
       layout = wibox.layout.fixed.horizontal()
     },

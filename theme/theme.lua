@@ -20,6 +20,7 @@ theme.hotkeys_description_font = theme.font
 -- Border
 theme.useless_gap   = dpi(2)
 theme.border_width  = dpi(2)
+theme.border_radius = dpi(10)
 
 -- Generate taglist squares:
 local taglist_square_size = dpi(4)

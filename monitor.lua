@@ -1,5 +1,6 @@
 -- AwesomeWM standard library
 local awful = require("awful")
+local gears = require("gears")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Widget and layout library
