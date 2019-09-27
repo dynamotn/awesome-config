@@ -16,12 +16,14 @@ end
 
 -- Automatically change wallpaper in seconds
 -- @param awesome.screen s Screen that is needed to auto change wallpaper
-local function auto_change_wallpaper(s)
-  wallpaper.timer:connect_signal("timeout", function()
-    wallpaper.timer:stop()
-    set_wallpaper(s, wallpaper.files)
-    wallpaper.timer:start()
-  end)
+-- @param boolean is_recursion Flag when this function call itself
+local function auto_change_wallpaper(s, is_recursion)
+  wallpaper.timer:stop()
+  if not is_recursion then
+    wallpaper.timer:connect_signal("timeout", function()
+      auto_change_wallpaper(s, true)
+    end)
+  end
   set_wallpaper(s, wallpaper.files)
   wallpaper.timer:start()
 end
