@@ -1,5 +1,8 @@
 -- AwesomeWM standard library
 local awful = require("awful")
+local gears = require("gears")
+-- Widget library
+local wibox = require("wibox")
 require("awful.autofocus")
 -- Theme handling library
 local beautiful = require("beautiful")

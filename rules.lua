@@ -20,7 +20,8 @@ awful.rules.rules = {
       maximized_horizontal = false,
       maximized_vertical = false,
       size_hints_honor = false,
-      opacity = 1
+      opacity = 1,
+      titlebars_enabled = true,
     }
   },
 
@@ -57,7 +58,7 @@ awful.rules.rules = {
   -- Set Firefox to always map on tags number 2 of primary screen
   {
     rule = { class = "Firefox", type = "normal" },
-    properties = { screen = "primary", tag = workspaces[2], border_width = 0 }
+    properties = { screen = "primary", tag = workspaces[2] }
   },
   -- Set KeepassXC to always maps on tags number 9 of last screen
   {

@@ -18,8 +18,8 @@ theme.hotkeys_description_font = theme.font
 
 -- { Size
 -- Border
-theme.useless_gap   = dpi(0)
-theme.border_width  = dpi(1)
+theme.useless_gap   = dpi(2)
+theme.border_width  = dpi(2)
 
 -- Generate taglist squares:
 local taglist_square_size = dpi(4)
@@ -54,9 +54,9 @@ theme.fg_urgent   = "#33b5e5"
 theme.fg_minimize = "#ffffff"
 
 -- Border
-theme.border_normal = "#3f3f3f"
-theme.border_focus  = "#7f7f7f"
-theme.border_marked = "#cc9393"
+theme.border_normal = "#313131"
+theme.border_focus  = "#45aacc"
+theme.border_marked = "#45bf55"
 
 -- Workspace panel
 theme.taglist_bg_empty    = "#313131"
