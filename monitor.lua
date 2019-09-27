@@ -12,7 +12,7 @@ awful.screen.connect_for_each_screen(function(s)
   misc.auto_change_wallpaper(s)
 
   -- Each screen has its own tag table.
-  awful.tag(workspaces, s, layouts[1])
+  awful.tag(workspaces, s, layouts[3])
 
   -- Create a promptbox for each screen
   s.promptbox = awful.widget.prompt()
