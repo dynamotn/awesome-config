@@ -7,6 +7,7 @@ local beautiful = require("beautiful")
 local wibox = require("wibox")
 -- Custom library
 local misc = require("dynamo.misc")
+local separator = require("dynamo.widget").separator
 
 awful.screen.connect_for_each_screen(function(s)
   -- Wallpaper
@@ -45,14 +46,28 @@ awful.screen.connect_for_each_screen(function(s)
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
       dynamo_prompt,
-      space,
       s.promptbox,
     },
     nil, -- Middle widget
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      dynamo_keyboard,
-      wibox.widget.systray(),
+      {
+        layout = awful.widget.only_on_screen,
+        screen = awful.screen.focused(),
+        {
+          layout = wibox.layout.fixed.horizontal,
+          separator(beautiful.powerline_symbol, "left", "chevron", beautiful.bg_focus, beautiful.bg_normal),
+          dynamo_keyboard,
+          wibox.widget.systray(),
+          wibox.container.background(wibox.widget.textbox(' '), beautiful.bg_systray),
+          separator(beautiful.powerline_symbol, "left", "solid", beautiful.bg_normal, beautiful.bg_focus),
+        }
+      },
+      dynamo_volume,
+      dynamo_cpu,
+      dynamo_memory,
+      dynamo_power,
+      dynamo_network,
       dynamo_clock,
       s.layoutbox,
     },

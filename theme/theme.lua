@@ -39,33 +39,31 @@ theme.powerline_bgs = {
   "#2c5e2e",
   "#70b85d",
 }
+theme.powerline_symbol = "arrow"
 
 -- Background
 theme.bg_normal   = "#1a1a1a"
 theme.bg_focus    = "#313131"
-theme.bg_urgent   = "#212121"
-theme.bg_minimize = "#414141"
+theme.bg_urgent   = "#4caf50"
 theme.bg_systray  = theme.bg_focus
 
 -- Foreground
-theme.fg_normal   = "#ddddff"
-theme.fg_focus    = "#f0dfaf"
-theme.fg_urgent   = "#33b5e5"
-theme.fg_minimize = "#ffffff"
+theme.fg_normal   = theme.powerline_bgs[1]
+theme.fg_focus    = "#d5d5d5"
+theme.fg_urgent   = "#d0f0f1"
 
 -- Border
-theme.border_normal = "#313131"
-theme.border_focus  = "#45aacc"
-theme.border_marked = "#45bf55"
+theme.border_normal = theme.bg_focus
+theme.border_focus  = theme.powerline_bgs[2]
 
 -- Workspace panel
-theme.taglist_bg_empty    = "#313131"
-theme.taglist_bg_focus    = "#45aacc"
-theme.taglist_bg_urgent   = "#45bf55"
-theme.taglist_fg_focus    = "#fff3f3"
-theme.taglist_fg_occupied = "#acacac"
-theme.taglist_fg_empty    = "#1a1a1a"
-theme.taglist_fg_urgent   = "#fff3f3"
+theme.taglist_bg_empty    = theme.bg_focus
+theme.taglist_bg_focus    = theme.powerline_bgs[2]
+theme.taglist_bg_urgent   = theme.bg_urgent
+theme.taglist_fg_empty    = theme.bg_normal
+theme.taglist_fg_focus    = theme.fg_focus
+theme.taglist_fg_occupied = theme.fg_focus
+theme.taglist_fg_urgent   = theme.fg_urgent
 
 -- Window panel
 theme.tasklist_fg_normal   = "#fff3f3"
@@ -74,7 +72,7 @@ theme.tasklist_fg_focus    = "#212121"
 theme.tasklist_fg_urgent   = "#f0f0f0"
 
 -- Prompt panel
-theme.prompt_bg_normal = "#f0f0f0"
+theme.prompt_bg_normal = theme.fg_normal
 if linux_distribution == "archlinux" then
   theme.prompt_fg_normal = "#2196f3"
 elseif linux_distribution == "gentoo" then
@@ -95,49 +93,83 @@ theme.menu_fg_focus  = theme.prompt_fg_normal
 theme.layout_bg_normal = theme.bg_systray
 
 -- Vicious panel
-theme.clock_fg_date = theme.powerline_bgs[3]
-theme.clock_fg_hour = theme.powerline_bgs[1]
+theme.clock_fg_date   = theme.bg_normal
+theme.clock_fg_hour   = theme.fg_normal
+theme.network_fg_down = theme.powerline_bgs[2]
+theme.network_fg_up   = theme.powerline_bgs[5]
+theme.cpu_fg          = theme.powerline_bgs[3]
 -- }
 
 -- { Image
 -- Menu
-theme.menu_submenu_icon = local_theme_path.."menu/submenu.png"
-theme.menu_edit_icon = local_theme_path.."menu/edit.svg"
-theme.menu_restart_icon = local_theme_path.."menu/restart.svg"
+theme.menu_submenu_icon = local_theme_path .. "menu/submenu.png"
+theme.menu_edit_icon    = local_theme_path .. "menu/edit.svg"
+theme.menu_restart_icon = local_theme_path .. "menu/restart.svg"
 
-theme.titlebar_close_button_normal = local_theme_path.."titlebar/close_normal.png"
-theme.titlebar_close_button_focus  = local_theme_path.."titlebar/close_focus.png"
+-- { Title bar
+-- Close
+theme.titlebar_close_button_normal = local_theme_path .. "titlebar/close_normal.png"
+theme.titlebar_close_button_focus  = local_theme_path .. "titlebar/close_focus.png"
 
-theme.titlebar_minimize_button_normal = local_theme_path.."titlebar/minimize_normal.png"
-theme.titlebar_minimize_button_focus  = local_theme_path.."titlebar/minimize_focus.png"
+-- Minimize
+theme.titlebar_minimize_button_normal = local_theme_path .. "titlebar/minimize_normal.png"
+theme.titlebar_minimize_button_focus  = local_theme_path .. "titlebar/minimize_focus.png"
 
-theme.titlebar_ontop_button_normal_inactive = local_theme_path.."titlebar/ontop_normal_inactive.svg"
-theme.titlebar_ontop_button_focus_inactive  = local_theme_path.."titlebar/ontop_focus_inactive.svg"
-theme.titlebar_ontop_button_normal_active = local_theme_path.."titlebar/ontop_normal_active.png"
-theme.titlebar_ontop_button_focus_active  = local_theme_path.."titlebar/ontop_focus_active.png"
+-- On top
+theme.titlebar_ontop_button_normal_inactive = local_theme_path .. "titlebar/ontop_normal_inactive.svg"
+theme.titlebar_ontop_button_focus_inactive  = local_theme_path .. "titlebar/ontop_focus_inactive.svg"
+theme.titlebar_ontop_button_normal_active   = local_theme_path .. "titlebar/ontop_normal_active.png"
+theme.titlebar_ontop_button_focus_active    = local_theme_path .. "titlebar/ontop_focus_active.png"
+-- Sticky
+theme.titlebar_sticky_button_normal_inactive = local_theme_path .. "titlebar/sticky_normal_inactive.svg"
+theme.titlebar_sticky_button_focus_inactive  = local_theme_path .. "titlebar/sticky_focus_inactive.svg"
+theme.titlebar_sticky_button_normal_active   = local_theme_path .. "titlebar/sticky_normal_active.svg"
+theme.titlebar_sticky_button_focus_active    = local_theme_path .. "titlebar/sticky_focus_active.svg"
 
-theme.titlebar_sticky_button_normal_inactive = local_theme_path.."titlebar/sticky_normal_inactive.svg"
-theme.titlebar_sticky_button_focus_inactive  = local_theme_path.."titlebar/sticky_focus_inactive.svg"
-theme.titlebar_sticky_button_normal_active = local_theme_path.."titlebar/sticky_normal_active.svg"
-theme.titlebar_sticky_button_focus_active  = local_theme_path.."titlebar/sticky_focus_active.svg"
+-- Floating
+theme.titlebar_floating_button_normal_inactive = local_theme_path .. "titlebar/floating_normal_inactive.svg"
+theme.titlebar_floating_button_focus_inactive  = local_theme_path .. "titlebar/floating_focus_inactive.svg"
+theme.titlebar_floating_button_normal_active   = local_theme_path .. "titlebar/floating_normal_active.svg"
+theme.titlebar_floating_button_focus_active    = local_theme_path .. "titlebar/floating_focus_active.svg"
 
-theme.titlebar_floating_button_normal_inactive = local_theme_path.."titlebar/floating_normal_inactive.svg"
-theme.titlebar_floating_button_focus_inactive  = local_theme_path.."titlebar/floating_focus_inactive.svg"
-theme.titlebar_floating_button_normal_active = local_theme_path.."titlebar/floating_normal_active.svg"
-theme.titlebar_floating_button_focus_active  = local_theme_path.."titlebar/floating_focus_active.svg"
+-- Maximized
+theme.titlebar_maximized_button_normal_inactive = local_theme_path .. "titlebar/maximized_normal_inactive.png"
+theme.titlebar_maximized_button_focus_inactive  = local_theme_path .. "titlebar/maximized_focus_inactive.png"
+theme.titlebar_maximized_button_normal_active   = local_theme_path .. "titlebar/maximized_normal_active.png"
+theme.titlebar_maximized_button_focus_active    = local_theme_path .. "titlebar/maximized_focus_active.png"
+-- }
 
-theme.titlebar_maximized_button_normal_inactive = local_theme_path.."titlebar/maximized_normal_inactive.png"
-theme.titlebar_maximized_button_focus_inactive  = local_theme_path.."titlebar/maximized_focus_inactive.png"
-theme.titlebar_maximized_button_normal_active = local_theme_path.."titlebar/maximized_normal_active.png"
-theme.titlebar_maximized_button_focus_active  = local_theme_path.."titlebar/maximized_focus_active.png"
+-- { Widget
+-- Clock
+theme.clock_icon = local_theme_path .. "widget/clock.png"
 
-theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
-theme.layout_fairv = themes_path.."default/layouts/fairvw.png"
-theme.layout_floating  = themes_path.."default/layouts/floatingw.png"
-theme.layout_magnifier = themes_path.."default/layouts/magnifierw.png"
-theme.layout_max = themes_path.."default/layouts/maxw.png"
-theme.layout_tile = themes_path.."default/layouts/tilew.png"
-theme.layout_cornernw = themes_path.."default/layouts/cornernww.png"
+-- Power
+theme.power_icon_ac       = local_theme_path .. "widget/power_ac.png"
+theme.power_icon_very_low = local_theme_path .. "widget/power_very_low.png"
+theme.power_icon_low      = local_theme_path .. "widget/power_low.png"
+theme.power_icon_normal   = local_theme_path .. "widget/power_normal.png"
+
+-- Memory
+theme.memory_icon = local_theme_path .. "widget/mem.png"
+
+-- CPU
+theme.cpu_icon = local_theme_path .. "widget/cpu.png"
+
+-- Volume
+theme.volume_icon_mute = local_theme_path .. "widget/volume_mute.png"
+theme.volume_icon_no = local_theme_path .. "widget/volume_no.png"
+theme.volume_icon_low = local_theme_path .. "widget/volume_low.png"
+theme.volume_icon_normal = local_theme_path .. "widget/volume_normal.png"
+-- }
+
+-- Layout
+theme.layout_fairh     = themes_path .. "default/layouts/fairhw.png"
+theme.layout_fairv     = themes_path .. "default/layouts/fairvw.png"
+theme.layout_floating  = local_theme_path .. "layouts/floating.png"
+theme.layout_magnifier = local_theme_path .. "layouts/magnifier.png"
+theme.layout_max       = themes_path .. "default/layouts/maxw.png"
+theme.layout_tile      = local_theme_path .. "layouts/tile.png"
+theme.layout_cornernw  = themes_path .. "default/layouts/cornernww.png"
 
 -- Generate Awesome icon:
 theme.launcher_icon = local_theme_path .. "icons/" .. linux_distribution .. ".png"
