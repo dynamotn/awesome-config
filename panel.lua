@@ -1,6 +1,6 @@
 -- AwesomeWM standard library
 local awful = require("awful")
--- Widget and layout library
+-- Widget library
 local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
@@ -24,49 +24,34 @@ dynamo_prompt = powerline_section(
   "opaque"
 )
 vicious.register(
-  dynamo_prompt:text(),
+  dynamo_prompt,
   vicious.widgets.os,
-  markup_text(" $3@$4", beautiful.prompt_fg_normal)
+  markup_text("$3@$4", beautiful.prompt_fg_normal)
 )
 -- }
 
 -- { Right panel
-local panel_index = 0
+local panel_index = -1
 
 -- Layout button
-panel_index = panel_index - 1
 dynamo_layout = function(screen)
-  return powerline_section(
-    panel_index,
-    awful.widget.layoutbox(screen),
-    beautiful.layout_bg_normal,
-    beautiful.bg_normal
-  )
+  local panel_index = -1
+  return powerline_section(panel_index, awful.widget.layoutbox(screen), beautiful.layout_bg_normal)
 end
 
 -- Clock
 panel_index = panel_index - 1
-dynamo_clock = powerline_section(
-  panel_index,
-  nil,
-  beautiful.bg_normal,
-  beautiful.bg_systray
-)
+dynamo_clock = powerline_section(panel_index)
 vicious.register(
-  dynamo_clock:text(),
+  dynamo_clock,
   vicious.widgets.date,
-  markup_text(" %I:%M %p ", beautiful.clock_fg_hour) .. markup_text(" %a %d %b ", beautiful.clock_fg_date),
+  markup_text("%I:%M %p ", beautiful.clock_fg_hour) .. markup_text("%a %d %b", beautiful.clock_fg_date),
   10
 )
 
 -- Keyboard map indicator and switcher
 panel_index = panel_index - 1
-dynamo_keyboard = powerline_section(
-  panel_index,
-  awful.widget.keyboardlayout(),
-  beautiful.bg_systray,
-  "opaque"
-)
+dynamo_keyboard = powerline_section(panel_index, awful.widget.keyboardlayout(), nil, "opaque")
 -- }
 
 -- { Miscellaneous

@@ -31,6 +31,15 @@ theme.bottom_panel_height = dpi(28)
 -- }
 
 -- { Color
+-- Common powerline section
+theme.powerline_bgs = {
+  "#f0f0f0",
+  "#44c0dd",
+  "#0c273d",
+  "#2c5e2e",
+  "#70b85d",
+}
+
 -- Background
 theme.bg_normal   = "#1a1a1a"
 theme.bg_focus    = "#313131"
@@ -86,8 +95,8 @@ theme.menu_fg_focus  = theme.prompt_fg_normal
 theme.layout_bg_normal = theme.bg_systray
 
 -- Vicious panel
-theme.clock_fg_date = theme.prompt_bg_normal
-theme.clock_fg_hour = theme.prompt_fg_normal
+theme.clock_fg_date = theme.powerline_bgs[3]
+theme.clock_fg_hour = theme.powerline_bgs[1]
 -- }
 
 -- { Image
