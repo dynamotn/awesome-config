@@ -28,6 +28,13 @@ theme.menu_width  = dpi(150)
 -- Panel
 theme.top_panel_height = dpi(18)
 theme.bottom_panel_height = dpi(28)
+
+-- Workspace
+theme.taglist_margin_left    = 3
+theme.taglist_margin_top     = 8
+theme.taglist_small_corner   = 2
+theme.taglist_large_corner   = 6
+theme.taglist_blink_interval = 0.5
 -- }
 
 -- { Color

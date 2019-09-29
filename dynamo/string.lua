@@ -20,9 +20,15 @@ end
 
 -- { Markup text
 -- @param string s String is needed to markup
+-- @param string color Color of string
+-- @tparam string font Font of string
 -- @return string Marked up text
-local function markup_text(s, color)
-  return '<span foreground="' .. color .. '">' .. s .. '</span>'
+local function markup_text(s, color, font)
+  if not font then
+    return '<span foreground="' .. color .. '">' .. s .. '</span>'
+  else
+    return '<span font="' .. font .. '" foreground="' .. color .. '">' .. s .. '</span>'
+  end
 end
 -- }
 

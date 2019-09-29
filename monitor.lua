@@ -8,6 +8,7 @@ local wibox = require("wibox")
 -- Custom library
 local misc = require("dynamo.misc")
 local separator = require("dynamo.widget").separator
+local bar = require("dynamo.bar")
 
 awful.screen.connect_for_each_screen(function(s)
   -- Wallpaper
@@ -23,7 +24,7 @@ awful.screen.connect_for_each_screen(function(s)
   s.layoutbox = dynamo_layout(s)
   s.layoutbox:set_buttons(layoutbuttons)
   -- Create a taglist widget
-  s.taglist = awful.widget.taglist {
+  s.taglist = bar.taglist {
     screen  = s,
     filter  = awful.widget.taglist.filter.all,
     buttons = taglist_buttons
