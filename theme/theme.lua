@@ -35,6 +35,9 @@ theme.taglist_margin_top     = 8
 theme.taglist_small_corner   = 2
 theme.taglist_large_corner   = 6
 theme.taglist_blink_interval = 0.5
+
+-- Taskbar
+theme.tasklist_margin_top = theme.taglist_margin_top
 -- }
 
 -- { Color
@@ -177,6 +180,12 @@ theme.layout_magnifier = local_theme_path .. "layouts/magnifier.png"
 theme.layout_max       = themes_path .. "default/layouts/maxw.png"
 theme.layout_tile      = local_theme_path .. "layouts/tile.png"
 theme.layout_cornernw  = themes_path .. "default/layouts/cornernww.png"
+
+-- Taskbar
+theme.tasklist_bg_image_normal   = local_theme_path .. 'background/gray.png'
+theme.tasklist_bg_image_minimize = local_theme_path .. 'background/black.png'
+theme.tasklist_bg_image_focus    = local_theme_path .. 'background/white.png'
+theme.tasklist_bg_image_urgent   = local_theme_path .. 'background/blue.png'
 
 -- Generate Awesome icon:
 theme.launcher_icon = local_theme_path .. "icons/" .. linux_distribution .. ".png"

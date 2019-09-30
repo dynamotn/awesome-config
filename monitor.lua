@@ -31,7 +31,7 @@ awful.screen.connect_for_each_screen(function(s)
   }
 
   -- Create a tasklist widget
-  s.tasklist = awful.widget.tasklist {
+  s.tasklist = bar.tasklist {
     screen  = s,
     filter  = awful.widget.tasklist.filter.currenttags,
     buttons = tasklist_buttons
