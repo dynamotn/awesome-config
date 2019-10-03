@@ -105,6 +105,8 @@ globalkeys = table.join(
   -- Third party application
   awful.key({ modkey,           }, "d",      dynamo.misc.redshift_toggle,
     { description="Toggle color temperature", group="redshift" }),
+  awful.key({ modkey,           }, "x",      function() awful.spawn(clipboard_list) end,
+    { description="Toggle color temperature", group="redshift" }),
 
   -- Menubar
   awful.key({ modkey }, "p", function() menubar.show() end,

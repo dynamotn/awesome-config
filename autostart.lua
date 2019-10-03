@@ -19,6 +19,10 @@ run_one_pid("keepassxc")
 run_one_pid(browser)
 -- }
 
+-- { Clipboard manager
+run_one_pid(clipboard)
+-- }
+
 -- { Redshift
 require("dynamo.misc").redshift_init()
 -- }

@@ -17,6 +17,8 @@ local command_option = " -c "
 terminal = "kitty"
 editor = os.getenv("EDITOR") or "vim"
 browser = "firefox"
+clipboard = "copyq"
+clipboard_list = clipboard .. " menu"
 
 -- Terminal command
 tmux = "'" .. "tmux -q has-session" .. and_operator .. "exec tmux attach-session -d" .. or_operator .. "exec tmux new-session -nwtf -s$USER@$HOSTNAME" .. "'"
