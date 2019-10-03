@@ -12,15 +12,19 @@ local dynamo = require("dynamo")
 -- { Global key bindings
 globalkeys = table.join(
   awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
-    { description="show help", group="awesome" }),
-  awful.key({ modkey,           }, "d",      dynamo.misc.redshift_toggle,
-    { description="show help", group="awesome" }),
-  awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
-    { description = "view previous", group = "tag" }),
-  awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
-    { description = "view next", group = "tag" }),
+    { description="Show help", group="awesome" }),
+
+  -- Workspace movement
+  awful.key({ modkey,           }, "Left",   function() dynamo.misc.switch_occupied_tag(-1) end,
+    { description = "View previous", group = "workspace" }),
+  awful.key({ modkey,           }, "Right",  function() dynamo.misc.switch_occupied_tag(1) end,
+    { description = "View next", group = "workspace" }),
+  awful.key({ modkey, altkey    }, "Left",   awful.tag.viewprev,
+    { description = "View previous", group = "workspace" }),
+  awful.key({ modkey, altkey    }, "Right",  awful.tag.viewnext,
+    { description = "View next", group = "workspace" }),
   awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
-    { description = "go back", group = "tag" }),
+    { description = "Go back", group = "workspace" }),
 
   awful.key({ modkey,           }, "j",
     function ()
@@ -108,6 +112,11 @@ globalkeys = table.join(
       }
     end,
     { description = "lua execute prompt", group = "awesome" }),
+
+  -- Third party application
+  awful.key({ modkey,           }, "d",      dynamo.misc.redshift_toggle,
+    { description="Toggle color temperature", group="redshift" }),
+
   -- Menubar
   awful.key({ modkey }, "p", function() menubar.show() end,
     { description = "show the menubar", group = "launcher" })
@@ -127,7 +136,7 @@ for i = 1, 9 do
           tag:view_only()
         end
       end,
-      { description = "view tag #"..i, group = "tag" }),
+      { description = "View workspace #"..i, group = "workspace" }),
     -- Toggle tag display.
     awful.key({ modkey, "Control" }, "#" .. i + 9,
       function ()
@@ -137,7 +146,7 @@ for i = 1, 9 do
           awful.tag.viewtoggle(tag)
         end
       end,
-      { description = "toggle tag #" .. i, group = "tag" }),
+      { description = "Toggle workspace #" .. i, group = "workspace" }),
     -- Move client to tag.
     awful.key({ modkey, "Shift" }, "#" .. i + 9,
       function ()
@@ -148,7 +157,7 @@ for i = 1, 9 do
           end
         end
       end,
-      { description = "move focused client to tag #"..i, group = "tag" }),
+      { description = "Move focused client to workspace #"..i, group = "workspace" }),
     -- Toggle tag on focused client.
     awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
       function ()
@@ -159,10 +168,9 @@ for i = 1, 9 do
           end
         end
       end,
-      { description = "toggle focused client on tag #" .. i, group = "tag" })
+      { description = "Toggle focused client on workspace #" .. i, group = "workspace" })
     )
 end
--- }
 
 -- Set keys
 root.keys(globalkeys)

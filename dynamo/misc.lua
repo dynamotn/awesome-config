@@ -1,3 +1,5 @@
+-- AwesomeWM standard library
+local awful = require("awful")
 -- Wallpaper library
 local wallpaper_lib = require("gears.wallpaper")
 -- Custom shell library
@@ -82,9 +84,28 @@ local function redshift_init()
 end
 -- }
 
+-- { Switch only occupied workspace
+-- @param number direction Number that greater than 0 is right, less than 0 is left
+local function switch_occupied_tag(direction)
+  local screen = awful.screen.focused()
+  local tag_number = awful.tag.getidx(awful.tag.selected(screen))
+  local tag
+  local all_tags = awful.tag.gettags(screen)
+  local direction = (direction > 0) and 1 or -1
+  for i = 1, #all_tags do
+    tag = all_tags[awful.util.cycle(#all_tags, tag_number + direction * i)]
+    if #tag:clients() > 0 then
+      break
+    end
+  end
+  awful.tag.viewonly(tag)
+end
+-- }
+
 return {
   auto_change_wallpaper = auto_change_wallpaper,
   linux_distribution = linux_distribution,
   redshift_toggle = redshift_toggle,
   redshift_init = redshift_init,
+  switch_occupied_tag = switch_occupied_tag,
 }
