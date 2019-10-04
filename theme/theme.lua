@@ -153,6 +153,9 @@ theme.titlebar_maximized_button_focus_active    = local_theme_path .. "titlebar/
 -- Clock
 theme.clock_icon = local_theme_path .. "widget/clock.png"
 
+-- Network
+theme.network_icon = local_theme_path .. "widget/network.png"
+
 -- Power
 theme.power_icon_ac       = local_theme_path .. "widget/power_ac.png"
 theme.power_icon_very_low = local_theme_path .. "widget/power_very_low.png"
@@ -166,9 +169,9 @@ theme.memory_icon = local_theme_path .. "widget/mem.png"
 theme.cpu_icon = local_theme_path .. "widget/cpu.png"
 
 -- Volume
-theme.volume_icon_mute = local_theme_path .. "widget/volume_mute.png"
-theme.volume_icon_no = local_theme_path .. "widget/volume_no.png"
-theme.volume_icon_low = local_theme_path .. "widget/volume_low.png"
+theme.volume_icon_mute   = local_theme_path .. "widget/volume_mute.png"
+theme.volume_icon_no     = local_theme_path .. "widget/volume_no.png"
+theme.volume_icon_low    = local_theme_path .. "widget/volume_low.png"
 theme.volume_icon_normal = local_theme_path .. "widget/volume_normal.png"
 -- }
 

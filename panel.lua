@@ -44,7 +44,7 @@ end
 
 -- Clock
 panel_index = panel_index - 1
-dynamo_clock = powerline_section(panel_index)
+dynamo_clock = powerline_section(panel_index, beautiful.clock_icon)
 vicious.register(
   dynamo_clock,
   vicious.widgets.date,
@@ -54,7 +54,7 @@ vicious.register(
 
 -- Network
 panel_index = panel_index - 1
-dynamo_network = powerline_section(panel_index)
+dynamo_network = powerline_section(panel_index, beautiful.network_icon)
 vicious.register(
   dynamo_network,
   vicious.contrib.net,
