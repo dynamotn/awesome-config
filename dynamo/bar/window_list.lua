@@ -7,24 +7,24 @@ local beautiful = require("beautiful")
 -- Custom library
 local taskbar = require("dynamo.widget.taskbar")
 
-local function update (w, buttons, label, data, objects)
+local function update(w, buttons, label, data, windows)
   -- update the widgets, creating them if needed
   w:reset()
-  for i, o in ipairs(objects) do
-    local cache = data[o]
+  for i, window in ipairs(windows) do
+    local cache = data[window]
     local bar
 
     if cache then
       bar = cache.bar
     else
-      bar = taskbar(awful.widget.common.create_buttons(buttons, o))
+      bar = taskbar(awful.widget.common.create_buttons(buttons, window))
 
-      data[o] = {
+      data[window] = {
         bar = bar
       }
     end
 
-    local text, bg, bg_image, icon = label(o, bar.text)
+    local text, bg, bg_image, icon = label(window, bar.text)
 
     -- The text might be invalid, so use pcall
     if not bar.text:set_markup_silently(text) then

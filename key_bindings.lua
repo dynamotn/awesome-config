@@ -10,7 +10,7 @@ local menubar = require("menubar")
 local dynamo = require("dynamo")
 
 -- { Global key bindings
-globalkeys = table.join(
+global_keys = table.join(
   awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
     { description="Show help", group="awesome" }),
 
@@ -99,7 +99,7 @@ globalkeys = table.join(
     { description = "restore minimized", group = "client" }),
 
   -- Prompt
-  awful.key({ modkey },            "r",     function () awful.screen.focused().promptbox:run() end,
+  awful.key({ modkey },            "r",     function () awful.screen.focused().prompt_box:run() end,
     { description = "run prompt", group = "launcher" }),
 
   -- Third party application
@@ -117,7 +117,7 @@ globalkeys = table.join(
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
-  globalkeys = table.join(globalkeys,
+  global_keys = table.join(global_keys,
     -- View tag only.
     awful.key({ modkey }, "#" .. i + 9,
       function ()
@@ -164,11 +164,11 @@ for i = 1, 9 do
 end
 
 -- Set keys
-root.keys(globalkeys)
+root.keys(global_keys)
 -- }
 
 -- { Window key bindings
-clientkeys = table.join(
+window_keys = table.join(
   awful.key({ modkey,           }, "f",
     function (c)
       c.fullscreen = not c.fullscreen

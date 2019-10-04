@@ -18,23 +18,23 @@ awful.screen.connect_for_each_screen(function(s)
   awful.tag(workspaces, s, layouts[3])
 
   -- Create a promptbox for each screen
-  s.promptbox = awful.widget.prompt()
+  s.prompt_box = awful.widget.prompt()
   -- Create an imagebox widget which will contain an icon indicating which layout we're using.
   -- We need one layoutbox per screen.
-  s.layoutbox = dynamo_layout(s)
-  s.layoutbox:set_buttons(layoutbuttons)
-  -- Create a taglist widget
-  s.taglist = bar.taglist {
+  s.layout_box = dynamo_layout(s)
+  s.layout_box:set_buttons(layout_buttons)
+  -- Create a workspace widget
+  s.workspace_list = bar.workspace_list {
     screen  = s,
     filter  = awful.widget.taglist.filter.all,
-    buttons = taglist_buttons
+    buttons = workspace_list_buttons
   }
 
-  -- Create a tasklist widget
-  s.tasklist = bar.tasklist {
+  -- Create a window list widget
+  s.window_list = bar.window_list {
     screen  = s,
     filter  = awful.widget.tasklist.filter.currenttags,
-    buttons = tasklist_buttons
+    buttons = window_list_buttons
   }
 
   -- Create the wibox
@@ -47,7 +47,7 @@ awful.screen.connect_for_each_screen(function(s)
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
       dynamo_prompt,
-      s.promptbox,
+      s.prompt_box,
     },
     nil, -- Middle widget
     { -- Right widgets
@@ -70,15 +70,15 @@ awful.screen.connect_for_each_screen(function(s)
       dynamo_power,
       dynamo_network,
       dynamo_clock,
-      s.layoutbox,
+      s.layout_box,
     },
   }
   s.bottom_wibox:setup {
     layout = wibox.layout.align.horizontal,
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
-      s.taglist,
+      s.workspace_list,
     },
-    s.tasklist, -- Middle widget
+    s.window_list, -- Middle widget
   }
 end)

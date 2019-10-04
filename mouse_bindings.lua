@@ -4,7 +4,7 @@ local awful = require("awful")
 local table = require("gears.table")
 
 -- { Workspace buttons
-taglist_buttons = table.join(
+workspace_list_buttons = table.join(
   awful.button({ }, 1, function(t) t:view_only() end),
   awful.button({ modkey }, 1, function(t)
     if client.focus then
@@ -23,7 +23,7 @@ taglist_buttons = table.join(
 -- }
 
 -- { Taskbar buttons
-tasklist_buttons = table.join(
+window_list_buttons = table.join(
   awful.button({ }, 1, function(c)
     if c == client.focus then
       c.minimized = true
@@ -48,7 +48,7 @@ tasklist_buttons = table.join(
 -- }
 
 -- { Window buttons
-clientbuttons = table.join(
+window_buttons = table.join(
   awful.button({ }, 1, function(c)
     c:emit_signal("request::activate", "mouse_click", { raise = true })
   end),
@@ -64,7 +64,7 @@ clientbuttons = table.join(
 -- }
 
 -- { Layout box buttons
-layoutbuttons = table.join(
+layout_buttons = table.join(
   awful.button({ }, 1, function() awful.layout.inc( 1) end),
   awful.button({ }, 3, function() awful.layout.inc(-1) end),
   awful.button({ }, 4, function() awful.layout.inc( 1) end),
