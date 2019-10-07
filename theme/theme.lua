@@ -107,7 +107,8 @@ theme.clock_fg_date   = theme.bg_normal
 theme.clock_fg_hour   = theme.fg_normal
 theme.network_fg_down = theme.powerline_bgs[2]
 theme.network_fg_up   = theme.powerline_bgs[5]
-theme.cpu_fg          = theme.powerline_bgs[3]
+theme.cpu_fg          = theme.powerline_bgs[2]
+theme.music_fg_title  = theme.powerline_bgs[2]
 -- }
 
 -- { Image
@@ -173,6 +174,10 @@ theme.volume_icon_mute   = local_theme_path .. "widget/volume_mute.png"
 theme.volume_icon_no     = local_theme_path .. "widget/volume_no.png"
 theme.volume_icon_low    = local_theme_path .. "widget/volume_low.png"
 theme.volume_icon_normal = local_theme_path .. "widget/volume_normal.png"
+
+-- Music
+theme.music_icon_on  = local_theme_path .. "widget/music_on.png"
+theme.music_icon_off = local_theme_path .. "widget/music_off.png"
 -- }
 
 -- Layout

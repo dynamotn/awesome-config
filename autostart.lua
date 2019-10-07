@@ -26,3 +26,7 @@ run_one_pid(clipboard)
 -- { Redshift
 require("dynamo.misc").redshift_init()
 -- }
+
+-- { MPD
+run_one_pid("mpd")
+-- }

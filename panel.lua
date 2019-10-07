@@ -121,7 +121,7 @@ vicious.register(
 
 -- Volume
 panel_index = panel_index - 1
-dynamo_volume = powerline_section(panel_index, nil, nil, beautiful.bg_normal)
+dynamo_volume = powerline_section(panel_index)
 vicious.register(
   dynamo_volume,
   vicious.widgets.volume,
@@ -141,7 +141,27 @@ vicious.register(
   "Master"
 )
 
--- TODO: Add MPD mini player
+-- Music
+panel_index = panel_index - 1
+dynamo_music = powerline_section(panel_index, nil, nil, beautiful.bg_normal)
+vicious.register(
+  dynamo_music,
+  vicious.widgets.mpd,
+  function(_, args)
+    if args["{state}"] == "Play" then
+      dynamo_music:set_widget(beautiful.music_icon_on)
+      return markup_text(args["{Title}"], beautiful.music_fg_title) .. " " .. args["{Artist}"]
+    else
+      dynamo_music:set_widget(beautiful.music_icon_off)
+      if args["{state}"] == "Pause" then
+        return "Pause"
+      else
+        return "Stop"
+      end
+    end
+  end,
+  1
+)
 
 -- Keyboard map indicator and switcher
 panel_index = panel_index - 1
