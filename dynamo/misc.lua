@@ -11,23 +11,27 @@ local shell = require("dynamo.shell")
 -- @param table list_files List of wallpaper files
 local function set_wallpaper(s, list_files)
   if next(list_files) ~= nil then
-    wallpaper_lib.maximized(list_files[math.random(1, #list_files)], s, true)
+    if wallpaper.current == nil then
+      wallpaper.current = list_files[math.random(1, #list_files)]
+    end
+    wallpaper_lib.maximized(wallpaper.current, s, false)
   end
   collectgarbage("collect")
 end
 
 -- Automatically change wallpaper in seconds
 -- @param awesome.screen s Screen that is needed to auto change wallpaper
--- @param boolean is_recursion Flag when this function call itself
-local function auto_change_wallpaper(s, is_recursion)
-  wallpaper.timer:stop()
-  if not is_recursion then
+local function auto_change_wallpaper(s)
+  wallpaper.timer:connect_signal("start", function()
+    set_wallpaper(s, wallpaper.files)
+  end)
+  if not wallpaper.timer.started then
     wallpaper.timer:connect_signal("timeout", function()
-      auto_change_wallpaper(s, true)
+      wallpaper.current = nil
+      wallpaper.timer:stop()
+      wallpaper.timer:start()
     end)
   end
-  set_wallpaper(s, wallpaper.files)
-  wallpaper.timer:start()
 end
 -- }
 

@@ -83,3 +83,5 @@ awful.screen.connect_for_each_screen(function(s)
     s.window_list, -- Middle widget
   }
 end)
+
+wallpaper.timer:start()
