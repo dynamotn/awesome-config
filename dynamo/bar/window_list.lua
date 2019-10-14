@@ -17,21 +17,20 @@ local function update(w, buttons, label, data, windows)
     if cache then
       bar = cache.bar
     else
-      bar = taskbar(awful.widget.common.create_buttons(buttons, window))
+      bar = taskbar(awful.widget.common.create_buttons(buttons, window), awful.widget.clienticon(window))
 
       data[window] = {
         bar = bar
       }
     end
 
-    local text, bg, bg_image, icon = label(window, bar.text)
+    local text, _, bg_image = label(window, bar.text)
 
     -- The text might be invalid, so use pcall
     if not bar.text:set_markup_silently(text) then
       bar.text:set_markup("<i>&lt;Invalid text&gt;</i>")
     end
     bar:set_bgimage(bg_image)
-    bar.image:set_image(icon)
 
     w:add(bar)
   end

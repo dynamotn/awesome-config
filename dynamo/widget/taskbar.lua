@@ -30,12 +30,10 @@ function bar:draw(context, cairo, width, height)
   cairo:restore()
 end
 
-local function new(buttons, color)
+local function new(buttons, image)
   local background = wibox.widget.background()
   local text = wibox.widget.textbox()
-  local image = wibox.widget.imagebox()
   background.text = text
-  background.image = image
 
   for k, v in pairs(bar) do
     if type(v) == "function" then
@@ -45,7 +43,7 @@ local function new(buttons, color)
 
   background:setup {
     widget = wibox.layout.fixed.horizontal(),
-    bg = color or beautiful.tasklist_bg_normal,
+    bg = beautiful.tasklist_bg_normal,
     buttons = buttons,
     wibox.layout.margin(image, dpi(4 + beautiful.bottom_panel_height / 2), dpi(0)),
     wibox.layout.margin(text, dpi(4), dpi(4)),
