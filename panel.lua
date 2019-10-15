@@ -18,7 +18,7 @@ local panel_index = 0
 -- Menu button
 dynamo_launcher = wibox.container.background(launcher, beautiful.prompt_bg_normal)
 
--- Powerline prompt
+-- { Powerline prompt
 panel_index = panel_index + 1
 dynamo_prompt = powerline_section(
   panel_index,
@@ -26,11 +26,46 @@ dynamo_prompt = powerline_section(
   beautiful.prompt_bg_normal,
   "opaque"
 )
-vicious.register(
-  dynamo_prompt,
-  vicious.widgets.os,
-  markup_text("$3@$4", beautiful.prompt_fg_normal)
-)
+
+-- Set text in powerline section
+-- @param string prompt_text Text is shown in powerline section
+function dynamo_prompt:set_prompt(text)
+  if not text then
+    vicious.register(
+      self,
+      vicious.widgets.os,
+      markup_text("$3@$4", beautiful.prompt_fg_normal)
+    )
+  else
+    vicious.unregister(self)
+    self:set_markup(markup_text(text, beautiful.prompt_fg_normal))
+  end
+end
+
+-- Show confirm prompt
+-- @param string prompt_text Text is shown in powerline section when ask
+-- @param string confirm_text Text is shown in input section when ask
+-- @param function exe_callback Callback is run when execute
+function dynamo_prompt:show_confirm_prompt(prompt_text, confirm_text, exe_callback)
+  local confirm_text = confirm_text or "Press 'Enter' to confirm"
+  dynamo_prompt:set_prompt(prompt_text)
+  awful.prompt.run({
+    prompt = markup_text(confirm_text .. ": ", beautiful.prompt_fg_confirm),
+    textbox = awful.screen.focused().prompt_box.widget,
+    exe_callback = function(input)
+      dynamo_prompt:set_prompt()
+      exe_callback(input)
+    end,
+    done_callback = function()
+      dynamo_prompt:set_prompt()
+    end,
+  })
+end
+
+dynamo_prompt:set_prompt()
+-- }
+
+dynamo_space = wibox.widget.textbox(' ')
 -- }
 
 -- { Right panel

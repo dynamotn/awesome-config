@@ -5,4 +5,5 @@ return {
   string = require("dynamo.string"),
   widget = require("dynamo.widget"),
   bar = require("dynamo.bar"),
+  session = require("dynamo.session"),
 }

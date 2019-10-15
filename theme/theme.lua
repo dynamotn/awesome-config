@@ -92,6 +92,8 @@ elseif linux_distribution == "ubuntu" then
 else
   theme.prompt_fg_normal = "#feb50f"
 end
+theme.prompt_bg_cursor = theme.prompt_fg_normal
+theme.prompt_fg_confirm = theme.prompt_fg_normal
 
 -- Menu
 theme.menu_bg_normal = theme.prompt_fg_normal

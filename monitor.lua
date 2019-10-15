@@ -18,7 +18,7 @@ awful.screen.connect_for_each_screen(function(s)
   awful.tag(workspaces, s, layouts[3])
 
   -- Create a promptbox for each screen
-  s.prompt_box = awful.widget.prompt()
+  s.prompt_box = awful.widget.prompt({ prompt = "" })
   -- Create an imagebox widget which will contain an icon indicating which layout we're using.
   -- We need one layoutbox per screen.
   s.layout_box = dynamo_layout(s)
@@ -47,6 +47,7 @@ awful.screen.connect_for_each_screen(function(s)
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
       dynamo_prompt,
+      dynamo_space,
       s.prompt_box,
     },
     nil, -- Middle widget
