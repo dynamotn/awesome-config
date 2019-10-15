@@ -8,7 +8,7 @@ run_one_pid("unclutter")
 -- }
 
 -- { Terminal with tmux
-run_one_pid(terminal_tmux, nil, "tmux attach-session -d")
+run_one_pid(terminal_tmux, nil, terminal)
 -- }
 
 -- { Password manager
