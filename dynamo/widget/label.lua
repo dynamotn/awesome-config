@@ -64,7 +64,7 @@ function label:set_color(color, blink_interval)
 
   if self.blink_interval ~= 0 and (self.blink_timer == nil or not self.blink_timer.started) then
     self.value = 1
-    self.blink_timer = timer { timeout = self.blink_interval }
+    self.blink_timer = gears.timer { timeout = self.blink_interval }
     self.blink_timer:connect_signal("timeout", function()
       self.blink_timer:stop()
       self.blink_timer.timeout = self.blink_interval

@@ -31,7 +31,7 @@ function bar:draw(context, cairo, width, height)
 end
 
 local function new(buttons, image)
-  local background = wibox.widget.background()
+  local background = wibox.container.background()
   local text = wibox.widget.textbox()
   background.text = text
 
@@ -45,8 +45,8 @@ local function new(buttons, image)
     widget = wibox.layout.fixed.horizontal(),
     bg = beautiful.tasklist_bg_normal,
     buttons = buttons,
-    wibox.layout.margin(image, dpi(4 + beautiful.bottom_panel_height / 2), dpi(0)),
-    wibox.layout.margin(text, dpi(4), dpi(4)),
+    wibox.container.margin(image, dpi(4 + beautiful.bottom_panel_height / 2), dpi(0)),
+    wibox.container.margin(text, dpi(4), dpi(4)),
   }
 
   return background
