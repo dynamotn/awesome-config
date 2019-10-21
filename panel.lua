@@ -79,13 +79,14 @@ dynamo_space = wibox.widget.textbox(' ')
 -- { Right panel
 local panel_index = -1
 
--- Layout button
+-- { Layout button
 dynamo_layout = function(screen)
   local panel_index = -1
   return powerline_section(panel_index, awful.widget.layoutbox(screen), beautiful.layout_bg_normal)
 end
+-- }
 
--- Clock
+-- { Clock
 panel_index = panel_index - 1
 dynamo_clock = powerline_section(panel_index, beautiful.clock_icon)
 vicious.register(
@@ -94,8 +95,9 @@ vicious.register(
   markup_text("%I:%M:%S %p", beautiful.clock_fg_hour) .. markup_text(" %a %d %b", beautiful.clock_fg_date),
   1
 )
+-- }
 
--- Network
+-- { Network
 panel_index = panel_index - 1
 dynamo_network = powerline_section(panel_index, beautiful.network_icon)
 vicious.register(
@@ -104,8 +106,9 @@ vicious.register(
   markup_text("↓ ${total down_kb}", beautiful.network_fg_down) .. markup_text(" ↑ ${total up_kb}", beautiful.network_fg_up),
   1
 )
+-- }
 
--- Power
+-- { Power
 run_command("ls /sys/class/power_supply/BAT*", false, function(stdout)
   if not stdout then
     return
@@ -139,8 +142,9 @@ run_command("ls /sys/class/power_supply/BAT*", false, function(stdout)
     stdout -- FIXME: Assume that each laptop has only one battery
   )
 end)
+-- }
 
--- Memory
+-- { Memory
 panel_index = panel_index - 1
 dynamo_memory = powerline_section(panel_index, beautiful.memory_icon)
 vicious.register(
@@ -149,10 +153,11 @@ vicious.register(
   "$2MB",
   1
 )
+-- }
 
 -- TODO: Add NVidia GPU
 
--- CPU
+-- { CPU
 panel_index = panel_index - 1
 dynamo_cpu = powerline_section(panel_index, beautiful.cpu_icon)
 vicious.register(
@@ -161,8 +166,9 @@ vicious.register(
   markup_text("$1%", beautiful.cpu_fg),
   1
 )
+-- }
 
--- Volume
+-- { Volume
 panel_index = panel_index - 1
 dynamo_volume = powerline_section(panel_index)
 vicious.register(
@@ -183,8 +189,9 @@ vicious.register(
   1,
   "Master"
 )
+-- }
 
--- Music
+-- { Music
 panel_index = panel_index - 1
 dynamo_music = powerline_section(panel_index, nil, nil, beautiful.bg_normal)
 vicious.register(
@@ -205,8 +212,10 @@ vicious.register(
   end,
   1
 )
+-- }
 
--- Keyboard map indicator and switcher
+-- { Keyboard map indicator and switcher
 panel_index = panel_index - 1
 dynamo_keyboard = powerline_section(panel_index, awful.widget.keyboardlayout(), beautiful.bg_systray, "opaque")
+-- }
 -- }

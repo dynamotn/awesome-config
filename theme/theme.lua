@@ -111,6 +111,9 @@ theme.network_fg_down = theme.powerline_bgs[2]
 theme.network_fg_up   = theme.powerline_bgs[5]
 theme.cpu_fg          = theme.powerline_bgs[2]
 theme.music_fg_title  = theme.powerline_bgs[2]
+
+-- Popup
+theme.popup_fg_htop_title = theme.bg_urgent
 -- }
 
 -- { Image

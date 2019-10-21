@@ -15,6 +15,7 @@ local markup_text = require("dynamo.string").markup_text
 -- @return table Table with information of section
 local function create(index, widget, color_current, color_next)
   local section = {
+    id = index,
     layout = wibox.layout.fixed.horizontal,
   }
 
@@ -66,17 +67,7 @@ local function create(index, widget, color_current, color_next)
     return section_text:set_markup((section_widget_type == "icon" and "" or " ") .. text .. " ")
   end
 
-  -- NOTE: Avoid 'buttons' name because has error when add it on declarative style of panel
-  function section:set_buttons(_buttons)
-    section_widget:buttons(_buttons)
-    section_textbar:buttons(_buttons)
-  end
-
-  -- NOTE: Avoid 'buttons' name because has error when add it on declarative style of panel
-  function section:set_signal(signal, execute)
-    section_widget:connect_signal(signal, execute)
-    section_textbar:connect_signal(signal, execute)
-  end
+  -- TODO: Hover exactly on arrow of powerline section
 
   if index > 0 then
     table.insert(section, section_widget)

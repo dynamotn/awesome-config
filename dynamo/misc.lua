@@ -1,9 +1,12 @@
 -- AwesomeWM standard library
 local awful = require("awful")
+-- Theme handling library
+local beautiful = require("beautiful")
 -- Wallpaper library
 local wallpaper_lib = require("gears.wallpaper")
 -- Custom shell library
 local shell = require("dynamo.shell")
+local markup_text = require("dynamo.string").markup_text
 
 -- { Set wallpaper
 -- Set random wallpaper to screen from list files
@@ -106,10 +109,27 @@ local function switch_occupied_tag(direction)
 end
 -- }
 
+-- { Get processes info
+-- @param function callback Callback is run when 
+local function get_processes_info(callback)
+  shell.run_command('ps --sort -c,-s -eo fname,%cpu,%mem,user,pid,etime,tname | head -n ' .. number_of_processes, true, function(stdout)
+    stats = string.gsub(stdout, "COMMAND", markup_text("%1", beautiful.popup_fg_htop_title))
+    stats = string.gsub(stats, "%%CPU", markup_text("%1", beautiful.popup_fg_htop_title))
+    stats = string.gsub(stats, "%%MEM", markup_text("%1", beautiful.popup_fg_htop_title))
+    stats = string.gsub(stats, "USER", markup_text("%1", beautiful.popup_fg_htop_title))
+    stats = string.gsub(stats, "PID", markup_text("%1", beautiful.popup_fg_htop_title))
+    stats = string.gsub(stats, "TTY", markup_text("%1", beautiful.popup_fg_htop_title))
+    stats = string.gsub(stats, "ELAPSED", markup_text("%1", beautiful.popup_fg_htop_title))
+    callback(stats)
+  end)
+end
+-- }
+
 return {
   auto_change_wallpaper = auto_change_wallpaper,
   linux_distribution = linux_distribution,
   redshift_toggle = redshift_toggle,
   redshift_init = redshift_init,
   switch_occupied_tag = switch_occupied_tag,
+  get_processes_info = get_processes_info,
 }

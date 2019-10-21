@@ -9,6 +9,8 @@ local wibox = require("wibox")
 local misc = require("dynamo.misc")
 local separator = require("dynamo.widget").separator
 local bar = require("dynamo.bar")
+local init_popup = require("dynamo.notify").init_popup
+local get_processes_info = require("dynamo.misc").get_processes_info
 
 awful.screen.connect_for_each_screen(function(s)
   -- Wallpaper
@@ -22,7 +24,6 @@ awful.screen.connect_for_each_screen(function(s)
   -- Create an imagebox widget which will contain an icon indicating which layout we're using.
   -- We need one layoutbox per screen.
   s.layout_box = dynamo_layout(s)
-  s.layout_box:set_buttons(layout_buttons)
   -- Create a workspace widget
   s.workspace_list = bar.workspace_list {
     screen  = s,
@@ -75,6 +76,9 @@ awful.screen.connect_for_each_screen(function(s)
       s.layout_box,
     },
   }
+  init_popup(s.top_wibox:get_children_by_id(dynamo_memory.id)[1], get_processes_info)
+  s.top_wibox:get_children_by_id(s.layout_box.id)[1]:buttons(layout_buttons)
+
   s.bottom_wibox:setup {
     layout = wibox.layout.align.horizontal,
     { -- Left widgets

@@ -62,3 +62,7 @@ wallpaper = {
   timer = gears.timer { timeout = 10 },
 }
 -- }
+
+-- { Popup config
+number_of_processes = 25
+-- }
