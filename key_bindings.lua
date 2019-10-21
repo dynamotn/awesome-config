@@ -23,9 +23,19 @@ global_keys = table.join(
     { group = "awesome", description = "quit awesome" }),
 
   -- Prompt
+  awful.key({ altkey }, "F1",
+    dynamo.notify.xprop,
+    { group = "awesome", description = "show properties of window" }),
   awful.key({ altkey }, "F2",
-    function() awful.screen.focused().prompt_box:run() end,
-    { group = "awesome", description = "run prompt" }),
+    function()
+      if not dynamo_prompt.is_busy then
+        awful.screen.focused().prompt_box:run()
+      end
+    end,
+    { group = "awesome", description = "run command" }),
+  awful.key({ altkey }, "F3",
+    dynamo.notify.calculation,
+    { group = "awesome", description = "calculation" }),
 
   -- Menu
   awful.key({ modkey }, "F1",

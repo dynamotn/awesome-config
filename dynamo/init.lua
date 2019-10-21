@@ -6,4 +6,5 @@ return {
   widget = require("dynamo.widget"),
   bar = require("dynamo.bar"),
   session = require("dynamo.session"),
+  notify = require("dynamo.notify"),
 }

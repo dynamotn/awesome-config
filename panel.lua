@@ -36,9 +36,14 @@ function dynamo_prompt:set_prompt(text)
       vicious.widgets.os,
       markup_text("$3@$4", beautiful.prompt_fg_normal)
     )
+    self.is_busy = false
   else
+    if self.is_busy then
+      return
+    end
     vicious.unregister(self)
     self:set_markup(markup_text(text, beautiful.prompt_fg_normal))
+    self.is_busy = true
   end
 end
 
@@ -48,6 +53,9 @@ end
 -- @param function exe_callback Callback is run when execute
 function dynamo_prompt:show_confirm_prompt(prompt_text, confirm_text, exe_callback)
   local confirm_text = confirm_text or "Press 'Enter' to confirm"
+  if dynamo_prompt.is_busy then
+    return
+  end
   dynamo_prompt:set_prompt(prompt_text)
   awful.prompt.run({
     prompt = markup_text(confirm_text .. ": ", beautiful.prompt_fg_confirm),
