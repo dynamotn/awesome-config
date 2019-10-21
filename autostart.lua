@@ -23,6 +23,14 @@ run_one_pid(browser)
 run_one_pid(clipboard)
 -- }
 
+-- { Network manager
+run_one_pid("nm-applet")
+-- }
+
+-- { IM framework
+run_one_pid("ibus-daemon", "-drx")
+-- }
+
 -- { Redshift
 require("dynamo.misc").redshift_init()
 -- }
