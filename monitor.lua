@@ -78,6 +78,7 @@ awful.screen.connect_for_each_screen(function(s)
   }
   init_popup(s.top_wibox:get_children_by_id(dynamo_memory.id)[1], get_processes_info)
   s.top_wibox:get_children_by_id(s.layout_box.id)[1]:buttons(layout_buttons)
+  s.top_wibox:get_children_by_id(dynamo_music.id)[1]:buttons(music_buttons)
 
   s.bottom_wibox:setup {
     layout = wibox.layout.align.horizontal,

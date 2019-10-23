@@ -19,11 +19,13 @@ editor = os.getenv("EDITOR") or "vim"
 browser = "firefox"
 clipboard = "copyq"
 clipboard_list = clipboard .. " menu"
+music = "ncmpcpp"
 
 -- Terminal command
 tmux = "'" .. "tmux -q has-session" .. and_operator .. "exec tmux attach-session -d" .. or_operator .. "exec tmux new-session -nwtf -s$USER@$HOSTNAME" .. "'"
 
 editor_cmd = terminal .. space .. editor
+music_cmd = terminal .. space .. music
 terminal_tmux = terminal .. space .. os.getenv("SHELL") .. command_option .. tmux
 
 -- Get Linux distribution name

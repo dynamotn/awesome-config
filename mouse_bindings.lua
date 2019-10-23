@@ -2,6 +2,8 @@
 local awful = require("awful")
 -- Table utilities library
 local table = require("gears.table")
+-- Custom library
+local misc = require("dynamo.misc")
 
 -- { Workspace buttons
 workspace_list_buttons = table.join(
@@ -70,6 +72,12 @@ layout_buttons = table.join(
   awful.button({ }, 4, function() awful.layout.inc( 1) end),
   awful.button({ }, 5, function() awful.layout.inc(-1) end)
   )
+-- }
+
+-- { Widget button
+music_buttons = table.join(
+  awful.button({ }, 1, function() misc.run_at_workspace(music_cmd, music_workspace) end)
+)
 -- }
 
 -- { Desktop buttons

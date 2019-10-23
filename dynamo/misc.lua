@@ -110,7 +110,7 @@ end
 -- }
 
 -- { Get processes info
--- @param function callback Callback is run when 
+-- @param function callback Callback is run when
 local function get_processes_info(callback)
   shell.run_command('ps --sort -c,-s -eo fname,%cpu,%mem,user,pid,etime,tname | head -n ' .. number_of_processes, true, function(stdout)
     stats = string.gsub(stdout, "COMMAND", markup_text("%1", beautiful.popup_fg_htop_title))
@@ -125,6 +125,39 @@ local function get_processes_info(callback)
 end
 -- }
 
+-- { Run application at specific workspace
+-- @param string prg Program to run
+-- @param string workspace Name of workspace
+local function run_at_workspace(prg, workspace)
+  if not prg or not workspace then
+    return nil
+  end
+
+  local function find_workspace_index(workspace)
+    for k, v in pairs(workspaces) do
+      if v == workspace then
+        return k
+      end
+    end
+  end
+
+  local workspace_index = find_workspace_index(workspace)
+  local screen = awful.screen.focused()
+  local tag = screen.tags[workspace_index]
+
+  local function move_client(window)
+    awful.client.movetotag(tag, window)
+    client.disconnect_signal("manage", move_client)
+  end
+
+  client.connect_signal("manage", move_client)
+  shell.run_command(prg, true)
+  if tag then
+    tag:view_only()
+  end
+end
+-- }
+
 return {
   auto_change_wallpaper = auto_change_wallpaper,
   linux_distribution = linux_distribution,
@@ -132,4 +165,5 @@ return {
   redshift_init = redshift_init,
   switch_occupied_tag = switch_occupied_tag,
   get_processes_info = get_processes_info,
+  run_at_workspace = run_at_workspace,
 }
