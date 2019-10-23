@@ -58,12 +58,12 @@ awful.rules.rules = {
   -- Set Firefox to always map on tags number 2 of primary screen
   {
     rule = { class = "Firefox", type = "normal" },
-    properties = { screen = "primary", tag = workspaces[2] }
+    properties = { screen = "primary", tag = web_workspace }
   },
   -- Set KeepassXC to always maps on tags number 9 of last screen
   {
     rule = { class = "keepassxc", type = "normal" },
-    properties = { screen = screen.count(), tag = workspaces[9] } 
+    properties = { screen = screen.count(), tag = other_workspace }
   },
   -- Set Desktop of Gnome must be share all workspace
   {
@@ -73,16 +73,16 @@ awful.rules.rules = {
   -- Set File manager of Gnome to always map on tags number 8 of primary screen
   {
     rule = { class = "Nautilus", instance = "nautilus" },
-    properties = { screen = "primary", tag = workspaces[8] }
+    properties = { screen = "primary", tag = sys_workspace }
   },
   -- Set Zim to always maps on tags number 6 of last screen
   {
     rule = { class = "Zim", type = "normal" },
-    properties = { screen = screen.count(), tag = workspaces[6] } 
+    properties = { screen = screen.count(), tag = doc_workspace }
   },
   -- Set Steam to always map on tags number 7 of primary screen
   {
     rule = { class = "Steam" },
-    properties = { screen = "primary", tag = workspaces[7] }
+    properties = { screen = "primary", tag = game_workspace }
   },
 }
