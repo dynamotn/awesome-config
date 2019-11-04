@@ -30,10 +30,10 @@ theme.top_panel_height = dpi(18)
 theme.bottom_panel_height = dpi(28)
 
 -- Workspace
-theme.taglist_margin_left    = 3
-theme.taglist_margin_top     = 8
-theme.taglist_small_corner   = 2
-theme.taglist_large_corner   = 6
+theme.taglist_margin_left    = dpi(3)
+theme.taglist_margin_top     = dpi(8)
+theme.taglist_small_corner   = dpi(2)
+theme.taglist_large_corner   = dpi(6)
 theme.taglist_blink_interval = 0.5
 
 -- Taskbar
