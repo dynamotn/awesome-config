@@ -57,7 +57,8 @@ awful.rules.rules = {
 
   -- Set Firefox to always map on tags number 2 of primary screen
   {
-    rule = { class = "Firefox", type = "normal" },
+    rule_any = { class = { "Firefox", "firefox" } },
+    except = { type = "dialog" },
     properties = { screen = "primary", tag = web_workspace }
   },
   -- Set KeepassXC to always maps on tags number 9 of last screen
@@ -79,6 +80,11 @@ awful.rules.rules = {
   {
     rule = { class = "Zim", type = "normal" },
     properties = { screen = screen.count(), tag = doc_workspace }
+  },
+  -- Set WPS Office to always maps on tags number 6 of primary screen
+  {
+    rule_any = { class = { "Wps", "Et", "Wpspdf", "Wpp" } },
+    properties = { screen = "primary", tag = doc_workspace }
   },
   -- Set Steam to always map on tags number 7 of primary screen
   {
