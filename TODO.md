@@ -1,0 +1,3 @@
+### Features
+- Menu
+- Calendar widget

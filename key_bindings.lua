@@ -6,193 +6,130 @@ local table = require("gears.table")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Menubar library
 local menubar = require("menubar")
--- Custom libray
+-- Custom library
 local dynamo = require("dynamo")
 
--- { Global key bindings
-global_keys = table.join(
-  -- Common
-  awful.key({ modkey }, "s",
-    hotkeys_popup.show_help,
-    { group = "awesome", description = "show help" }),
-  awful.key({ modkey, "Control" }, "r",
-    awesome.restart,
-    { group = "awesome", description = "reload awesome" }),
-  awful.key({ modkey, "Shift" }, "q",
-    awesome.quit,
-    { group = "awesome", description = "quit awesome" }),
+-- { Miscellaneous function
+local function hide_panel()
+  local screen = awful.screen.focused()
+  screen.top_wibox.visible = not screen.top_wibox.visible
+  screen.bottom_wibox.visible = not screen.bottom_wibox.visible
+end
 
-  -- Prompt
-  awful.key({ altkey }, "F1",
-    dynamo.notify.xprop,
-    { group = "awesome", description = "show properties of window" }),
-  awful.key({ altkey }, "F2",
-    function()
-      if not dynamo_prompt.is_busy then
-        awful.screen.focused().prompt_box:run()
-      end
-    end,
-    { group = "awesome", description = "run command" }),
-  awful.key({ altkey }, "F3",
-    dynamo.notify.calculation,
-    { group = "awesome", description = "calculation" }),
+local function restore_minimized_window()
+  local c = awful.client.restore()
+  if c then
+    c:emit_signal("request::activate", "key.unminimize", { raise = true })
+  end
+end
 
-  -- Menu
-  awful.key({ modkey }, "F1",
-    function() main_menu:show() end,
-    { group = "awesome", description = "show main menu" }),
-  awful.key({ modkey }, "F2",
-    function() menubar.show() end,
-    { group = "awesome", description = "show the menubar" }),
+local function action_workspace(index, action)
+  local screen = awful.screen.focused()
+  local tag = screen.tags[index]
+  if tag then
+    if action then
+      action(tag)
+    else
+      tag:view_only()
+    end
+  end
+end
+-- }
 
-  -- Workspace movement
-  awful.key({ modkey }, "Left",
-    function() dynamo.misc.switch_occupied_tag(-1) end,
-    { group = "workspace", description = "view not empty previous" }),
-  awful.key({ modkey }, "Right",
-    function() dynamo.misc.switch_occupied_tag(1) end,
-    { group = "workspace", description = "view not empty next" }),
-  awful.key({ modkey, altkey }, "Left",
-    awful.tag.viewprev,
-    { group = "workspace", description = "view previous" }),
-  awful.key({ modkey, altkey }, "Right",
-    awful.tag.viewnext,
-    { group = "workspace", description = "view next" }),
-  awful.key({ modkey }, "Escape",
-    awful.tag.history.restore,
-    { group = "workspace", description = "go back" }),
+-- { List key bindings
+-- Global
+local list_global_keys = {
+  ["awesome"] = {
+    -- Common
+    { { modkey            }, "s", "Show help", hotkeys_popup.show_help },
+    { { modkey, "Control" }, "r", "Reload awesome", awesome.restart },
+    { { modkey, "Shift"   }, "q", "Quit", awesome.quit },
+    -- Prompt
+    { { altkey            }, "F1", "Show properties of window", dynamo.notify.prop },
+    { { altkey            }, "F2", "Run command", function() if not dynamo_prompt.is_busy then awful.screen.focused().prompt_box:run() end end },
+    { { altkey            }, "F3", "Calculation", dynamo.notify.calculation },
+    -- Menu
+    { { modkey            }, "F1", "Show main menu", function() main_menu:show() end },
+    { { modkey            }, "F2", "Show menubar", menubar.show },
+  },
+  ["workspace"] = {
+    -- Workspace movement
+    { { modkey            }, "Left", "View not empty previous workspace", function() dynamo.misc.switch_occupied_tag(-1) end },
+    { { modkey            }, "Right", "View not empty next workspace", function() dynamo.misc.switch_occupied_tag(1) end },
+    { { modkey, altkey    }, "Left", "View previous workspace", awful.tag.viewprev },
+    { { modkey, altkey    }, "Right", "View next workspace", awful.tag.viewnext },
+    { { modkey            }, "Escape", "Go back to last workspace", awful.tag.history.restore },
+  },
+  ["window"] = {
+    -- Client focus
+    { { altkey            }, "Tab", "Focus to next window", function() awful.client.focus.byidx(1) end },
+    { { altkey, "Shift"   }, "Tab", "Focus to previous window", function() awful.client.focus.byidx(-1) end },
+    { { modkey            }, "u", "Focus to urgent window", awful.client.urgent.jumpto },
+    -- Layout manipulation
+    { { modkey, "Shift"   }, "j", "Swap to next window", function() awful.client.swap.byidx(1) end },
+    { { modkey, "Shift"   }, "k", "Swap to previous window", function() awful.client.swap.byidx(-1) end },
+    -- Restore client
+    { { modkey, "Control" }, "n", "Select previous layout", restore_minimized_window },
+  },
+  ["layout"] = {
+    { { modkey            }, "l", "Increase master width factor", function() awful.tag.incmwfact(0.05) end },
+    { { modkey            }, "h", "Decrease master width factor", function() awful.tag.incmwfact(-0.05) end },
+    { { modkey, "Shift"   }, "l", "Increase number of master windows", function() awful.tag.incnmaster(1, nil, true) end },
+    { { modkey, "Shift"   }, "h", "Increase number of master windows", function() awful.tag.incnmaster(-1, nil, true) end },
+    { { modkey, "Control" }, "l", "Increase number of column", function() awful.tag.incncol(1, nil, true) end },
+    { { modkey, "Control" }, "h", "Increase number of column", function() awful.tag.incncol(-1, nil, true) end },
+    { { modkey            }, "space", "Select next layout", function() awful.layout.inc(1) end },
+    { { modkey, "Shift"   }, "space", "Select previous layout", function() awful.layout.inc(-1) end },
+  },
+  ["screen"] = {
+    -- Panel
+    { { modkey            }, "b", "Toggle panel", hide_panel },
+    -- Screen focus
+    { { modkey, "Control" }, "j", "Focus to next screen", function() awful.screen.focus_relative(1) end },
+    { { modkey, "Control" }, "k", "Focus to previous screen", function() awful.screen.focus_relative(-1) end },
+  },
+  ["3rd app"] = {
+    { { modkey            }, "Return", "Open a terminal", function() awful.spawn(terminal_tmux) end },
+    { { modkey            }, "d", "Toggle color temperature (redshift)", dynamo.misc.redshift_toggle },
+    { { modkey            }, "x", "Show clipboard list", function() awful.spawn(clipboard_list) end },
+  }
+}
 
-  -- Client focus
-  awful.key({ altkey}, "Tab",
-    function() awful.client.focus.byidx(1) end,
-    { group = "window", description = "focus next by index" }),
-  awful.key({ altkey, "Shift"}, "Tab",
-    function() awful.client.focus.byidx(-1) end,
-    { group = "window", description = "focus previous by index" }),
-  awful.key({ modkey }, "u",
-    awful.client.urgent.jumpto,
-    { group = "window", description = "jump to urgent window" }),
-
-  -- Layout manipulation
-  awful.key({ modkey, "Shift" }, "j",
-    function() awful.client.swap.byidx( 1) end,
-    { group = "window", description = "swap with next window by index" }),
-  awful.key({ modkey, "Shift" }, "k",
-    function() awful.client.swap.byidx( -1) end,
-    { group = "window", description = "swap with previous window by index" }),
-  awful.key({ modkey, "Control" }, "j",
-    function() awful.screen.focus_relative( 1) end,
-    { group = "screen", description = "focus the next screen" }),
-  awful.key({ modkey, "Control" }, "k",
-    function() awful.screen.focus_relative(-1) end,
-    { group = "screen", description = "focus the previous screen" }),
-
-  -- Panel
-  awful.key({ modkey }, "b",
-    function()
-      local screen = awful.screen.focused()
-      screen.top_wibox.visible = not screen.top_wibox.visible
-      screen.bottom_wibox.visible = not screen.bottom_wibox.visible
-    end,
-    { group = "screen", description = "toggle panel" }),
-
-  -- Layout
-  awful.key({ modkey }, "l",
-    function() awful.tag.incmwfact( 0.05) end,
-    { group = "layout", description = "increase master width factor" }),
-  awful.key({ modkey }, "h",
-    function() awful.tag.incmwfact(-0.05) end,
-    { group = "layout", description = "decrease master width factor" }),
-  awful.key({ modkey, "Shift" }, "h",
-    function() awful.tag.incnmaster( 1, nil, true) end,
-    { group = "layout", description = "increase the number of master windows" }),
-  awful.key({ modkey, "Shift" }, "l",
-    function() awful.tag.incnmaster(-1, nil, true) end,
-    { group = "layout", description = "decrease the number of master windows" }),
-  awful.key({ modkey, "Control" }, "h",
-    function() awful.tag.incncol( 1, nil, true) end,
-    { group = "layout", description = "increase the number of columns" }),
-  awful.key({ modkey, "Control" }, "l",
-    function() awful.tag.incncol(-1, nil, true) end,
-    { group = "layout", description = "decrease the number of columns" }),
-  awful.key({ modkey }, "space",
-    function() awful.layout.inc( 1) end,
-    { group = "layout", description = "select next" }),
-  awful.key({ modkey, "Shift" }, "space",
-    function() awful.layout.inc(-1) end,
-    { group = "layout", description = "select previous" }),
-  awful.key({ modkey, "Control" }, "n",
-    function()
-      local c = awful.client.restore()
-      -- Focus restored client
-      if c then
-        c:emit_signal(
-          "request::activate", "key.unminimize", { raise = true }
-          )
-      end
-    end,
-    { group = "window", description = "restore minimized" }),
-
-  -- Third party application
-  awful.key({ modkey }, "Return",
-    function() awful.spawn(terminal_tmux) end,
-    { group = "3rd apps", description = "open a terminal" }),
-  awful.key({ modkey }, "d",
-    dynamo.misc.redshift_toggle,
-    { group = "3rd apps", description = "toggle color temperature (redshift)" }),
-  awful.key({ modkey }, "x",
-    function() awful.spawn(clipboard_list) end,
-    { group = "3rd apps", description = "show clipboard list" })
-  )
-
--- Bind all key numbers to tags.
+-- Bind all key numbers to workspaces.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
-  global_keys = table.join(global_keys,
+  table.merge(list_global_keys["workspace"], {
     -- View tag only.
-    awful.key({ modkey }, "#" .. i + 9,
-      function()
-        local screen = awful.screen.focused()
-        local tag = screen.tags[i]
-        if tag then
-          tag:view_only()
-        end
-      end,
-      { group = "workspace", description = "view workspace #"..i }),
+    { { modkey            }, "#" .. i + 9, "View workspace #" .. i, function() action_workspace(i) end },
     -- Toggle tag display.
-    awful.key({ modkey, "Control" }, "#" .. i + 9,
-      function()
-        local screen = awful.screen.focused()
-        local tag = screen.tags[i]
-        if tag then
-          awful.tag.viewtoggle(tag)
-        end
-      end,
-      { group = "workspace", description = "toggle workspace #" .. i }),
+    { { modkey, "Control" }, "#" .. i + 9, "Toggle workspace #" .. i, function() action_workspace(i, awful.tag.viewtoggle) end },
     -- Move client to tag.
-    awful.key({ modkey, "Shift" }, "#" .. i + 9,
-      function()
-        if client.focus then
-          local tag = client.focus.screen.tags[i]
-          if tag then
-            client.focus:move_to_tag(tag)
-          end
-        end
-      end,
-      { group = "workspace", description = "move focused window to workspace #"..i }),
+    { { modkey, "Shift"   }, "#" .. i + 9, "Move focused window to workspace #" .. i, function() if client.focus then action_workspace(i, function(tag) client.focus:move_to_tag(tag) end) end end },
     -- Toggle tag on focused client.
-    awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
-      function()
-        if client.focus then
-          local tag = client.focus.screen.tags[i]
-          if tag then
-            client.focus:toggle_tag(tag)
-          end
-        end
-      end,
-      { group = "workspace", description = "toggle focused window on workspace #" .. i })
-    )
+    { { modkey, "Control", "Shift" }, "#" .. i + 9, "Toggle focused window to workspace #" .. i, function() if client.focus then action_workspace(i, function(tag) client.focus:toggle_tag(tag) end) end end },
+  })
+end
+
+-- Windows key
+local list_window_keys = {
+  { { altkey            }, "F4", "Close window", function(c) c:kill() end },
+  { { modkey            }, "f", "Toggle fullscreen", function(c) c.fullscreen = not c.fullscreen; c:raise() end },
+  { { modkey, "Control" }, "space", "Toggle floating", awful.client.floating.toggle },
+  { { modkey, "Control" }, "Return", "Move to master", function(c) c:swap(awful.client.getmaster()) end },
+  { { modkey            }, "o", "Move to other screen", function(c) c:move_to_screen() end },
+  { { modkey            }, "t", "Toggle keep on top", function(c) c.ontop = not c.ontop end },
+  { { modkey            }, "n", "Minimize window", function(c) c.minimized = true end },
+  { { modkey            }, "m", "Toggle maximize window", function(c) c.maximized = not c.maximized; c:raise() end },
+}
+-- }
+
+-- { Global key bindings
+global_keys = {}
+for group, list_group_keys in pairs(list_global_keys) do
+  for _, group_keys in ipairs(list_group_keys) do
+    table.merge(global_keys, awful.key(group_keys[1], group_keys[2], group_keys[4], { group = group, description = group_keys[3] }))
+  end
 end
 
 -- Set keys
@@ -200,36 +137,8 @@ root.keys(global_keys)
 -- }
 
 -- { Window key bindings
-window_keys = table.join(
-  awful.key({ modkey }, "f",
-    function(c)
-      c.fullscreen = not c.fullscreen
-      c:raise()
-    end,
-    { group = "window", description = "toggle fullscreen" }),
-  awful.key({ altkey }, "F4",
-    function(c) c:kill() end,
-    { group = "window", description = "close" }),
-  awful.key({ modkey, "Control" }, "space",
-    awful.client.floating.toggle,
-    { group = "window", description = "toggle floating" }),
-  awful.key({ modkey, "Control" }, "Return",
-    function(c) c:swap(awful.client.getmaster()) end,
-    { group = "window", description = "move to master" }),
-  awful.key({ modkey }, "o",
-    function(c) c:move_to_screen() end,
-    { group = "window", description = "move to screen" }),
-  awful.key({ modkey }, "t",
-    function(c) c.ontop = not c.ontop end,
-    { group = "window", description = "toggle keep on top" }),
-  awful.key({ modkey }, "n",
-    function(c) c.minimized = true end ,
-    { group = "window", description = "minimize" }),
-  awful.key({ modkey }, "m",
-    function(c)
-      c.maximized = not c.maximized
-      c:raise()
-    end ,
-    { group = "window", description = "(un)maximize" })
-  )
+window_keys = {}
+for _, keys in ipairs(list_window_keys) do
+  table.merge(window_keys, awful.key(keys[1], keys[2], keys[4], { group = "window", description = keys[3] }))
+end
 -- }
