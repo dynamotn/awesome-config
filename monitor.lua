@@ -28,14 +28,14 @@ awful.screen.connect_for_each_screen(function(s)
   s.workspace_list = bar.workspace_list {
     screen  = s,
     filter  = awful.widget.taglist.filter.all,
-    buttons = workspace_list_buttons
+    buttons = global_buttons["workspace"]
   }
 
   -- Create a window list widget
   s.window_list = bar.window_list {
     screen  = s,
     filter  = awful.widget.tasklist.filter.currenttags,
-    buttons = window_list_buttons
+    buttons = global_buttons["taskbar"]
   }
 
   -- Create the wibox
@@ -77,8 +77,8 @@ awful.screen.connect_for_each_screen(function(s)
     },
   }
   init_popup(s.top_wibox:get_children_by_id(dynamo_memory.id)[1], get_processes_info)
-  s.top_wibox:get_children_by_id(s.layout_box.id)[1]:buttons(layout_buttons)
-  s.top_wibox:get_children_by_id(dynamo_music.id)[1]:buttons(music_buttons)
+  s.top_wibox:get_children_by_id(s.layout_box.id)[1]:buttons(global_buttons["layout"])
+  s.top_wibox:get_children_by_id(dynamo_music.id)[1]:buttons(widget_buttons["music"])
 
   s.bottom_wibox:setup {
     layout = wibox.layout.align.horizontal,
