@@ -1,6 +1,6 @@
 local run_one_pid = require("dynamo").shell.run_one_pid
 -- { Composite manager
-run_one_pid("compton")
+run_one_pid("picom", "--experimental-backends -b")
 -- }
 
 -- { Hide mouse when not use
