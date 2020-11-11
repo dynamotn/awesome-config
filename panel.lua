@@ -109,7 +109,7 @@ vicious.register(
 -- }
 
 -- { Power
-run_command("ls /sys/class/power_supply/BAT*", false, function(stdout)
+run_command("find /sys/class/power_supply -iname 'BAT*' | awk -F/ '{printf $NF}'", false, function(stdout)
   if not stdout then
     return
   end
@@ -187,7 +187,7 @@ vicious.register(
     return args[1]
   end,
   1,
-  "Master"
+  {"Master", "-D", "pulse"}
 )
 -- }
 
