@@ -38,3 +38,11 @@ require("dynamo.misc").redshift_init()
 -- { MPD
 run_one_pid("mpd")
 -- }
+
+-- { Rambox
+run_one_pid("rambox")
+-- }
+
+-- { Mail
+run_one_pid("thunderbird")
+-- }

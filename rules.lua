@@ -61,6 +61,16 @@ awful.rules.rules = {
     except = { type = "dialog" },
     properties = { screen = "primary", tag = web_workspace }
   },
+  -- Set Thunderbird to always map on tags number 3 of primary screen
+  {
+    rule_any = { class = { "Thunderbird" } },
+    properties = { screen = "primary", tag = mail_workspace }
+  },
+  -- Set Rambox to always map on tags number 5 of primary screen
+  {
+    rule_any = { class = { "Rambox" } },
+    properties = { screen = "primary", tag = chat_workspace }
+  },
   -- Set KeepassXC to always maps on tags number 9 of last screen
   {
     rule = { class = "keepassxc", type = "normal" },

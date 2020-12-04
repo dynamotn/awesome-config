@@ -55,7 +55,7 @@ layouts = {
 -- Workspace
 term_workspace = "TERM"
 web_workspace = "WEB"
-code_workspace = "CODE"
+mail_workspace = "MAIL"
 music_workspace = "M&V"
 chat_workspace = "CHAT"
 doc_workspace = "DOC"
@@ -65,7 +65,7 @@ other_workspace = "MORE"
 workspaces = {
   term_workspace,
   web_workspace,
-  code_workspace,
+  mail_workspace,
   music_workspace,
   chat_workspace,
   doc_workspace,
