@@ -45,7 +45,7 @@ local list_global_keys = {
     { { modkey, "Control" }, "r", "Reload awesome", awesome.restart },
     { { modkey, "Shift"   }, "q", "Quit", awesome.quit },
     -- Prompt
-    { { altkey            }, "F1", "Show properties of window", dynamo.notify.prop },
+    { { altkey            }, "F1", "Show properties of window", dynamo.notify.xprop },
     { { altkey            }, "F2", "Run command", function() if not dynamo_prompt.is_busy then awful.screen.focused().prompt_box:run() end end },
     { { altkey            }, "F3", "Calculation", dynamo.notify.calculation },
     -- Menu

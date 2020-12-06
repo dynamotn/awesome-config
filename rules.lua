@@ -20,7 +20,6 @@ awful.rules.rules = {
       maximized_horizontal = false,
       maximized_vertical = false,
       size_hints_honor = false,
-      opacity = 1,
       titlebars_enabled = true,
     }
   },
@@ -42,6 +41,7 @@ awful.rules.rules = {
       role = {
         "AlarmWindow",  -- Thunderbird's calendar
         "ConfigManager",  -- Thunderbird's about:config
+        "Msgcompose", -- Thunderbird's new sent email
         "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools
         "GtkFileChooserDialog", -- File Chooser dialog
       },
@@ -63,7 +63,7 @@ awful.rules.rules = {
   },
   -- Set Thunderbird to always map on tags number 3 of primary screen
   {
-    rule_any = { class = { "Thunderbird" } },
+    rule_any = { class = { "Thunderbird", instance = "Mail" } },
     properties = { screen = "primary", tag = mail_workspace }
   },
   -- Set Rambox to always map on tags number 5 of primary screen
@@ -73,7 +73,7 @@ awful.rules.rules = {
   },
   -- Set KeepassXC to always maps on tags number 9 of last screen
   {
-    rule = { class = "keepassxc", type = "normal" },
+    rule = { class = "KeePassXC", type = "normal" },
     properties = { screen = screen.count(), tag = other_workspace }
   },
   -- Set Desktop of Gnome must be share all workspace
