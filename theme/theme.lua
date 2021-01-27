@@ -13,12 +13,13 @@ theme.font                     = "Iosevka Dynamo 11"
 theme.tasklist_font            = "Iosevka Dynamo 11"
 theme.hotkeys_font             = theme.font
 theme.hotkeys_description_font = theme.font
+theme.titlebar_font            = theme.font
 -- }
 
 -- { Size
 -- Border
-theme.useless_gap   = dpi(2)
-theme.border_width  = dpi(2)
+theme.useless_gap   = dpi(5)
+theme.border_width  = 0
 theme.border_radius = dpi(10)
 
 -- Menu
@@ -38,6 +39,9 @@ theme.taglist_blink_interval = 0.5
 
 -- Taskbar
 theme.tasklist_margin_top = theme.taglist_margin_top
+
+-- Titlebar
+theme.titlebar_height = dpi(28)
 -- }
 
 -- { Color
@@ -112,6 +116,14 @@ theme.network_fg_up   = theme.powerline_bgs[5]
 theme.cpu_fg          = theme.powerline_bgs[2]
 theme.music_fg_title  = theme.powerline_bgs[2]
 
+-- Titlebar
+theme.titlebar_fg_close    = "#ee4266"
+theme.titlebar_fg_minimize = "#ffb400"
+theme.titlebar_fg_maximize = "#4cbb17"
+theme.titlebar_fg_floating = theme.powerline_bgs[2]
+theme.titlebar_fg_ontop    = theme.powerline_bgs[2]
+theme.titlebar_fg_sticky   = theme.powerline_bgs[2]
+
 -- Popup
 theme.popup_fg_htop_title = theme.bg_urgent
 -- }
@@ -121,39 +133,6 @@ theme.popup_fg_htop_title = theme.bg_urgent
 theme.menu_submenu_icon = local_theme_path .. "menu/submenu.png"
 theme.menu_edit_icon    = local_theme_path .. "menu/edit.svg"
 theme.menu_restart_icon = local_theme_path .. "menu/restart.svg"
-
--- { Title bar
--- Close
-theme.titlebar_close_button_normal = local_theme_path .. "titlebar/close_normal.png"
-theme.titlebar_close_button_focus  = local_theme_path .. "titlebar/close_focus.png"
-
--- Minimize
-theme.titlebar_minimize_button_normal = local_theme_path .. "titlebar/minimize_normal.png"
-theme.titlebar_minimize_button_focus  = local_theme_path .. "titlebar/minimize_focus.png"
-
--- On top
-theme.titlebar_ontop_button_normal_inactive = local_theme_path .. "titlebar/ontop_normal_inactive.svg"
-theme.titlebar_ontop_button_focus_inactive  = local_theme_path .. "titlebar/ontop_focus_inactive.svg"
-theme.titlebar_ontop_button_normal_active   = local_theme_path .. "titlebar/ontop_normal_active.png"
-theme.titlebar_ontop_button_focus_active    = local_theme_path .. "titlebar/ontop_focus_active.png"
--- Sticky
-theme.titlebar_sticky_button_normal_inactive = local_theme_path .. "titlebar/sticky_normal_inactive.svg"
-theme.titlebar_sticky_button_focus_inactive  = local_theme_path .. "titlebar/sticky_focus_inactive.svg"
-theme.titlebar_sticky_button_normal_active   = local_theme_path .. "titlebar/sticky_normal_active.svg"
-theme.titlebar_sticky_button_focus_active    = local_theme_path .. "titlebar/sticky_focus_active.svg"
-
--- Floating
-theme.titlebar_floating_button_normal_inactive = local_theme_path .. "titlebar/floating_normal_inactive.svg"
-theme.titlebar_floating_button_focus_inactive  = local_theme_path .. "titlebar/floating_focus_inactive.svg"
-theme.titlebar_floating_button_normal_active   = local_theme_path .. "titlebar/floating_normal_active.svg"
-theme.titlebar_floating_button_focus_active    = local_theme_path .. "titlebar/floating_focus_active.svg"
-
--- Maximized
-theme.titlebar_maximized_button_normal_inactive = local_theme_path .. "titlebar/maximized_normal_inactive.png"
-theme.titlebar_maximized_button_focus_inactive  = local_theme_path .. "titlebar/maximized_focus_inactive.png"
-theme.titlebar_maximized_button_normal_active   = local_theme_path .. "titlebar/maximized_normal_active.png"
-theme.titlebar_maximized_button_focus_active    = local_theme_path .. "titlebar/maximized_focus_active.png"
--- }
 
 -- { Widget
 -- Clock
