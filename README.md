@@ -21,6 +21,7 @@ Clone this repository to ~/.config/awesome
 ```
 rm -rf ~/.config/awesome
 git clone https://gitlab.com/dynamo-config/awesome ~/.config/awesome
+git submodule update --init --remote
 ```
 and create `Wallpaper` folder in your `Pictures` user folder
 ```
