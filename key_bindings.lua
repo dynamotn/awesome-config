@@ -92,6 +92,15 @@ local list_global_keys = {
     { { modkey            }, "Return", "Open a terminal", function() awful.spawn(terminal_tmux) end },
     { { modkey            }, "d", "Toggle color temperature (redshift)", dynamo.misc.redshift_toggle },
     { { modkey            }, "x", "Show clipboard list", function() awful.spawn(clipboard_list) end },
+  },
+  ["multimedia"] = {
+    { {                   }, "XF86AudioPlay", "Play song on mpd", function() awful.spawn(music_play_cmd) end },
+    { {                   }, "XF86AudioPause", "Pause mpd", function() awful.spawn(music_payse_cmd) end },
+    { {                   }, "XF86AudioNext", "Next song", function() awful.spawn(music_next_cmd) end },
+    { {                   }, "XF86AudioPrev", "Previous music", function() awful.spawn(music_previous_cmd) end },
+    { {                   }, "XF86AudioRaiseVolume", "Increase volume", function() awful.spawn(volume_raise_cmd) end },
+    { {                   }, "XF86AudioLowerVolume", "Decrease volume", function() awful.spawn(volume_lower_cmd) end },
+    { {                   }, "XF86AudioMute", "Mute volume", function() awful.spawn(volume_mute_cmd) end },
   }
 }
 

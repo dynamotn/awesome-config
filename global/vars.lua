@@ -18,8 +18,10 @@ terminal = "kitty"
 editor = os.getenv("EDITOR") or "vim"
 browser = "firefox"
 clipboard = "copyq"
-clipboard_list = clipboard .. " menu"
+clipboard_list = clipboard .. space .. "menu"
 music = "ncmpcpp"
+music_control = "mpc"
+sound_control = "pactl"
 
 -- Terminal command
 tmux = "'" .. "tmux -q has-session" .. and_operator .. "exec tmux attach-session -d" .. or_operator .. "exec tmux new-session -nwtf -s$USER@$HOSTNAME" .. "'"
@@ -27,6 +29,14 @@ tmux = "'" .. "tmux -q has-session" .. and_operator .. "exec tmux attach-session
 editor_cmd = terminal .. space .. editor
 music_cmd = terminal .. space .. music
 terminal_tmux = terminal .. space .. os.getenv("SHELL") .. command_option .. tmux
+
+music_play_cmd = music_control .. space .. "toggle"
+music_pause_cmd = music_control .. space .. "pause"
+music_next_cmd = music_control .. space .. "next"
+music_previous_cmd = music_control .. space .. "prev"
+volume_raise_cmd = sound_control .. space .. "set-sink-volume @DEFAULT_SINK@ +1%"
+volume_lower_cmd = sound_control .. space .. "set-sink-volume @DEFAULT_SINK@ -1%"
+volume_mute_cmd = sound_control .. space .. "set-sink-mute @DEFAULT_SINK@ toggle"
 
 -- Get Linux distribution name
 local misc = require("dynamo.misc")
