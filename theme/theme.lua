@@ -23,18 +23,18 @@ theme.border_width  = 0
 theme.border_radius = dpi(10)
 
 -- Menu
-theme.menu_height = dpi(20)
-theme.menu_width  = dpi(150)
+theme.menu_height = dpi(24)
+theme.menu_width  = dpi(160)
 
 -- Panel
-theme.top_panel_height = dpi(18)
-theme.bottom_panel_height = dpi(28)
+theme.top_panel_height = dpi(24)
+theme.bottom_panel_height = dpi(36)
 
 -- Workspace
-theme.taglist_margin_left    = dpi(3)
-theme.taglist_margin_top     = dpi(8)
-theme.taglist_small_corner   = dpi(2)
-theme.taglist_large_corner   = dpi(6)
+theme.taglist_margin_left    = dpi(4)
+theme.taglist_margin_top     = dpi(10)
+theme.taglist_small_corner   = dpi(4)
+theme.taglist_large_corner   = dpi(8)
 theme.taglist_blink_interval = 0.5
 
 -- Taskbar
