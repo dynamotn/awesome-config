@@ -66,9 +66,9 @@ awful.rules.rules = {
     rule_any = { class = { "Thunderbird", instance = "Mail" } },
     properties = { screen = "primary", tag = mail_workspace }
   },
-  -- Set Rambox to always map on tags number 5 of primary screen
+  -- Set Rambox, Ferdi, Telegram to always map on tags number 5 of primary screen
   {
-    rule_any = { class = { "Rambox" } },
+    rule_any = { class = { "Rambox", "Ferdi", "TelegramDesktop" } },
     properties = { screen = "primary", tag = chat_workspace }
   },
   -- Set KeepassXC to always maps on tags number 9 of last screen

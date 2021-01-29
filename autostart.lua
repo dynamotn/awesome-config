@@ -39,8 +39,8 @@ require("dynamo.misc").redshift_init()
 run_one_pid("mpd")
 -- }
 
--- { Rambox
-run_one_pid("rambox")
+-- { Ferdi
+run_one_pid("ferdi")
 -- }
 
 -- { Mail
