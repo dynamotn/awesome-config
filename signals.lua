@@ -40,4 +40,6 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- { Screen signal
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", misc.auto_change_wallpaper)
+screen.connect_signal("added", awesome.restart)
+screen.connect_signal("removed", awesome.restart)
 -- }
