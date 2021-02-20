@@ -175,7 +175,7 @@ vicious.register(
   dynamo_volume,
   vicious.widgets.volume,
   function(_, args)
-    if args[2] == "♩" then
+    if args[2] == "🔈" then
       dynamo_volume:set_widget(beautiful.volume_icon_mute)
     elseif args[1] == 0 then
       dynamo_volume:set_widget(beautiful.volume_icon_no)
