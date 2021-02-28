@@ -13,7 +13,7 @@ end
 -- Hibernate
 local function hibernate()
   dynamo_prompt:show_confirm_prompt("Hibernate", nil, function()
-    shell.run_command("systemctl hibernate" .. or_operator "pm-hibernate", true)
+    shell.run_command("sudo systemctl hibernate" .. or_operator "pm-hibernate", true)
   end)
 end
 
@@ -21,7 +21,7 @@ end
 local function reboot()
   dynamo_prompt:show_confirm_prompt("Reboot", nil, function()
     awesome.emit_signal("exit", nil)
-    shell.run_command("reboot", true)
+    shell.run_command("sudo reboot", true)
   end)
 end
 
@@ -29,7 +29,7 @@ end
 local function shutdown()
   dynamo_prompt:show_confirm_prompt("Shutdown", nil, function()
     awesome.emit_signal("exit", nil)
-    shell.run_command("shutdown -P now", true)
+    shell.run_command("sudo shutdown -P now", true)
   end)
 end
 
@@ -37,7 +37,7 @@ end
 local function schedule_shutdown()
   dynamo_prompt:show_confirm_prompt("Shutdown", "Please enter time", function(input)
     awesome.emit_signal("exit", nil)
-    shell.run_command("shutdown -P " .. dstring.trim(input), true)
+    shell.run_command("sudo shutdown -P " .. dstring.trim(input), true)
   end)
 end
 
