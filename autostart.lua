@@ -12,7 +12,7 @@ run_one_pid(terminal_tmux, nil, terminal)
 -- }
 
 -- { Password manager
-run_one_pid("keepassxc")
+-- run_one_pid("keepassxc")
 -- }
 
 -- { Browser
@@ -44,5 +44,5 @@ run_one_pid("ferdi")
 -- }
 
 -- { Mail
-run_one_pid("thunderbird")
+-- run_one_pid("thunderbird")
 -- }
