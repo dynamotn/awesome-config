@@ -91,7 +91,7 @@ local list_global_keys = {
     { { modkey            }, "d", "Toggle color temperature (redshift)", dynamo.misc.redshift_toggle },
     { { modkey            }, "x", "Show clipboard list", function() awful.spawn(clipboard_list) end },
     { {                   }, "XF86Mail", "Open email client", function() awful.spawn(email_cmd) end },
-    { {                   }, "XF86Explorer", "Open application launcher", function() awful.spawn(launcher) end },
+    { {                   }, "XF86Explorer", "Open application launcher", function() awful.spawn(launcher_application) end },
     -- { {                   }, "XF86Calculator", "Open application launcher", function() awful.spawn(launcher) end },
     -- { {                   }, "XF86Tools", "Open application launcher", function() awful.spawn(launcher) end },
     -- { {                   }, "XF86Eject", "Open application launcher", function() awful.spawn(launcher) end },
