@@ -4,8 +4,6 @@ local awful = require("awful")
 local table = require("gears.table")
 -- Popup library
 local hotkeys_popup = require("awful.hotkeys_popup")
--- Menubar library
-local menubar = require("menubar")
 -- Custom library
 local dynamo = require("dynamo")
 
@@ -46,11 +44,11 @@ local list_global_keys = {
     { { modkey, "Shift"   }, "q", "Quit", awesome.quit },
     -- Prompt
     { { altkey            }, "F1", "Show properties of window", dynamo.notify.xprop },
-    { { altkey            }, "F2", "Run command", function() if not dynamo_prompt.is_busy then awful.screen.focused().prompt_box:run() end end },
+    { { altkey            }, "F2", "Run command", function() awful.spawn(launcher_command) end },
     { { altkey            }, "F3", "Calculation", dynamo.notify.calculation },
     -- Menu
     { { modkey            }, "F1", "Show main menu", function() main_menu:show() end },
-    { { modkey            }, "F2", "Show menubar", menubar.show },
+    { { modkey            }, "F2", "Show menubar", function() awful.spawn(launcher_application) end },
   },
   ["workspace"] = {
     -- Workspace movement

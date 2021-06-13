@@ -22,6 +22,9 @@ clipboard_list = clipboard .. space .. "menu"
 music = "ncmpcpp"
 music_control = "mpc"
 sound_control = "pactl"
+launcher = "rofi"
+launcher_application = launcher .. space .. "-show drun"
+launcher_command = launcher .. space .. "-show run"
 
 -- Terminal command
 tmux = "'" .. "tmux -q has-session" .. and_operator .. "exec tmux attach-session -d" .. or_operator .. "exec tmux new-session -nwtf -s$USER@$HOSTNAME" .. "'"
