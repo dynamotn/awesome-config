@@ -1,4 +1,7 @@
 local run_one_pid = require("dynamo").shell.run_one_pid
+local misc = require("dynamo.misc")
+linux_distribution = misc.linux_distribution()
+
 -- { Composite manager
 run_one_pid("picom", "--experimental-backends -b")
 -- }
@@ -16,7 +19,7 @@ run_one_pid(terminal_tmux, nil, terminal)
 -- }
 
 -- { Browser
-run_one_pid(browser)
+run_one_pid(browser, nil, linux_distribution == "gentoo" and "/usr/lib64/firefox/firefox" or "/usr/lib/firefox/firefox")
 -- }
 
 -- { Clipboard manager
@@ -44,5 +47,5 @@ run_one_pid("ferdi")
 -- }
 
 -- { Mail
--- run_one_pid("thunderbird")
+run_one_pid("thunderbird")
 -- }

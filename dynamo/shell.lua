@@ -69,7 +69,7 @@ local function run_one_pid(prg, arg_string, pname)
     arg_string = " " .. arg_string
   end
 
-  run_command("pgrep -u $USER -x '" .. pname .. "'", true, nil, function()
+  run_command("pgrep -u $USER -f '^" .. pname .. "*'", true, nil, function()
     run_command(prg .. arg_string, true)
   end)
 end
