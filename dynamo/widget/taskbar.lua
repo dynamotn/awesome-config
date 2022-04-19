@@ -30,6 +30,10 @@ function bar:draw(context, cairo, width, height)
   cairo:restore()
 end
 
+function bar:before_draw_children(context, cairo, width, height)
+  cairo:restore()
+end
+
 local function new(buttons, image)
   local background = wibox.container.background()
   local text = wibox.widget.textbox()
