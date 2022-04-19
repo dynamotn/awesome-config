@@ -8,10 +8,11 @@ local chevron_size = 1
 -- @param lgi.cairo cairo 2D graphic library
 -- @param number width Width of separator
 -- @param number height Height of separator
--- @param string color Hexa or name color of separator
 -- @param string direction 'left' or 'right' direction
 -- @param string style 'solid' or 'chevron' style
-local function draw_arrow(cairo, width, height, direction, style, color)
+-- @param string fg_color Hexa or name foreground color of separator
+-- @param string bg_color Hexa or name background color of separator
+local function draw_arrow(cairo, width, height, direction, style, fg_color, bg_color)
   if not style or not direction then
     return
   end
@@ -33,7 +34,7 @@ local function draw_arrow(cairo, width, height, direction, style, color)
     triangle_base_vicinity_x = width - chevron_size
   end
 
-  cairo:set_source_rgb(gears.color.parse_color(color))
+  cairo:set_source_rgba(gears.color.parse_color(fg_color))
   cairo:new_path()
   if style == "solid" then
     cairo:move_to(triangle_base_x, 0)
@@ -52,7 +53,23 @@ local function draw_arrow(cairo, width, height, direction, style, color)
   end
   cairo:close_path()
   cairo:fill()
+
+  cairo:set_source_rgba(gears.color.parse_color(bg_color))
+  cairo:new_path()
+  if style == "solid" then
+    cairo:move_to(triangle_base_x, 0)
+    cairo:line_to(triangle_apex_x, height / 2)
+    cairo:line_to(triangle_base_x, height)
+    cairo:line_to(triangle_apex_x, height)
+    cairo:line_to(triangle_apex_x, 0)
+    cairo:close_path()
+  elseif style == "chevron" then
+    -- TODO: background for left and right of chevron
+  end
+  cairo:close_path()
+  cairo:fill()
 end
+
 -- }
 
 -- { Draw curve with cairo
@@ -112,20 +129,9 @@ local function create(symbol, direction, style, fg_color, bg_color)
       return height / 2, height
     end,
     draw = function(_, _, cairo, width, height)
-      if bg_color ~= "opaque" then
-        cairo:set_source_rgb(gears.color.parse_color(bg_color))
-        cairo:new_path()
-        cairo:move_to(0, 0)
-        cairo:line_to(width, 0)
-        cairo:line_to(width, height)
-        cairo:line_to(0, height)
-        cairo:close_path()
-        cairo:fill()
-      end
-
       if fg_color ~= "opaque" then
         if symbol == "arrow" then
-          draw_arrow(cairo, width, height, direction, style, fg_color)
+          draw_arrow(cairo, width, height, direction, style, fg_color, bg_color)
         elseif symbol == "curve" then
           draw_curve(cairo, width, height, direction, style, fg_color, bg_color)
         end

@@ -82,7 +82,7 @@ local panel_index = -1
 -- { Layout button
 dynamo_layout = function(screen)
   local panel_index = -1
-  return powerline_section(panel_index, awful.widget.layoutbox(screen), beautiful.layout_bg_normal)
+  return powerline_section(panel_index, awful.widget.layoutbox(screen))
 end
 -- }
 

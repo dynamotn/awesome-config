@@ -45,26 +45,42 @@ theme.titlebar_height = dpi(28)
 -- }
 
 -- { Color
+theme.alpha_color_suffix = 'aa'
+
 -- Common powerline section
 theme.powerline_bgs = {
-  "#f0f0f0",
-  "#44c0dd",
-  "#0c273d",
-  "#2c5e2e",
-  "#70b85d",
+  "#01579b" .. theme.alpha_color_suffix,
+  "#0277bd" .. theme.alpha_color_suffix,
+  "#0288d1" .. theme.alpha_color_suffix,
+  "#039be5" .. theme.alpha_color_suffix,
+  "#03a9f4" .. theme.alpha_color_suffix,
+  "#29b6f6" .. theme.alpha_color_suffix,
+  "#4fc3f7" .. theme.alpha_color_suffix,
+  "#81d4fa" .. theme.alpha_color_suffix
+}
+theme.powerline_fgs = {
+  "#263238",
+  "#37474f",
+  "#455a64",
+  "#546e7a",
+  "#607d8b",
+  "#78909c",
+  "#90a4ae",
+  "#b0bec5",
 }
 theme.powerline_symbol = "arrow"
+theme.powerline_style = "solid"
 
 -- Background
-theme.bg_normal   = "#1a1a1a"
-theme.bg_focus    = "#313131"
-theme.bg_urgent   = "#4caf50"
-theme.bg_systray  = theme.bg_focus
+theme.bg_normal  = "#263238" .. theme.alpha_color_suffix
+theme.bg_focus   = "#37474f" .. theme.alpha_color_suffix
+theme.bg_urgent  = "#00c853" .. theme.alpha_color_suffix
+theme.bg_systray = "#313131" .. theme.alpha_color_suffix
 
 -- Foreground
-theme.fg_normal   = theme.powerline_bgs[1]
-theme.fg_focus    = "#d5d5d5"
-theme.fg_urgent   = "#d0f0f1"
+theme.fg_normal = "#fafafa"
+theme.fg_focus  = "#eeeeee"
+theme.fg_urgent = theme.powerline_fgs[8]
 
 -- Border
 theme.border_normal = theme.bg_focus
@@ -72,7 +88,7 @@ theme.border_focus  = theme.powerline_bgs[2]
 
 -- Workspace panel
 theme.taglist_bg_empty    = theme.bg_focus
-theme.taglist_bg_focus    = theme.powerline_bgs[2]
+theme.taglist_bg_focus    = theme.powerline_fgs[6]
 theme.taglist_bg_urgent   = theme.bg_urgent
 theme.taglist_fg_empty    = theme.bg_normal
 theme.taglist_fg_focus    = theme.fg_focus
@@ -80,13 +96,13 @@ theme.taglist_fg_occupied = theme.fg_focus
 theme.taglist_fg_urgent   = theme.fg_urgent
 
 -- Window panel
-theme.tasklist_fg_normal   = "#fff3f3"
+theme.tasklist_fg_normal   = theme.powerline_fgs[8]
 theme.tasklist_fg_minimize = "#777e76"
 theme.tasklist_fg_focus    = "#212121"
 theme.tasklist_fg_urgent   = "#f0f0f0"
 
 -- Prompt panel
-theme.prompt_bg_normal = theme.fg_normal
+theme.prompt_bg_normal = "#f0f0f0" .. theme.alpha_color_suffix
 if linux_distribution == "archlinux" then
   theme.prompt_fg_normal = "#2196f3"
 elseif linux_distribution == "gentoo" then
@@ -109,12 +125,12 @@ theme.menu_fg_focus  = theme.prompt_fg_normal
 theme.layout_bg_normal = theme.bg_systray
 
 -- Vicious panel
-theme.clock_fg_date   = theme.bg_normal
-theme.clock_fg_hour   = theme.fg_normal
-theme.network_fg_down = theme.powerline_bgs[2]
-theme.network_fg_up   = theme.powerline_bgs[5]
-theme.cpu_fg          = theme.powerline_bgs[2]
-theme.music_fg_title  = theme.powerline_bgs[2]
+theme.clock_fg_date   = "#fafafa"
+theme.clock_fg_hour   = "#4a148c"
+theme.network_fg_down = "#ffd600"
+theme.network_fg_up   = "#64dd17"
+theme.cpu_fg          = theme.powerline_fgs[8]
+theme.music_fg_title  = theme.powerline_fgs[8]
 
 -- Titlebar
 theme.titlebar_fg_close    = "#ee4266"
