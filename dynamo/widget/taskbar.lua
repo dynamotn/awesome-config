@@ -30,8 +30,7 @@ function bar:draw(context, cairo, width, height)
   cairo:restore()
 end
 
-function bar:before_draw_children(context, cairo, width, height)
-  cairo:restore()
+function bar:before_draw_children(_, _, _, _)
 end
 
 local function new(buttons, image)
