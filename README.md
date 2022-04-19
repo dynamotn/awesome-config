@@ -13,8 +13,7 @@ Installation
 You must install:
 * [xdg-user-dirs](https://www.freedesktop.org/wiki/Software/xdg-user-dirs/): some Linux distros already install this package
 * [Moka icon theme](https://github.com/snwh/moka-icon-theme)
-* [Terminus font](http://terminus-font.sourceforge.net): some Linux distros already have this font
-* [Monofur Nerd font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Monofur)
+* [My Iosevka font](https://github.com/dynamotn/font-collection/tree/main/files/DIY/Iosevka): just copy to your ~/.local/share/fonts folder
 * [Redshift](http://jonls.dk/redshift/)
 
 Clone this repository to ~/.config/awesome
