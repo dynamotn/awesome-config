@@ -121,7 +121,7 @@ local function get_processes_info(callback)
     stats = string.gsub(stats, "TTY", markup_text("%1", beautiful.popup_fg_htop_title))
     stats = string.gsub(stats, "ELAPSED", markup_text("%1", beautiful.popup_fg_htop_title))
     callback(stats)
-  end)
+  end, nil, true)
 end
 -- }
 

@@ -37,7 +37,7 @@ local function calculation()
     local expr = trim(expr)
     shell.run_command("echo '" .. expr .. "' | bc", true, function(result)
       naughty.notify({ text = expr .. " = " .. trim(result), timeout = 10, screen = mouse.screen })
-    end)
+    end, nil, true)
   end)
 end
 -- }
