@@ -89,7 +89,7 @@ local list_global_keys = {
   ["3rd app"] = {
     { { modkey            }, "Return", "Open a terminal", function() awful.spawn(terminal_tmux) end },
     { { modkey            }, "d", "Toggle color temperature (redshift)", dynamo.misc.redshift_toggle },
-    { { modkey            }, "x", "Show clipboard list", function() awful.spawn(clipboard_list) end },
+    { { modkey            }, "x", "Show clipboard list", function() awful.spawn.with_shell(clipboard_list) end },
     { {                   }, "XF86Mail", "Open email client", function() awful.spawn(email_cmd) end },
     { {                   }, "XF86Explorer", "Open application launcher", function() awful.spawn(launcher_application) end },
     -- { {                   }, "XF86Calculator", "Open application launcher", function() awful.spawn(launcher) end },
