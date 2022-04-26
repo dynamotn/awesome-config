@@ -38,8 +38,8 @@ run_one_pid("ibus-daemon", "-drx")
 require("dynamo.misc").redshift_init()
 -- }
 
--- { MPD
-run_one_pid("mpd")
+-- { MPD from Mopidy
+run_one_pid("mopidy")
 -- }
 
 -- { Ferdi
