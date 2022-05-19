@@ -1,7 +1,7 @@
 [submodule "vicious"]
-	path = vicious
+	path = vendor/vicious
 	url = https://github.com/vicious-widgets/vicious.git
 [submodule "awesome-wm-nice"]
-	path = nice
+	path = vendor/nice
 	branch = awesome-4v3-stable
 	url = https://github.com/mut-ex/awesome-wm-nice.git
