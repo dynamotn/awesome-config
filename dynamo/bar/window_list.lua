@@ -1,11 +1,11 @@
 -- AwesomeWM standard library
-local awful = require("awful")
+local awful = require('awful')
 -- Widget library
-local wibox = require("wibox")
+local wibox = require('wibox')
 -- Theme handling library
-local beautiful = require("beautiful")
+local beautiful = require('beautiful')
 -- Custom library
-local taskbar = require("dynamo.widget.taskbar")
+local taskbar = require('dynamo.widget.taskbar')
 
 local function update(w, buttons, label, data, windows)
   -- update the widgets, creating them if needed
@@ -20,7 +20,7 @@ local function update(w, buttons, label, data, windows)
       bar = taskbar(awful.widget.common.create_buttons(buttons, window), awful.widget.clienticon(window))
 
       data[window] = {
-        bar = bar
+        bar = bar,
       }
     end
 
@@ -28,7 +28,7 @@ local function update(w, buttons, label, data, windows)
 
     -- The text might be invalid, so use pcall
     if not bar.text:set_markup_silently(text) then
-      bar.text:set_markup("<i>&lt;Invalid text&gt;</i>")
+      bar.text:set_markup('<i>&lt;Invalid text&gt;</i>')
     end
     bar:set_bgimage(bg_image)
 
@@ -41,4 +41,8 @@ local function create(args)
   return awful.widget.tasklist(args)
 end
 
-return setmetatable({}, { __call = function(_, ...) return create(...) end })
+return setmetatable({}, {
+  __call = function(_, ...)
+    return create(...)
+  end,
+})

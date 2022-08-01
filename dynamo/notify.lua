@@ -1,12 +1,12 @@
 -- Notification library
-local naughty = require("naughty")
+local naughty = require('naughty')
 -- Custom library
-local trim = require("dynamo.string").trim
-local shell = require("dynamo.shell")
+local trim = require('dynamo.string').trim
+local shell = require('dynamo.shell')
 
 -- { Show properties of window
 local function xprop()
-  dynamo_prompt:set_prompt("Show properties of window")
+  dynamo_prompt:set_prompt('Show properties of window')
   if not mousegrabber.isrunning() then
     mousegrabber.run(function(_mouse)
       for k, v in ipairs(_mouse.buttons) do
@@ -14,29 +14,29 @@ local function xprop()
           dynamo_prompt:set_prompt()
           local c = client.focus
           dbg({
-              name = c.name,
-              class = c.class,
-              instance = c.instance,
-              type = c.type,
-              window = c.window,
-              role = c.role,
-              pid = c.pid,
-            }, true)
+            name = c.name,
+            class = c.class,
+            instance = c.instance,
+            type = c.type,
+            window = c.window,
+            role = c.role,
+            pid = c.pid,
+          }, true)
           return false
         end
       end
       return true
-    end, "target")
-end
+    end, 'target')
+  end
 end
 -- }
 
 -- { Calculation
 local function calculation()
-  dynamo_prompt:show_confirm_prompt("Calculation", "Enter formula", function(expr)
+  dynamo_prompt:show_confirm_prompt('Calculation', 'Enter formula', function(expr)
     local expr = trim(expr)
     shell.run_command("echo '" .. expr .. "' | bc", true, function(result)
-      naughty.notify({ text = expr .. " = " .. trim(result), timeout = 10, screen = mouse.screen })
+      naughty.notify({ text = expr .. ' = ' .. trim(result), timeout = 10, screen = mouse.screen })
     end, nil, true)
   end)
 end
@@ -70,7 +70,7 @@ end
 -- Callback function must have first argument that is a function same with notify(text) function
 local function show_popup(callback)
   is_show_popup = true
-  if type(callback) == "function" then
+  if type(callback) == 'function' then
     callback(notify)
   else
     notify(callback)
@@ -81,8 +81,12 @@ end
 -- @param table widget Widget that need to show popup
 -- @param function callback See param of show_popup function
 local function init_popup(widget, callback)
-  widget:connect_signal("mouse::enter", function() show_popup(callback) end)
-  widget:connect_signal("mouse::leave", function() hide_popup() end)
+  widget:connect_signal('mouse::enter', function()
+    show_popup(callback)
+  end)
+  widget:connect_signal('mouse::leave', function()
+    hide_popup()
+  end)
 end
 -- }
 

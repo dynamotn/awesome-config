@@ -1,5 +1,5 @@
 -- Custom shell library
-local shell = require("dynamo.shell")
+local shell = require('dynamo.shell')
 
 -- { Advance function for file and directory
 -- Scan directory, and optionally filter outputs
@@ -11,22 +11,25 @@ local function scan_dir(kind, directory, filter)
   if directory:sub(1, 1) ~= '/' then
     return {}
   end
-  if kind ~= "mime" then
+  if kind ~= 'mime' then
     return {}
   end
   local command = {
-    mime = "find " .. directory .. " -type f -exec file -i {} + | awk -F': +' '{ if ($2 ~ /" .. filter .. "/) print $1 }'",
+    mime = 'find '
+      .. directory
+      .. " -type f -exec file -i {} + | awk -F': +' '{ if ($2 ~ /"
+      .. filter
+      .. "/) print $1 }'",
   }
   return shell.run_command_multiple_lines(command[kind])
 end
-
 
 -- Scan directory, and filter outputs by MIME type
 -- @param string directory Absolute path of directory
 -- @param string filter MIME type of file filter with escape character (eg: image, video, image\/png...)
 -- @return table List of file name match with filter in directory
 local function scan_dir_by_mime(directory, filter)
-  return scan_dir("mime", directory, filter)
+  return scan_dir('mime', directory, filter)
 end
 -- }
 
@@ -35,7 +38,7 @@ end
 -- @param string kind Type of XDG user directory
 -- @return string Path of XDG user directory
 local function xdg_user_dirs(kind)
-  return shell.run_command_one_line("xdg-user-dir " .. kind)
+  return shell.run_command_one_line('xdg-user-dir ' .. kind)
 end
 -- }
 

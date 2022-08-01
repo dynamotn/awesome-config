@@ -1,3 +1,3 @@
-require("global.debug")
-require("global.vars")
-require("global.utils")
+require('global.debug')
+require('global.vars')
+require('global.utils')

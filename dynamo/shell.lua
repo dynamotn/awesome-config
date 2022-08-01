@@ -1,7 +1,7 @@
 -- AwesomeWM standard library
-local awful = require("awful")
+local awful = require('awful')
 -- Custom library
-local dstring = require("dynamo.string")
+local dstring = require('dynamo.string')
 
 -- { Run command
 -- Run command and get result
@@ -27,7 +27,7 @@ local function run_command(cmd, is_async, succeed_callback, failed_callback, wit
   end
   if not is_async or is_async == false then
     local stream = io.popen(cmd)
-    local stdout = stream:read("*all")
+    local stdout = stream:read('*all')
     local _, reason, exit_code = stream:close()
     return post_run_command(stdout, nil, reason, exit_code)
   else
@@ -70,10 +70,10 @@ local function run_one_pid(prg, arg_string, pname, with_shell)
     pname = prg
   end
 
-  if not arg_string or tostring(arg_string):find("^%s*$") then
-    arg_string = ""
+  if not arg_string or tostring(arg_string):find('^%s*$') then
+    arg_string = ''
   else
-    arg_string = " " .. arg_string
+    arg_string = ' ' .. arg_string
   end
 
   run_command("pgrep -u $USER -f '^" .. pname .. "*'", true, nil, function()

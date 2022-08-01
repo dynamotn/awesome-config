@@ -1,10 +1,10 @@
 -- Widget library
-local textbox = require("wibox.widget.textbox")
-local gears = require("gears")
+local textbox = require('wibox.widget.textbox')
+local gears = require('gears')
 -- Theme handling library
-local beautiful = require("beautiful")
+local beautiful = require('beautiful')
 -- Pango library
-local Pango = require("lgi").Pango
+local Pango = require('lgi').Pango
 
 local label = { mt = {} }
 
@@ -30,11 +30,23 @@ function label:draw(context, cairo, width, height)
   cairo:set_source_rgb(gears.color.parse_color(self.color))
   cairo:new_path()
   cairo:move_to(beautiful.taglist_margin_left / 2, beautiful.taglist_margin_top / 2)
-  cairo:line_to(beautiful.taglist_margin_left / 2, height - beautiful.taglist_margin_top / 2 - beautiful.taglist_small_corner)
-  cairo:line_to(beautiful.taglist_margin_left / 2 + beautiful.taglist_small_corner, height - beautiful.taglist_margin_top / 2)
+  cairo:line_to(
+    beautiful.taglist_margin_left / 2,
+    height - beautiful.taglist_margin_top / 2 - beautiful.taglist_small_corner
+  )
+  cairo:line_to(
+    beautiful.taglist_margin_left / 2 + beautiful.taglist_small_corner,
+    height - beautiful.taglist_margin_top / 2
+  )
   cairo:line_to(width - beautiful.taglist_margin_left / 2, height - beautiful.taglist_margin_top / 2)
-  cairo:line_to(width - beautiful.taglist_margin_left / 2, beautiful.taglist_margin_top / 2 + beautiful.taglist_large_corner)
-  cairo:line_to(width - beautiful.taglist_margin_left / 2 - beautiful.taglist_large_corner, beautiful.taglist_margin_top / 2)
+  cairo:line_to(
+    width - beautiful.taglist_margin_left / 2,
+    beautiful.taglist_margin_top / 2 + beautiful.taglist_large_corner
+  )
+  cairo:line_to(
+    width - beautiful.taglist_margin_left / 2 - beautiful.taglist_large_corner,
+    beautiful.taglist_margin_top / 2
+  )
   cairo:close_path()
   cairo:fill()
 
@@ -54,7 +66,8 @@ function label:fit(context, width, height)
     return 0, 0
   end
 
-  return logical.width + beautiful.taglist_margin_left + 2 * beautiful.taglist_large_corner, logical.height + beautiful.taglist_margin_top
+  return logical.width + beautiful.taglist_margin_left + 2 * beautiful.taglist_large_corner,
+    logical.height + beautiful.taglist_margin_top
 end
 
 -- Change label cairo color
@@ -64,25 +77,25 @@ function label:set_color(color, blink_interval)
 
   if self.blink_interval ~= 0 and (self.blink_timer == nil or not self.blink_timer.started) then
     self.value = 1
-    self.blink_timer = gears.timer { timeout = self.blink_interval }
-    self.blink_timer:connect_signal("timeout", function()
+    self.blink_timer = gears.timer({ timeout = self.blink_interval })
+    self.blink_timer:connect_signal('timeout', function()
       self.blink_timer:stop()
       self.blink_timer.timeout = self.blink_interval
       self.blink_timer:start()
       if self.value == 0 then
-        self.value = 1 
+        self.value = 1
         self.color = beautiful.taglist_bg_empty
       else
-        self.value = 0 
+        self.value = 0
         self.color = color or beautiful.taglist_bg_empty
       end
-      self:emit_signal("widget::updated")
+      self:emit_signal('widget::updated')
     end)
     self.blink_timer:start()
   elseif self.blink_interval == 0 and self.blink_timer ~= nil and self.blink_timer.started then
     self.blink_timer:stop()
   end
-  self:emit_signal("widget::updated")
+  self:emit_signal('widget::updated')
 end
 
 local function create(color, blink_interval)
@@ -91,7 +104,7 @@ local function create(color, blink_interval)
   ret.blink_interval = blink_interval or 0
 
   for k, v in pairs(label) do
-    if type(v) == "function" then
+    if type(v) == 'function' then
       ret[k] = v
     end
   end

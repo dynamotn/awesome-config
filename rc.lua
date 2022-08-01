@@ -1,35 +1,35 @@
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
-pcall(require, "luarocks.loader")
+pcall(require, 'luarocks.loader')
 
 -- { Error handling, variable definitions, pre-setup
-require("global")
+require('global')
 -- }
 
 -- { Third party application
 -- Autostart application at startup
-require("autostart")
+require('autostart')
 -- }
 
 -- { Bindings
 -- Mouse
-require("mouse_bindings")
+require('mouse_bindings')
 -- Keyboard
-require("key_bindings")
+require('key_bindings')
 -- }
 
 -- { Screen setup
 -- Menu
-require("menu")
+require('menu')
 -- Panel
-require("panel")
+require('panel')
 -- Monitor
-require("monitor")
+require('monitor')
 -- }
 
 -- { On-the-fly setup
 -- Rules
-require("rules")
+require('rules')
 -- Signals
-require("signals")
+require('signals')
 -- }

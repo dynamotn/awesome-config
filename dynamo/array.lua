@@ -2,7 +2,7 @@
 -- @param table array
 -- @param number index Index of array
 local function array_values(array, cyclic_index)
-  if type(array) ~= "table" then
+  if type(array) ~= 'table' then
     return
   end
 
