@@ -12,10 +12,7 @@ require('autostart')
 -- }
 
 -- { Bindings
--- Mouse
-require('mouse_bindings')
--- Keyboard
-require('key_bindings')
+require('bindings').setup()
 -- }
 
 -- { Screen setup

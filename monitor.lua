@@ -11,6 +11,8 @@ local separator = require('dynamo.widget').separator
 local bar = require('dynamo.bar')
 local init_popup = require('dynamo.notify').init_popup
 local get_processes_info = require('dynamo.misc').get_processes_info
+-- Bindings
+local bindings = require('bindings')
 
 awful.screen.connect_for_each_screen(function(s)
   -- Wallpaper
@@ -28,14 +30,14 @@ awful.screen.connect_for_each_screen(function(s)
   s.workspace_list = bar.workspace_list({
     screen = s,
     filter = awful.widget.taglist.filter.all,
-    buttons = global_buttons['workspace'],
+    buttons = bindings.config.mouse.global.workspace,
   })
 
   -- Create a window list widget
   s.window_list = bar.window_list({
     screen = s,
     filter = awful.widget.tasklist.filter.currenttags,
-    buttons = global_buttons['taskbar'],
+    buttons = bindings.config.mouse.global.taskbar,
   })
 
   -- Create the wibox
@@ -77,8 +79,8 @@ awful.screen.connect_for_each_screen(function(s)
     },
   })
   init_popup(s.top_wibox:get_children_by_id(dynamo_memory.id)[1], get_processes_info)
-  s.top_wibox:get_children_by_id(s.layout_box.id)[1]:buttons(global_buttons['layout'])
-  s.top_wibox:get_children_by_id(dynamo_music.id)[1]:buttons(widget_buttons['music'])
+  s.top_wibox:get_children_by_id(s.layout_box.id)[1]:buttons(bindings.config.mouse.global.layout)
+  s.top_wibox:get_children_by_id(dynamo_music.id)[1]:buttons(bindings.config.mouse.widgets.music)
 
   s.bottom_wibox:setup({
     layout = wibox.layout.align.horizontal,
