@@ -20,8 +20,6 @@ require('bindings').setup()
 require('menu')
 -- Panel
 require('panel')
--- Monitor
-require('monitor')
 -- }
 
 -- { On-the-fly setup

@@ -1,6 +1,5 @@
 -- AwesomeWM standard library
 local awful = require('awful')
-local gears = require('gears')
 -- Theme handling library
 local beautiful = require('beautiful')
 -- Widget and layout library
@@ -14,11 +13,17 @@ local get_processes_info = require('dynamo.misc').get_processes_info
 -- Bindings
 local bindings = require('bindings')
 
-awful.screen.connect_for_each_screen(function(s)
-  -- Wallpaper
-  misc.auto_change_wallpaper(s)
+-- Restart awesome when screens are removed or added
+screen.connect_signal('added', awesome.restart)
+screen.connect_signal('removed', awesome.restart)
 
-  -- Each screen has its own tag table.
+-- Setup wallpaper
+screen.connect_signal('request::wallpaper', function(s)
+  misc.auto_change_wallpaper(s)
+end)
+
+-- Setup screen
+screen.connect_signal('request::desktop_decoration', function(s)
   awful.tag(workspaces, s, layouts[3])
 
   -- Create a promptbox for each screen
@@ -91,5 +96,3 @@ awful.screen.connect_for_each_screen(function(s)
     s.window_list, -- Middle widget
   })
 end)
-
-wallpaper.timer:start()
