@@ -5,6 +5,8 @@ local table = require('gears.table')
 -- Special keys
 local k = require('bindings.special').key
 local m = require('bindings.special').mouse
+-- Widgets
+local widgets = require('widgets')
 
 local list = {
   ['workspace'] = {
@@ -122,7 +124,7 @@ local list = {
       {},
       m.right,
       function()
-        main_menu:toggle()
+        widgets.menu:toggle()
       end,
     },
     {

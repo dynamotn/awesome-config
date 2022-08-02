@@ -12,7 +12,7 @@ local awesome_menu = {
   {
     'Hot&keys',
     function()
-      hotkeys_popup.show_help(nil, awful.screen.focused())
+      awful.hotkeys_popup.show_help(nil, awful.screen.focused())
     end,
   },
   { 'Edit &configuration', editor_cmd .. ' ' .. awesome.conffile, beautiful.menu_edit_icon },
@@ -27,11 +27,9 @@ local system_menu = {
   { 'S&chedule shutdown', session.schedule_shutdown },
 }
 
-main_menu = awful.menu({
+return awful.menu({
   items = {
     { '&Awesome', awesome_menu, beautiful.awesome_icon },
     { '&System', system_menu, utils.lookup_icon('applications-system') },
   },
 })
-
-launcher = awful.widget.launcher({ image = beautiful.launcher_icon, menu = main_menu })

@@ -11,12 +11,14 @@ local run_command = require('dynamo.shell').run_command
 local array_values = require('dynamo.array').array_values
 local vicious = require('vicious')
 vicious.contrib = require('vicious.contrib')
+-- Widgets
+local widgets = require('widgets')
 
 -- { Left panel
 local panel_index = 0
 
 -- Menu button
-dynamo_launcher = wibox.container.background(launcher, beautiful.prompt_bg_normal)
+dynamo_launcher = wibox.container.background(widgets.launcher, beautiful.prompt_bg_normal)
 
 -- { Powerline prompt
 panel_index = panel_index + 1

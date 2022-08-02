@@ -6,18 +6,11 @@ pcall(require, 'luarocks.loader')
 require('global')
 -- }
 
--- { Third party application
--- Autostart application at startup
-require('autostart')
--- }
-
 -- { Bindings
 require('bindings').setup()
 -- }
 
 -- { Screen setup
--- Menu
-require('menu')
 -- Panel
 require('panel')
 -- }
