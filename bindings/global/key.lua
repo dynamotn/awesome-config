@@ -44,7 +44,7 @@ local list = {
       'F2',
       'Run command',
       function()
-        awful.spawn(apps.launcher_command)
+        awful.spawn(apps.command_launcher)
       end,
     },
     {
