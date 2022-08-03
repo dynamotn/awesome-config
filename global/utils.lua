@@ -8,11 +8,6 @@ local local_rc_path = awful.util.get_configuration_dir()
 package.path = package.path .. ';' .. local_rc_path .. 'vendor/?.lua;' .. local_rc_path .. 'vendor/?/init.lua;'
 -- }
 
--- { Reconfigure notification
-local naughty = require('naughty')
-naughty.config.defaults.timeout = 10
--- }
-
 -- { Initial theme
 local beautiful = require('beautiful')
 beautiful.init(theme_location)
