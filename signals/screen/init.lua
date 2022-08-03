@@ -14,6 +14,7 @@ local get_processes_info = require('dynamo.misc').get_processes_info
 local bindings = require('bindings')
 -- Configuration
 local layouts = require('config.layouts')
+local workspaces = require('config.workspaces')
 
 -- Restart awesome when screens are removed or added
 screen.connect_signal('added', awesome.restart)
@@ -26,7 +27,7 @@ end)
 
 -- Setup screen
 screen.connect_signal('request::desktop_decoration', function(s)
-  awful.tag(workspaces, s, layouts[3])
+  awful.tag(workspaces.list[s.index], s, layouts[s.index == 1 and 3 or 4])
 
   -- Create a promptbox for each screen
   s.prompt_box = awful.widget.prompt({ prompt = '' })
@@ -65,7 +66,7 @@ screen.connect_signal('request::desktop_decoration', function(s)
       layout = wibox.layout.fixed.horizontal,
       {
         layout = awful.widget.only_on_screen,
-        screen = awful.screen.focused(),
+        screen = 'primary',
         {
           layout = wibox.layout.fixed.horizontal,
           separator(beautiful.powerline_symbol, 'left', 'chevron', beautiful.bg_focus, beautiful.bg_normal),
