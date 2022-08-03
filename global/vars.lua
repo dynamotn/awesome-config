@@ -1,8 +1,3 @@
--- { Theme config location
-local awful = require('awful')
-theme_location = awful.util.getdir('config') .. '/theme/theme.lua'
--- }
-
 -- { Shell helper
 -- If current shell is fish then use not POSIX syntax
 is_fish_shell = string.find(os.getenv('SHELL'), 'fish')

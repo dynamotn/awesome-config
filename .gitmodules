@@ -5,3 +5,6 @@
 	path = vendor/nice
 	branch = awesome-4v3-stable
 	url = https://github.com/mut-ex/awesome-wm-nice.git
+[submodule "vendor/inspect"]
+	path = vendor/inspect
+	url = https://github.com/kikito/inspect.lua

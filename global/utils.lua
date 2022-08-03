@@ -1,17 +1,4 @@
--- { Localization
-os.setlocale(os.getenv('LANG'))
--- }
-
--- { Vendor modules
-local awful = require('awful')
-local local_rc_path = awful.util.get_configuration_dir()
-package.path = package.path .. ';' .. local_rc_path .. 'vendor/?.lua;' .. local_rc_path .. 'vendor/?/init.lua;'
--- }
-
--- { Initial theme
 local beautiful = require('beautiful')
-beautiful.init(theme_location)
--- }
 
 -- { Window decorations
 local nice = require('nice')

@@ -3,8 +3,12 @@
 pcall(require, 'luarocks.loader')
 
 -- { Error handling, variable definitions, pre-setup
+require('bootstrap')
 require('global')
 -- }
+
+-- Initial theme
+require('beautiful').init(require('theme'))
 
 -- Bindings
 require('bindings').setup()
