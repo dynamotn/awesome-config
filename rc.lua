@@ -6,18 +6,13 @@ pcall(require, 'luarocks.loader')
 require('global')
 -- }
 
--- { Bindings
+-- Bindings
 require('bindings').setup()
--- }
 
 -- { Screen setup
 -- Panel
 require('panel')
 -- }
 
--- { On-the-fly setup
--- Rules
-require('rules')
--- Signals
+-- On-the-fly setup
 require('signals')
--- }

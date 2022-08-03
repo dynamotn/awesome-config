@@ -3,8 +3,7 @@ local awful = require('awful')
 -- Theme handling library
 local beautiful = require('beautiful')
 
--- Rules to apply to new clients (through the "manage" signal).
-awful.rules.rules = {
+return {
   -- All clients will match this rule.
   {
     rule = {},
@@ -29,6 +28,7 @@ awful.rules.rules = {
         'DTA', -- Firefox addon DownThemAll
         'copyq', -- CopyQ clipboard manager
         'nm-connection-editor', -- Network Manager GUI
+        'Devtools', -- Firefox Developer Tools
       },
 
       -- Note that the name property shown in xprop might be set slightly after creation of the client
