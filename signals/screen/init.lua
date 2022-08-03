@@ -12,6 +12,8 @@ local init_popup = require('dynamo.notify').init_popup
 local get_processes_info = require('dynamo.misc').get_processes_info
 -- Bindings
 local bindings = require('bindings')
+-- Configuration
+local layouts = require('config.layouts')
 
 -- Restart awesome when screens are removed or added
 screen.connect_signal('added', awesome.restart)
