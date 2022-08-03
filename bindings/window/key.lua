@@ -4,6 +4,8 @@ local awful = require('awful')
 local table = require('gears.table')
 -- Special keys
 local k = require('bindings.special').key
+-- Configuration
+local apps = require('config.apps')
 
 local list = {
   {
@@ -68,6 +70,14 @@ local list = {
     function(c)
       c.maximized = not c.maximized
       c:raise()
+    end,
+  },
+  {
+    { k.super },
+    'x',
+    'Show clipboard list',
+    function(c)
+      awful.spawn.with_shell(apps.clipboard_launcher(c.window))
     end,
   },
 }

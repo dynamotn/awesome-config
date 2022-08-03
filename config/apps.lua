@@ -1,0 +1,50 @@
+local M = {
+  terminal = 'kitty',
+  editor = os.getenv('EDITOR') or 'vim',
+  browser = 'firefox',
+  clipboard = 'greenclip daemon',
+  music_server = 'mopidy',
+  music_player = 'ncmpcpp',
+  music_controller = 'playerctl',
+  sound_controller = 'pactl',
+  email_client = 'thunderbird',
+  message_client = 'ferdi',
+  launcher = 'rofi',
+  composite_manager = 'picom',
+  system_monitor = 'btop',
+  automation_tool = 'xdotool',
+}
+
+-- Run with launcher
+M.application_launcher = M.launcher .. ' -show drun'
+M.command_launcher = M.launcher .. ' -show run'
+M.clipboard_launcher = function(window_id)
+  return M.launcher
+    .. " -modi 'clipboard:greenclip print' -show clipboard "
+    .. '&& sleep 0.5 && '
+    .. M.automation_tool
+    .. ' windowactivate --sync '
+    .. window_id
+    .. ' && '
+    .. M.automation_tool
+    .. ' key --clearmodifiers Shift+Insert'
+end
+
+-- Terminal apps
+M.editor_cmd = M.terminal .. ' ' .. M.editor
+M.music_player_cmd = M.terminal .. ' ' .. M.music_player
+M.system_monitor_cmd = M.terminal .. ' ' .. M.system_monitor
+M.startup_terminal = M.terminal
+  .. ' '
+  .. os.getenv('SHELL')
+  .. "-c 'tmux -q has-session && tmux attach-session -d || tmux new-session -nwtf -s$USER@$HOSTNAME'"
+M.music_play_cmd = M.music_controller .. ' --all-players play'
+M.music_pause_cmd = M.music_controller .. ' --all-players pause'
+M.music_stop_cmd = M.music_controller .. ' --all-players stop'
+M.music_next_cmd = M.music_controller .. ' --all-players next'
+M.music_previous_cmd = M.music_controller .. ' --all-players previous'
+M.volume_raise_cmd = M.sound_controller .. ' set-sink-volume @DEFAULT_SINK@ +1%'
+M.volume_lower_cmd = M.sound_controller .. ' set-sink-volume @DEFAULT_SINK@ -1%'
+M.volume_mute_cmd = M.sound_controller .. ' set-sink-mute @DEFAULT_SINK@ toggle'
+
+return M

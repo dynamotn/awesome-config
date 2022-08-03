@@ -4,6 +4,8 @@ local awful = require('awful')
 local beautiful = require('beautiful')
 -- Menubar library
 local utils = require('menubar.utils')
+-- Configuration
+local app = require('config.apps')
 -- Custom session library
 local session = require('dynamo.session')
 
@@ -15,7 +17,7 @@ local awesome_menu = {
       awful.hotkeys_popup.show_help(nil, awful.screen.focused())
     end,
   },
-  { 'Edit &configuration', editor_cmd .. ' ' .. awesome.conffile, beautiful.menu_edit_icon },
+  { 'Edit &configuration', app.editor_cmd .. ' ' .. awesome.conffile, beautiful.menu_edit_icon },
   { '&Restart', awesome.restart, beautiful.menu_restart_icon },
   { '&Quit session', session.quit },
 }

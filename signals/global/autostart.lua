@@ -1,8 +1,10 @@
 local run_one_pid = require('dynamo').shell.run_one_pid
 local misc = require('dynamo.misc')
+-- Configuration
+local apps = require('config.apps')
 
 -- { Composite manager
-run_one_pid('picom', '--experimental-backends -b')
+run_one_pid(apps.composite_manager, '--experimental-backends -b')
 -- }
 
 -- { Hide mouse when not use
@@ -10,23 +12,19 @@ run_one_pid('unclutter')
 -- }
 
 -- { Terminal with tmux
-run_one_pid(terminal_tmux, nil, terminal)
+run_one_pid(apps.startup_terminal, nil, apps.terminal)
 -- }
 
 -- { Browser
 run_one_pid(
-  browser,
+  apps.browser,
   nil,
   misc.linux_distribution() == 'gentoo' and '/usr/lib64/firefox/firefox' or '/usr/lib/firefox/firefox'
 )
 -- }
 
 -- { Clipboard manager
-run_one_pid(clipboard)
--- }
-
--- { Network manager
-run_one_pid('nm-applet')
+run_one_pid(apps.clipboard)
 -- }
 
 -- { IM framework
@@ -38,13 +36,13 @@ require('dynamo.misc').redshift_init()
 -- }
 
 -- { MPD from Mopidy
-run_one_pid('mopidy')
+run_one_pid(apps.music_server)
 -- }
 
 -- { Ferdi
-run_one_pid('ferdi')
+run_one_pid(apps.message_client)
 -- }
 
 -- { Mail
-run_one_pid('thunderbird')
+run_one_pid(apps.email_client)
 -- }

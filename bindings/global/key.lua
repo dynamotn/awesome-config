@@ -6,6 +6,8 @@ local table = require('gears.table')
 local hotkeys_popup = require('awful.hotkeys_popup')
 -- Special keys
 local k = require('bindings.special').key
+-- Configuration
+local apps = require('config.apps')
 -- Custom library
 local dynamo = require('dynamo')
 
@@ -42,7 +44,7 @@ local list = {
       'F2',
       'Run command',
       function()
-        awful.spawn(launcher_command)
+        awful.spawn(apps.launcher_command)
       end,
     },
     {
@@ -65,7 +67,7 @@ local list = {
       'F2',
       'Show menubar',
       function()
-        awful.spawn(launcher_application)
+        awful.spawn(apps.application_launcher)
       end,
     },
   },
@@ -316,7 +318,7 @@ local list = {
       'Return',
       'Open a terminal',
       function()
-        awful.spawn(terminal_tmux)
+        awful.spawn(apps.startup_terminal)
       end,
     },
     {
@@ -326,19 +328,11 @@ local list = {
       dynamo.misc.redshift_toggle,
     },
     {
-      { k.super },
-      'x',
-      'Show clipboard list',
-      function()
-        awful.spawn.with_shell(clipboard_list)
-      end,
-    },
-    {
       {},
       'XF86Mail',
       'Open email client',
       function()
-        awful.spawn(email_cmd)
+        awful.spawn(apps.email_client)
       end,
     },
     {
@@ -346,7 +340,7 @@ local list = {
       'XF86Explorer',
       'Open application launcher',
       function()
-        awful.spawn(launcher_application)
+        awful.spawn(apps.application_launcher)
       end,
     },
   },
@@ -356,7 +350,7 @@ local list = {
       'XF86AudioPlay',
       'Play song on mpd',
       function()
-        awful.spawn(music_play_cmd)
+        awful.spawn(apps.music_play_cmd)
       end,
     },
     {
@@ -364,7 +358,7 @@ local list = {
       'XF86AudioStop',
       'Stop mpd',
       function()
-        awful.spawn(music_stop_cmd)
+        awful.spawn(apps.music_stop_cmd)
       end,
     },
     {
@@ -372,7 +366,7 @@ local list = {
       'XF86AudioPause',
       'Pause mpd',
       function()
-        awful.spawn(music_pause_cmd)
+        awful.spawn(apps.music_pause_cmd)
       end,
     },
     {
@@ -380,7 +374,7 @@ local list = {
       'XF86AudioNext',
       'Next song',
       function()
-        awful.spawn(music_next_cmd)
+        awful.spawn(apps.music_next_cmd)
       end,
     },
     {
@@ -388,7 +382,7 @@ local list = {
       'XF86AudioPrev',
       'Previous music',
       function()
-        awful.spawn(music_previous_cmd)
+        awful.spawn(apps.music_previous_cmd)
       end,
     },
     {
@@ -396,7 +390,7 @@ local list = {
       'XF86AudioRaiseVolume',
       'Increase volume',
       function()
-        awful.spawn(volume_raise_cmd)
+        awful.spawn(apps.volume_raise_cmd)
       end,
     },
     {
@@ -404,7 +398,7 @@ local list = {
       'XF86AudioLowerVolume',
       'Decrease volume',
       function()
-        awful.spawn(volume_lower_cmd)
+        awful.spawn(apps.volume_lower_cmd)
       end,
     },
     {
@@ -412,7 +406,7 @@ local list = {
       'XF86AudioMute',
       'Mute volume',
       function()
-        awful.spawn(volume_mute_cmd)
+        awful.spawn(apps.volume_mute_cmd)
       end,
     },
   },
