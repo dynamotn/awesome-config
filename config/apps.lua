@@ -21,7 +21,7 @@ M.command_launcher = M.launcher .. ' -show run'
 M.clipboard_launcher = function(window_id)
   return M.launcher
     .. " -modi 'clipboard:greenclip print' -show clipboard "
-    .. '&& sleep 0.5 && '
+    .. '&& sleep 0.1 && '
     .. M.automation_tool
     .. ' windowactivate --sync '
     .. window_id
