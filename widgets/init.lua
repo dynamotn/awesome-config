@@ -1,4 +1,5 @@
 return {
+  components = require('widgets.components'),
   menu = require('widgets.menu'),
   launcher = require('widgets.launcher'),
   window_list = require('widgets.window_list'),

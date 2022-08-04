@@ -6,7 +6,6 @@ local beautiful = require('beautiful')
 -- Widget and layout library
 local wibox = require('wibox')
 -- Custom library
-local separator = require('widgets.components').separator
 local init_popup = require('dynamo.notify').init_popup
 local get_processes_info = require('dynamo.misc').get_processes_info
 local filesystem = require('dynamo.filesystem')
@@ -17,6 +16,7 @@ local layouts = require('config.layouts')
 local workspaces = require('config.workspaces')
 -- Widgets
 local widgets = require('widgets')
+local panel = require('signals.screen.panel')
 
 -- Restart awesome when screens are removed or added
 screen.connect_signal('added', awesome.restart)
@@ -50,7 +50,7 @@ screen.connect_signal('request::desktop_decoration', function(s)
   s.prompt_box = awful.widget.prompt({ prompt = '' })
   -- Create an imagebox widget which will contain an icon indicating which layout we're using.
   -- We need one layoutbox per screen.
-  s.layout_box = dynamo_layout(s)
+  s.layout_box = panel.layout(s)
   -- Create a workspace widget
   s.workspace_list = widgets.workspace_list({
     screen = s,
@@ -74,8 +74,8 @@ screen.connect_signal('request::desktop_decoration', function(s)
     layout = wibox.layout.align.horizontal,
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
-      dynamo_prompt,
-      dynamo_space,
+      panel.prompt,
+      panel.space,
       s.prompt_box,
     },
     nil, -- Middle widget
@@ -86,26 +86,38 @@ screen.connect_signal('request::desktop_decoration', function(s)
         screen = 'primary',
         {
           layout = wibox.layout.fixed.horizontal,
-          separator(beautiful.powerline_symbol, 'left', 'chevron', beautiful.bg_focus, beautiful.bg_normal),
-          dynamo_keyboard,
+          widgets.components.separator(
+            beautiful.powerline_symbol,
+            'left',
+            'chevron',
+            beautiful.bg_focus,
+            beautiful.bg_normal
+          ),
+          panel.keyboard,
           wibox.widget.systray(),
           wibox.container.background(wibox.widget.textbox(' '), beautiful.bg_systray),
-          separator(beautiful.powerline_symbol, 'left', 'solid', beautiful.bg_normal, beautiful.bg_focus),
+          widgets.components.separator(
+            beautiful.powerline_symbol,
+            'left',
+            'solid',
+            beautiful.bg_normal,
+            beautiful.bg_focus
+          ),
         },
       },
-      dynamo_music,
-      dynamo_volume,
-      dynamo_cpu,
-      dynamo_memory,
-      dynamo_power,
-      dynamo_network,
-      dynamo_clock,
+      panel.music,
+      panel.volume,
+      panel.cpu,
+      panel.memory,
+      panel.power,
+      panel.network,
+      panel.clock,
       s.layout_box,
     },
   })
-  init_popup(s.top_wibox:get_children_by_id(dynamo_memory.id)[1], get_processes_info)
+  init_popup(s.top_wibox:get_children_by_id(panel.memory.id)[1], get_processes_info)
   s.top_wibox:get_children_by_id(s.layout_box.id)[1]:buttons(bindings.config.mouse.global.layout)
-  s.top_wibox:get_children_by_id(dynamo_music.id)[1]:buttons(bindings.config.mouse.widgets.music)
+  s.top_wibox:get_children_by_id(panel.music.id)[1]:buttons(bindings.config.mouse.widgets.music)
 
   s.bottom_wibox:setup({
     layout = wibox.layout.align.horizontal,

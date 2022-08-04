@@ -13,10 +13,5 @@ require('beautiful').init(require('theme'))
 -- Bindings
 require('bindings').setup()
 
--- { Screen setup
--- Panel
-require('panel')
--- }
-
 -- On-the-fly setup
 require('signals')
