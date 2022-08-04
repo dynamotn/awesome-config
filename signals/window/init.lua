@@ -7,6 +7,7 @@ local ruled = require('ruled')
 local beautiful = require('beautiful')
 -- Rules
 local rules = require('rules')
+require('signals.window.titlebar')
 
 -- Signal function to execute when a new client appears.
 client.connect_signal('manage', function(c)
