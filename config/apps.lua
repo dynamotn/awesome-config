@@ -37,7 +37,7 @@ M.system_monitor_cmd = M.terminal .. ' ' .. M.system_monitor
 M.startup_terminal = M.terminal
   .. ' '
   .. os.getenv('SHELL')
-  .. "-c 'tmux -q has-session && tmux attach-session -d || tmux new-session -nwtf -s$USER@$HOSTNAME'"
+  .. " -c 'tmux -q has-session && tmux attach-session -d || tmux new-session -nwtf -s$USER@$HOSTNAME'"
 M.music_play_cmd = M.music_controller .. ' --all-players play'
 M.music_pause_cmd = M.music_controller .. ' --all-players pause'
 M.music_stop_cmd = M.music_controller .. ' --all-players stop'
