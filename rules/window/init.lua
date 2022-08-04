@@ -2,6 +2,20 @@
 local awful = require('awful')
 -- Theme handling library
 local beautiful = require('beautiful')
+-- Configuration
+local workspaces = require('config.workspaces')
+
+-- Find screen of a workspace by workspace name
+-- @param name Name of the workspace
+-- @return screen Screen of the workspace
+local function find_screen_by_workspace_name(name)
+  for _, tag in ipairs(root.tags()) do
+    if tag.name == name then
+      return tag.screen
+    end
+  end
+  return 'primary'
+end
 
 return {
   -- All clients will match this rule.
@@ -53,50 +67,55 @@ return {
     properties = { floating = true },
   },
 
-  -- Set Firefox to always map on tags number 2 of primary screen
+  -- Set Firefox to always map on Web workspace
   {
     rule_any = { class = { 'Firefox', 'firefox' } },
     except = { type = 'dialog' },
-    properties = { screen = 'primary', tag = web_workspace },
+    properties = { screen = find_screen_by_workspace_name(workspaces.web), tag = workspaces.web },
   },
-  -- Set Thunderbird to always map on tags number 3 of primary screen
+  -- Set Thunderbird to always map on Mail workspace
   {
     rule_any = { class = { 'Thunderbird', instance = 'Mail' } },
-    properties = { screen = 'primary', tag = mail_workspace },
+    properties = { screen = find_screen_by_workspace_name(workspaces.mail), tag = workspaces.mail },
   },
-  -- Set Rambox, Ferdi, Telegram to always map on tags number 5 of primary screen
+  -- Set Rambox, Ferdi, Telegram to always map on Chat workspace
   {
     rule_any = { class = { 'Rambox', 'Ferdi', 'TelegramDesktop' } },
-    properties = { screen = 'primary', tag = chat_workspace },
+    properties = { screen = find_screen_by_workspace_name(workspaces.chat), tag = workspaces.chat },
   },
-  -- Set KeepassXC to always maps on tags number 9 of last screen
+  -- Set KeepassXC to always maps on More workspace
   {
     rule = { class = 'KeePassXC', type = 'normal' },
-    properties = { screen = screen.count(), tag = other_workspace },
+    properties = { screen = find_screen_by_workspace_name(workspaces.other), tag = workspaces.other },
+  },
+  -- Set Bitwarden Desktop to always maps on More workspace
+  {
+    rule = { class = 'Bitwarden', type = 'normal' },
+    properties = { screen = find_screen_by_workspace_name(workspaces.other), tag = workspaces.other },
   },
   -- Set Desktop of Gnome must be share all workspace
   {
     rule = { class = 'Nautilus', instance = 'desktop_window' },
     properties = { sticky = true },
   },
-  -- Set File manager of Gnome to always map on tags number 8 of primary screen
+  -- Set File manager of Gnome to always map on Sys workspace
   {
     rule = { class = 'Nautilus', instance = 'nautilus' },
-    properties = { screen = 'primary', tag = sys_workspace },
+    properties = { screen = find_screen_by_workspace_name(workspaces.sys), tag = workspaces.sys },
   },
-  -- Set Zim to always maps on tags number 6 of last screen
+  -- Set Zim to always maps on Doc workspace
   {
     rule = { class = 'Zim', type = 'normal' },
-    properties = { screen = screen.count(), tag = doc_workspace },
+    properties = { screen = find_screen_by_workspace_name(workspaces.doc), tag = workspaces.doc },
   },
-  -- Set WPS Office to always maps on tags number 6 of primary screen
+  -- Set WPS Office to always maps on Doc workspace
   {
     rule_any = { class = { 'Wps', 'Et', 'Wpspdf', 'Wpp' } },
-    properties = { screen = 'primary', tag = doc_workspace },
+    properties = { screen = find_screen_by_workspace_name(workspaces.doc), tag = workspaces.doc },
   },
   -- Set Steam to always map on tags number 7 of primary screen
   {
     rule = { class = 'Steam' },
-    properties = { screen = 'primary', tag = game_workspace },
+    properties = { screen = find_screen_by_workspace_name(workspaces.game), tag = workspaces.game },
   },
 }
