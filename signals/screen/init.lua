@@ -1,15 +1,16 @@
 -- AwesomeWM standard library
 local awful = require('awful')
+local gears = require('gears')
 -- Theme handling library
 local beautiful = require('beautiful')
 -- Widget and layout library
 local wibox = require('wibox')
 -- Custom library
-local misc = require('dynamo.misc')
 local separator = require('dynamo.widget').separator
 local bar = require('dynamo.bar')
 local init_popup = require('dynamo.notify').init_popup
 local get_processes_info = require('dynamo.misc').get_processes_info
+local filesystem = require('dynamo.filesystem')
 -- Bindings
 local bindings = require('bindings')
 -- Configuration
@@ -22,7 +23,22 @@ screen.connect_signal('removed', awesome.restart)
 
 -- Setup wallpaper
 screen.connect_signal('request::wallpaper', function(s)
-  misc.auto_change_wallpaper(s)
+  local all_wallpapers = filesystem.scan_dir_by_mime(filesystem.xdg_user_dirs('PICTURES') .. '/Wallpaper', 'image')
+  local current_wallpaper
+
+  local timer = gears.timer.start_new(5, function()
+    if next(all_wallpapers) ~= nil then
+      if current_wallpaper == nil then
+        current_wallpaper = all_wallpapers[math.random(1, #all_wallpapers)]
+      end
+      gears.wallpaper.maximized(current_wallpaper, s, false)
+    end
+    collectgarbage('collect')
+  end)
+
+  timer:connect_signal('timeout', function()
+    timer:start()
+  end)
 end)
 
 -- Setup screen
