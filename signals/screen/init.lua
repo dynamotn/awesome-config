@@ -65,6 +65,15 @@ screen.connect_signal('request::desktop_decoration', function(s)
     buttons = bindings.config.mouse.global.taskbar,
   })
 
+  s.lockscreen = awful.wibar({
+    screen = s,
+    visible = false,
+    ontop = true,
+    type = 'splash',
+    width = s.geometry.width,
+    height = s.geometry.height,
+  })
+
   -- Create the wibox
   s.top_wibox = awful.wibar({ position = 'top', screen = s, height = beautiful.top_panel_height })
   s.bottom_wibox = awful.wibar({ position = 'bottom', screen = s, height = beautiful.bottom_panel_height })

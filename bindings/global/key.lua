@@ -32,6 +32,12 @@ local list = {
       'Quit',
       awesome.quit,
     },
+    {
+      { k.alt },
+      'F5',
+      'Lock',
+      dynamo.session.lock,
+    },
     -- Prompt
     {
       { k.alt },

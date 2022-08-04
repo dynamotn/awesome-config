@@ -8,3 +8,6 @@ _G.local_rc_path = awful.util.get_configuration_dir()
 
 -- Linux distribution name
 _G.linux_distribution = distro.get_distribution()
+
+-- Global lock screen state
+_G.is_lock = false

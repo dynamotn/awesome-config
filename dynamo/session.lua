@@ -2,6 +2,14 @@
 local shell = require('dynamo.shell')
 local dstring = require('dynamo.string')
 
+-- Lock session
+local function lock()
+  _G.is_lock = not is_lock
+  for s in screen do
+    s.lockscreen.visible = not s.lockscreen.visible
+  end
+end
+
 -- Quit session
 local function quit()
   dynamo_prompt:show_confirm_prompt('Quit session', nil, function()
@@ -42,6 +50,7 @@ local function schedule_shutdown()
 end
 
 return {
+  lock = lock,
   quit = quit,
   hibernate = hibernate,
   reboot = reboot,

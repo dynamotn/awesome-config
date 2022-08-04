@@ -25,6 +25,7 @@ local awesome_menu = {
 }
 
 local system_menu = {
+  { '&Lock', session.lock },
   { '&Hibernate', session.hibernate },
   { '&Reboot', session.reboot },
   { '&Shutdown', session.shutdown },
