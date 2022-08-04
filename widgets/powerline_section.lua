@@ -3,7 +3,7 @@ local wibox = require('wibox')
 -- Theme handling library
 local beautiful = require('beautiful')
 -- Custom library
-local separator = require('dynamo.widget').separator
+local separator = require('widgets.components').separator
 local array_values = require('dynamo.array').array_values
 local markup_text = require('dynamo.string').markup_text
 

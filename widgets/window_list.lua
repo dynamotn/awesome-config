@@ -5,7 +5,7 @@ local wibox = require('wibox')
 -- Theme handling library
 local beautiful = require('beautiful')
 -- Custom library
-local taskbar = require('dynamo.widget.taskbar')
+local taskbar = require('widgets.components.taskbar')
 
 local function update(w, buttons, label, data, windows)
   -- update the widgets, creating them if needed

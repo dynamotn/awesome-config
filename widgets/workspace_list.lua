@@ -6,7 +6,7 @@ local wibox = require('wibox')
 local beautiful = require('beautiful')
 -- Custom library
 local markup_text = require('dynamo.string').markup_text
-local label = require('dynamo.widget.label')
+local label = require('widgets.components.label')
 local gears = require('gears')
 
 local function decorate_workspace(workspace)

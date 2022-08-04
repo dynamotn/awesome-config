@@ -5,10 +5,8 @@ local wibox = require('wibox')
 -- Theme handling library
 local beautiful = require('beautiful')
 -- Custom library
-local powerline_section = require('dynamo.bar').powerline_section
 local markup_text = require('dynamo.string').markup_text
 local run_command = require('dynamo.shell').run_command
-local array_values = require('dynamo.array').array_values
 local vicious = require('vicious')
 vicious.contrib = require('vicious.contrib')
 -- Widgets
@@ -22,7 +20,7 @@ dynamo_launcher = wibox.container.background(widgets.launcher, beautiful.prompt_
 
 -- { Powerline prompt
 panel_index = panel_index + 1
-dynamo_prompt = powerline_section(panel_index, dynamo_launcher, beautiful.prompt_bg_normal, 'opaque')
+dynamo_prompt = widgets.powerline_section(panel_index, dynamo_launcher, beautiful.prompt_bg_normal, 'opaque')
 
 -- Set text in powerline section
 -- @param string prompt_text Text is shown in powerline section
@@ -75,13 +73,13 @@ local panel_index = -1
 -- { Layout button
 dynamo_layout = function(screen)
   local panel_index = -1
-  return powerline_section(panel_index, awful.widget.layoutbox(screen))
+  return widgets.powerline_section(panel_index, awful.widget.layoutbox(screen))
 end
 -- }
 
 -- { Clock
 panel_index = panel_index - 1
-dynamo_clock = powerline_section(panel_index, beautiful.clock_icon)
+dynamo_clock = widgets.powerline_section(panel_index, beautiful.clock_icon)
 vicious.register(
   dynamo_clock,
   vicious.widgets.date,
@@ -92,7 +90,7 @@ vicious.register(
 
 -- { Network
 panel_index = panel_index - 1
-dynamo_network = powerline_section(panel_index, beautiful.network_icon)
+dynamo_network = widgets.powerline_section(panel_index, beautiful.network_icon)
 vicious.register(
   dynamo_network,
   vicious.contrib.net,
@@ -108,7 +106,7 @@ run_command("find /sys/class/power_supply -iname 'BAT*' | awk -F/ '{printf $NF}'
     return
   end
   panel_index = panel_index - 1
-  dynamo_power = powerline_section(panel_index)
+  dynamo_power = widgets.powerline_section(panel_index)
   vicious.register(
     dynamo_power,
     vicious.widgets.bat,
@@ -140,7 +138,7 @@ end)
 
 -- { Memory
 panel_index = panel_index - 1
-dynamo_memory = powerline_section(panel_index, beautiful.memory_icon)
+dynamo_memory = widgets.powerline_section(panel_index, beautiful.memory_icon)
 vicious.register(dynamo_memory, vicious.widgets.mem, '$2MB', 1)
 -- }
 
@@ -148,13 +146,13 @@ vicious.register(dynamo_memory, vicious.widgets.mem, '$2MB', 1)
 
 -- { CPU
 panel_index = panel_index - 1
-dynamo_cpu = powerline_section(panel_index, beautiful.cpu_icon)
+dynamo_cpu = widgets.powerline_section(panel_index, beautiful.cpu_icon)
 vicious.register(dynamo_cpu, vicious.widgets.cpu, markup_text('$1%', beautiful.cpu_fg), 1)
 -- }
 
 -- { Volume
 panel_index = panel_index - 1
-dynamo_volume = powerline_section(panel_index)
+dynamo_volume = widgets.powerline_section(panel_index)
 vicious.register(dynamo_volume, vicious.widgets.volume, function(_, args)
   if args[2] == '🔈' then
     dynamo_volume:set_widget(beautiful.volume_icon_mute)
@@ -171,7 +169,7 @@ end, 1, { 'Master', '-D', 'pulse' })
 
 -- { Music
 panel_index = panel_index - 1
-dynamo_music = powerline_section(panel_index, nil, nil, beautiful.bg_normal)
+dynamo_music = widgets.powerline_section(panel_index, nil, nil, beautiful.bg_normal)
 vicious.register(dynamo_music, vicious.widgets.mpd, function(_, args)
   if args['{state}'] == 'Play' then
     dynamo_music:set_widget(beautiful.music_icon_on)
@@ -189,6 +187,6 @@ end, 1)
 
 -- { Keyboard map indicator and switcher
 panel_index = panel_index - 1
-dynamo_keyboard = powerline_section(panel_index, awful.widget.keyboardlayout(), beautiful.bg_systray, 'opaque')
+dynamo_keyboard = widgets.powerline_section(panel_index, awful.widget.keyboardlayout(), beautiful.bg_systray, 'opaque')
 -- }
 -- }

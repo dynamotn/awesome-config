@@ -9,6 +9,8 @@ local app = require('config.apps')
 -- Custom session library
 local session = require('dynamo.session')
 
+require('menubar').utils.terminal = require('config.apps').terminal
+
 -- Create a launcher widget and a main menu
 local awesome_menu = {
   {

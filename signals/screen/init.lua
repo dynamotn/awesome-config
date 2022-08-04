@@ -6,8 +6,7 @@ local beautiful = require('beautiful')
 -- Widget and layout library
 local wibox = require('wibox')
 -- Custom library
-local separator = require('dynamo.widget').separator
-local bar = require('dynamo.bar')
+local separator = require('widgets.components').separator
 local init_popup = require('dynamo.notify').init_popup
 local get_processes_info = require('dynamo.misc').get_processes_info
 local filesystem = require('dynamo.filesystem')
@@ -16,6 +15,8 @@ local bindings = require('bindings')
 -- Configuration
 local layouts = require('config.layouts')
 local workspaces = require('config.workspaces')
+-- Widgets
+local widgets = require('widgets')
 
 -- Restart awesome when screens are removed or added
 screen.connect_signal('added', awesome.restart)
@@ -51,14 +52,14 @@ screen.connect_signal('request::desktop_decoration', function(s)
   -- We need one layoutbox per screen.
   s.layout_box = dynamo_layout(s)
   -- Create a workspace widget
-  s.workspace_list = bar.workspace_list({
+  s.workspace_list = widgets.workspace_list({
     screen = s,
     filter = awful.widget.taglist.filter.all,
     buttons = bindings.config.mouse.global.workspace,
   })
 
   -- Create a window list widget
-  s.window_list = bar.window_list({
+  s.window_list = widgets.window_list({
     screen = s,
     filter = awful.widget.tasklist.filter.currenttags,
     buttons = bindings.config.mouse.global.taskbar,
