@@ -1,5 +1,5 @@
 local run_one_pid = require('dynamo').shell.run_one_pid
-local misc = require('dynamo.misc')
+local distro = require('lib.distro')
 -- Configuration
 local apps = require('config.apps')
 
@@ -19,7 +19,7 @@ run_one_pid(apps.startup_terminal, nil, apps.terminal)
 run_one_pid(
   apps.browser,
   nil,
-  misc.linux_distribution() == 'gentoo' and '/usr/lib64/firefox/firefox' or '/usr/lib/firefox/firefox'
+  linux_distribution == 'gentoo' and '/usr/lib64/firefox/firefox' or '/usr/lib/firefox/firefox'
 )
 -- }
 

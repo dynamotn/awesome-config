@@ -36,30 +36,7 @@ local function auto_change_wallpaper(s)
     end)
   end
 end
--- }
 
--- { Linux distribution detection
--- Check is specify distribution
--- @param string Distribution detection name
--- @return string Result of check command
-local function is_linux_distribution(distribution_name)
-  return shell.run_command_one_line("cat /etc/os-release | grep '" .. distribution_name .. "'") ~= ''
-end
-
--- Get Linux distribution name
--- @return string Name of distribution
-local function linux_distribution()
-  if is_linux_distribution('Ubuntu') then
-    return 'ubuntu'
-  elseif is_linux_distribution('Arch Linux') then
-    return 'archlinux'
-  elseif is_linux_distribution('Gentoo') then
-    return 'gentoo'
-  else
-    -- FIXME: Add other distribution if needed
-    return 'linux'
-  end
-end
 -- }
 
 -- { Redshift
@@ -93,6 +70,7 @@ local function redshift_init()
   redshift_state = 0
   redshift_undim()
 end
+
 -- }
 
 -- { Switch only occupied workspace
@@ -111,6 +89,7 @@ local function switch_occupied_tag(direction)
   end
   awful.tag.viewonly(tag)
 end
+
 -- }
 
 -- { Get processes info
@@ -133,6 +112,7 @@ local function get_processes_info(callback)
     true
   )
 end
+
 -- }
 
 -- { Run application at specific workspace
@@ -166,6 +146,7 @@ local function run_at_workspace(prg, workspace)
     tag:view_only()
   end
 end
+
 -- }
 
 return {
