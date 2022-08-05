@@ -57,7 +57,9 @@ local list = {
       { k.alt },
       'F3',
       'Calculation',
-      dynamo.notify.calculation,
+      function()
+        awful.spawn(apps.calculator_launcher)
+      end,
     },
     -- Menu
     {

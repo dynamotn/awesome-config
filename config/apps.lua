@@ -29,6 +29,8 @@ M.clipboard_launcher = function(window_id)
     .. M.automation_tool
     .. ' key --clearmodifiers Shift+Insert'
 end
+M.calculator_launcher = M.launcher
+  .. ' -modi calc -show calc -no-show-match -no-sort -calc-command \'echo -n "{result}" | xsel -i -b\''
 
 -- Terminal apps
 M.editor_cmd = M.terminal .. ' ' .. M.editor
