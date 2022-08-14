@@ -11,3 +11,4 @@ _G.linux_distribution = distro.get_distribution()
 
 -- Global lock screen state
 _G.is_lock = false
+_G.locked_workspace = nil

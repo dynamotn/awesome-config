@@ -1,4 +1,5 @@
 require('signals.screen.wallpaper')
+require('signals.screen.lockscreen')
 require('signals.screen.workscreen')
 
 -- Restart awesome when screens are removed or added
@@ -48,6 +49,7 @@ screen.connect_signal('request::desktop_decoration', function(s)
     buttons = bindings.config.mouse.global.taskbar,
   })
 
+  -- Create lockscreen
   s.lockscreen = awful.wibar({
     screen = s,
     visible = false,
@@ -55,6 +57,16 @@ screen.connect_signal('request::desktop_decoration', function(s)
     type = 'splash',
     width = s.geometry.width,
     height = s.geometry.height,
+  })
+
+  s.lockscreen:setup({
+    layout = wibox.layout.align.vertical,
+    expand = 'none',
+    nil,
+    {
+      layout = wibox.layout.align.horizontal,
+      expand = 'none',
+    },
   })
 
   -- Create the wibox

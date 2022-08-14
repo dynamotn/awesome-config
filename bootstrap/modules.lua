@@ -2,4 +2,10 @@
 package.path = package.path .. ';' .. local_rc_path .. 'vendor/?.lua;' .. local_rc_path .. 'vendor/?/init.lua;'
 
 -- C modules
-package.cpath = package.cpath .. ';' .. local_rc_path .. 'vendor/?.so;'
+package.cpath = package.cpath
+  .. ';'
+  .. local_rc_path
+  .. 'vendor/?.so;'
+  .. '/usr/lib64/lua/'
+  .. string.gsub(_VERSION, 'Lua ', '')
+  .. '/?.so'

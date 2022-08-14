@@ -24,7 +24,11 @@ local list = {
       { k.super, k.ctrl },
       'r',
       'Reload awesome',
-      awesome.restart,
+      function()
+        if not _G.is_lock then
+          awesome.restart()
+        end
+      end,
     },
     {
       { k.super, k.shift },
@@ -33,8 +37,8 @@ local list = {
       awesome.quit,
     },
     {
-      { k.alt },
-      'F5',
+      { k.super },
+      'q',
       'Lock',
       dynamo.session.lock,
     },
