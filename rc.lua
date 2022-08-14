@@ -4,7 +4,6 @@ pcall(require, 'luarocks.loader')
 
 -- { Error handling, variable definitions, pre-setup
 require('bootstrap')
-require('global')
 -- }
 
 -- Initial theme

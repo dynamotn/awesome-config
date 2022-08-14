@@ -96,7 +96,8 @@ end
 -- @param function callback Callback is run when
 local function get_processes_info(callback)
   shell.run_command(
-    'ps --sort -c,-s -eo fname,%cpu,%mem,user,pid,etime,tname | head -n ' .. number_of_processes,
+    'ps --sort -c,-s -eo fname,%cpu,%mem,user,pid,etime,tname | head -n '
+      .. require('config.widgets').system.process_count,
     true,
     function(stdout)
       stats = string.gsub(stdout, 'COMMAND', markup_text('%1', beautiful.popup_fg_htop_title))
