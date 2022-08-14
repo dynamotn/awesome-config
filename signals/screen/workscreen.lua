@@ -1,39 +1,31 @@
-require('signals.screen.wallpaper')
-require('signals.screen.workscreen')
+-- AwesomeWM standard library
+local awful = require('awful')
+-- Theme handling library
+local beautiful = require('beautiful')
+-- Widget and layout library
+local wibox = require('wibox')
+-- Custom library
+local init_popup = require('dynamo.notify').init_popup
+local get_processes_info = require('dynamo.misc').get_processes_info
+-- Bindings
+local bindings = require('bindings')
+-- Configuration
+local layouts = require('config.layouts')
+local workspaces = require('config.workspaces')
+-- Widgets
+local widgets = require('widgets')
 
--- Restart awesome when screens are removed or added
-screen.connect_signal('added', awesome.restart)
-screen.connect_signal('removed', awesome.restart)
-
--- Setup wallpaper
-screen.connect_signal('request::wallpaper', function(s)
-  local all_wallpapers = filesystem.scan_dir_by_mime(filesystem.xdg_user_dirs('PICTURES') .. '/Wallpaper', 'image')
-  local current_wallpaper
-
-  local timer = gears.timer.start_new(5, function()
-    if next(all_wallpapers) ~= nil then
-      if current_wallpaper == nil then
-        current_wallpaper = all_wallpapers[math.random(1, #all_wallpapers)]
-      end
-      gears.wallpaper.maximized(current_wallpaper, s, false)
-    end
-    collectgarbage('collect')
-  end)
-
-  timer:connect_signal('timeout', function()
-    timer:start()
-  end)
-end)
-
--- Setup screen
 screen.connect_signal('request::desktop_decoration', function(s)
   awful.tag(workspaces.list[s.index], s, layouts[s.index == 1 and 3 or 4])
+
+  -- Create all widgets on wibox
+  s.panel = require('signals.screen.panel')
 
   -- Create a promptbox for each screen
   s.prompt_box = awful.widget.prompt({ prompt = '' })
   -- Create an imagebox widget which will contain an icon indicating which layout we're using.
   -- We need one layoutbox per screen.
-  s.layout_box = panel.layout(s)
+  s.layout_box = s.panel.layout(s)
   -- Create a workspace widget
   s.workspace_list = widgets.workspace_list({
     screen = s,
@@ -48,15 +40,6 @@ screen.connect_signal('request::desktop_decoration', function(s)
     buttons = bindings.config.mouse.global.taskbar,
   })
 
-  s.lockscreen = awful.wibar({
-    screen = s,
-    visible = false,
-    ontop = true,
-    type = 'splash',
-    width = s.geometry.width,
-    height = s.geometry.height,
-  })
-
   -- Create the wibox
   s.top_wibox = awful.wibar({ position = 'top', screen = s, height = beautiful.top_panel_height })
   s.bottom_wibox = awful.wibar({ position = 'bottom', screen = s, height = beautiful.bottom_panel_height })
@@ -66,8 +49,8 @@ screen.connect_signal('request::desktop_decoration', function(s)
     layout = wibox.layout.align.horizontal,
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
-      panel.prompt,
-      panel.space,
+      s.panel.prompt,
+      s.panel.space,
       s.prompt_box,
     },
     nil, -- Middle widget
@@ -85,7 +68,7 @@ screen.connect_signal('request::desktop_decoration', function(s)
             beautiful.bg_focus,
             beautiful.bg_normal
           ),
-          panel.keyboard,
+          s.panel.keyboard,
           wibox.widget.systray(),
           wibox.container.background(wibox.widget.textbox(' '), beautiful.bg_systray),
           widgets.components.separator(
@@ -97,19 +80,19 @@ screen.connect_signal('request::desktop_decoration', function(s)
           ),
         },
       },
-      panel.music,
-      panel.volume,
-      panel.cpu,
-      panel.memory,
-      panel.power,
-      panel.network,
-      panel.clock,
+      s.panel.music,
+      s.panel.volume,
+      s.panel.cpu,
+      s.panel.memory,
+      s.panel.power,
+      s.panel.network,
+      s.panel.clock,
       s.layout_box,
     },
   })
-  init_popup(s.top_wibox:get_children_by_id(panel.memory.id)[1], get_processes_info)
+  init_popup(s.top_wibox:get_children_by_id(s.panel.memory.id)[1], get_processes_info)
   s.top_wibox:get_children_by_id(s.layout_box.id)[1]:buttons(bindings.config.mouse.global.layout)
-  s.top_wibox:get_children_by_id(panel.music.id)[1]:buttons(bindings.config.mouse.widgets.music)
+  s.top_wibox:get_children_by_id(s.panel.music.id)[1]:buttons(bindings.config.mouse.widgets.music)
 
   s.bottom_wibox:setup({
     layout = wibox.layout.align.horizontal,
