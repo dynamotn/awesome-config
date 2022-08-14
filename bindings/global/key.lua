@@ -24,11 +24,7 @@ local list = {
       { k.super, k.ctrl },
       'r',
       'Reload awesome',
-      function()
-        if not _G.is_lock then
-          awesome.restart()
-        end
-      end,
+      awesome.restart,
     },
     {
       { k.super, k.shift },
@@ -434,7 +430,14 @@ for group, group_keybindings in pairs(list) do
         key = keybinding[2],
         description = keybinding[3],
         group = group,
-        on_press = keybinding[4],
+        on_press = function(...)
+          local on_call = keybinding[4]
+          if on_call == dynamo.session.lock then
+            on_call(...)
+          elseif not _G.is_lock then
+            on_call(...)
+          end
+        end,
         keygroup = keybinding['keygroup'],
       })
     )

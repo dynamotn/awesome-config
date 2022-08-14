@@ -38,6 +38,10 @@ local function lock()
       keygrabbing_instance:stop()
     end
 
+    if client.focus then
+      client.focus.minimized = true
+    end
+
     for _, t in ipairs(mouse.screen.selected_tags) do
       _G.locked_workspace = t
       t.selected = false
