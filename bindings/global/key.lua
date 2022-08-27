@@ -13,6 +13,7 @@ local notify = require('lib.notify')
 local session = require('lib.session')
 local redshift = require('lib.redshift')
 local workspace = require('lib.workspace')
+local menu = require('widgets.menu')
 
 local list = {
   ['awesome'] = {
@@ -70,7 +71,7 @@ local list = {
       'F1',
       'Show main menu',
       function()
-        main_menu:show()
+        menu:show()
       end,
     },
     {
