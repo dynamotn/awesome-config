@@ -13,6 +13,7 @@ local M = {
   composite_manager = 'picom',
   system_monitor = 'btop',
   automation_tool = 'xdotool',
+  locker_tool = 'xss-lock',
 }
 
 -- Run with launcher
@@ -48,5 +49,6 @@ M.music_previous_cmd = M.music_controller .. ' --all-players previous'
 M.volume_raise_cmd = M.sound_controller .. ' set-sink-volume @DEFAULT_SINK@ +1%'
 M.volume_lower_cmd = M.sound_controller .. ' set-sink-volume @DEFAULT_SINK@ -1%'
 M.volume_mute_cmd = M.sound_controller .. ' set-sink-mute @DEFAULT_SINK@ toggle'
+M.locker_cmd = M.locker_tool .. ' awesome-client "awesome.emit_signal(\'lockscreen::start\')"'
 
 return M

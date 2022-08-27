@@ -45,3 +45,7 @@ run_one_pid(apps.message_client)
 -- { Mail
 run_one_pid(apps.email_client)
 -- }
+
+-- { Locker
+run_one_pid(apps.locker_cmd)
+-- }

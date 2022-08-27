@@ -8,6 +8,7 @@ local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
 -- Custom library
 local str = require('lib.string')
+local session = require('lib.session')
 
 screen.connect_signal('request::desktop_decoration', function(s)
   -- Create lockscreen
@@ -144,3 +145,5 @@ screen.connect_signal('request::desktop_decoration', function(s)
     layout = wibox.layout.stack,
   })
 end)
+
+awesome.connect_signal('lockscreen::start', session.lock)
