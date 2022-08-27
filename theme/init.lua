@@ -10,7 +10,10 @@ local theme = {}
 
 -- { Font
 theme.font = 'Iosevka Dynamo 11'
-theme.tasklist_font = 'Iosevka Dynamo 11'
+theme.lockscreen_time_font = 'Iosevka Dynamo Bold 52'
+theme.lockscreen_date_font = 'Iosevka Dynamo Italic 18'
+theme.lockscreen_username_font = 'Pacifico 18'
+theme.lockscreen_password_font = 'Symbol Nerd Fonts 12'
 theme.hotkeys_font = theme.font
 theme.hotkeys_description_font = theme.font
 theme.titlebar_font = theme.font
@@ -81,6 +84,7 @@ theme.bg_systray = '#313131' .. theme.alpha_color_suffix
 theme.fg_normal = '#fafafa'
 theme.fg_focus = '#eeeeee'
 theme.fg_urgent = theme.powerline_fgs[8]
+theme.fg_warning = '#f2b8b5'
 
 -- Border
 theme.border_normal = theme.bg_focus

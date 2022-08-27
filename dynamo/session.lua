@@ -1,5 +1,8 @@
 -- AwesomeWM standard library
 local awful = require('awful')
+local wibox = require('wibox')
+-- Theme handling library
+local beautiful = require('beautiful')
 -- Custom library
 local shell = require('dynamo.shell')
 local dstring = require('dynamo.string')
@@ -24,57 +27,100 @@ local function unlock()
   end
 end
 
--- Lock session
-local function lock()
-  if not _G.is_lock then
-    _G.is_lock = true
+local characters_entered = 0
 
-    for s in screen do
-      s.lockscreen.visible = true
-    end
-
-    local keygrabbing_instance = awful.keygrabber.current_instance
-    if keygrabbing_instance then
-      keygrabbing_instance:stop()
-    end
-
-    if client.focus then
-      client.focus.minimized = true
-    end
-
-    for _, t in ipairs(mouse.screen.selected_tags) do
-      _G.locked_workspace = t
-      t.selected = false
-    end
-  else
-    awful.screen.focused().warning_text:set_markup('')
-
-    awful.prompt.run({
-      prompt = 'Password: ',
-      textbox = awful.screen.focused().input_password_box.widget,
-      highlighter = function(before, after)
-        before = before:gsub('.', '*')
-        after = after:gsub('.', '*')
-        return before, after
-      end,
-      exe_callback = function(input)
-        awesome.emit_signal('lock:enter_password', input)
-      end,
-    })
+local function reset_lock()
+  characters_entered = 0
+  for s in screen do
+    s.warning_text:set_markup(dstring.markup_text('', beautiful.fg_warning))
+    s.input_password_box:set_markup(dstring.markup_text('Enter your password', beautiful.bg_normal))
   end
 end
 
-awesome.connect_signal('lock:enter_password', function(input)
-  local h, _ = pam.start('system-auth', os.getenv('LOGNAME'), {
+local function fail_lock(msg)
+  characters_entered = 0
+  for s in screen do
+    s.warning_text:set_markup(dstring.markup_text('Failed to authenticate: ' .. msg, beautiful.fg_warning))
+    s.input_password_box:set_markup(dstring.markup_text('Enter your password', beautiful.bg_normal))
+  end
+end
+
+local function grab_password()
+  awful.prompt.run({
+    textbox = wibox.widget.textbox(),
+    hooks = {
+      {
+        {},
+        'Escape',
+        function(_)
+          reset_lock()
+          grab_password()
+        end,
+      },
+    },
+    keypressed_callback = function(_, key, _)
+      if #key == 1 then
+        characters_entered = characters_entered + 1
+      elseif key == 'BackSpace' then
+        if characters_entered > 0 then
+          characters_entered = characters_entered - 1
+        end
+      end
+      awful.screen.focused().input_password_box:set_markup(
+        dstring.markup_text(string.rep('', characters_entered), beautiful.fg_normal)
+      )
+    end,
+    exe_callback = function(input)
+      _G.input_password = input
+      local a, err = pam.authenticate(_G.pam_handle)
+      if not a then
+        fail_lock(err)
+        grab_password()
+      else
+        pam.endx(_G.pam_handle, pam.SUCCESS)
+        reset_lock()
+        unlock()
+      end
+    end,
+  })
+end
+
+-- Lock session
+local function lock()
+  if _G.is_lock then
+    return
+  end
+  _G.is_lock = true
+
+  for s in screen do
+    s.lockscreen.visible = true
+  end
+
+  local keygrabbing_instance = awful.keygrabber.current_instance
+  if keygrabbing_instance then
+    keygrabbing_instance:stop()
+  end
+
+  if client.focus then
+    client.focus.minimized = true
+  end
+
+  for _, t in ipairs(mouse.screen.selected_tags) do
+    _G.locked_workspace = t
+    t.selected = false
+  end
+
+  reset_lock()
+  _G.pam_handle, _ = pam.start('system-local-login', os.getenv('LOGNAME'), {
     function(messages)
       local responses = {}
 
       for i, message in ipairs(messages) do
         local msg_style, msg = message[1], message[2]
         if msg_style == pam.PROMPT_ECHO_OFF or msg_style == pam.PROMPT_ECHO_ON then
-          responses[i] = { input, 0 }
-        else
-          awful.screen.focused().warning_text:set_markup(msg)
+          responses[i] = { _G.input_password, 0 }
+        elseif msg_style == pam.TEXT_INFO then
+          awful.screen.focused().warning_text:set_markup(dstring.markup_text(msg, beautiful.fg_warning))
           responses[i] = { '', 0 }
         end
       end
@@ -83,15 +129,8 @@ awesome.connect_signal('lock:enter_password', function(input)
     end,
     nil,
   })
-
-  local a, err = pam.authenticate(h)
-  if not a then
-    awful.screen.focused().warning_text:set_markup('Error: ' .. err)
-  else
-    unlock()
-    pam.endx(h, pam.SUCCESS)
-  end
-end)
+  grab_password()
+end
 
 -- Quit session
 local function quit()

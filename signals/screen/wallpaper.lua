@@ -2,6 +2,7 @@
 local gears = require('gears')
 -- Custom library
 local filesystem = require('dynamo.filesystem')
+local lgi = require('lgi')
 
 -- Setup wallpaper
 screen.connect_signal('request::wallpaper', function(s)

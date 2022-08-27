@@ -432,9 +432,7 @@ for group, group_keybindings in pairs(list) do
         group = group,
         on_press = function(...)
           local on_call = keybinding[4]
-          if on_call == dynamo.session.lock then
-            on_call(...)
-          elseif not _G.is_lock then
+          if not _G.is_lock then
             on_call(...)
           end
         end,
