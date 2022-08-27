@@ -5,7 +5,7 @@ local wibox = require('wibox')
 -- Theme handling library
 local beautiful = require('beautiful')
 -- Custom library
-local markup_text = require('dynamo.string').markup_text
+local markup_text = require('lib.string').markup_text
 local label = require('widgets.components.label')
 local gears = require('gears')
 

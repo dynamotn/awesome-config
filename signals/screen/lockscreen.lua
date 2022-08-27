@@ -7,7 +7,7 @@ local wibox = require('wibox')
 local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
 -- Custom library
-local dstring = require('dynamo.string')
+local str = require('lib.string')
 
 screen.connect_signal('request::desktop_decoration', function(s)
   -- Create lockscreen
@@ -73,7 +73,7 @@ screen.connect_signal('request::desktop_decoration', function(s)
     }),
     {
       font = beautiful.lockscreen_time_font,
-      format = dstring.markup_text('%I:%M:%S', beautiful.fg_focus),
+      format = str.markup_text('%I:%M:%S', beautiful.fg_focus),
       widget = wibox.widget.textclock,
       align = 'center',
       valign = 'center',
@@ -81,7 +81,7 @@ screen.connect_signal('request::desktop_decoration', function(s)
     },
     {
       font = beautiful.lockscreen_date_font,
-      format = dstring.markup_text('%A, %B %Y', beautiful.fg_focus),
+      format = str.markup_text('%A, %B %Y', beautiful.fg_focus),
       widget = wibox.widget.textclock,
       align = 'center',
       valign = 'center',

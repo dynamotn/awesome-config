@@ -5,14 +5,16 @@ local table = require('gears.table')
 -- Special keys
 local m = require('bindings.special').mouse
 -- Custom library
-local misc = require('dynamo.misc')
+local workspace = require('lib.workspace')
+local apps = require('config.apps')
+local workspaces = require('config.workspaces')
 
 local list = {
   {
     {},
     m.left,
     function()
-      misc.run_at_workspace(music_cmd, music_workspace)
+      workspace.run_at_workspace(apps.music_player_cmd, workspaces.music)
     end,
   },
 }

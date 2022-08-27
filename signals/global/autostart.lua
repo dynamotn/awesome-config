@@ -1,5 +1,4 @@
-local run_one_pid = require('dynamo').shell.run_one_pid
-local distro = require('lib.distro')
+local run_one_pid = require('lib.shell').run_one_pid
 -- Configuration
 local apps = require('config.apps')
 
@@ -32,7 +31,7 @@ run_one_pid('ibus-daemon', '-drx')
 -- }
 
 -- { Redshift
-require('dynamo.misc').redshift_init()
+require('lib.redshift').init()
 -- }
 
 -- { MPD from Mopidy

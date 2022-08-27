@@ -1,7 +1,7 @@
 -- AwesomeWM standard library
 local gears = require('gears')
 -- Custom library
-local filesystem = require('dynamo.filesystem')
+local filesystem = require('lib.filesystem')
 local lgi = require('lgi')
 
 -- Setup wallpaper

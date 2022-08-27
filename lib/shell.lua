@@ -1,7 +1,7 @@
 -- AwesomeWM standard library
 local awful = require('awful')
 -- Custom library
-local dstring = require('dynamo.string')
+local str = require('lib.string')
 
 -- { Run command
 -- Run command and get result
@@ -42,7 +42,7 @@ end
 -- @param boolean with_shell Flag is ran with shell
 -- @return table Result of command
 local function run_command_multiple_lines(cmd, is_async, with_shell)
-  return run_command(cmd, is_async, dstring.extract_lines, nil, with_shell)
+  return run_command(cmd, is_async, str.extract_lines, nil, with_shell)
 end
 
 -- Run command synchronous and represent by one line
@@ -51,7 +51,7 @@ end
 -- @param boolean with_shell Flag is ran with shell
 -- @return string Result of command
 local function run_command_one_line(cmd, is_async, with_shell)
-  return run_command(cmd, is_async, dstring.trim, nil, with_shell)
+  return run_command(cmd, is_async, str.trim, nil, with_shell)
 end
 
 -- }

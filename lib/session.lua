@@ -4,8 +4,8 @@ local wibox = require('wibox')
 -- Theme handling library
 local beautiful = require('beautiful')
 -- Custom library
-local shell = require('dynamo.shell')
-local dstring = require('dynamo.string')
+local shell = require('lib.shell')
+local str = require('lib.string')
 local pam = require('pam')
 
 -- Unlock session
@@ -32,16 +32,16 @@ local characters_entered = 0
 local function reset_lock()
   characters_entered = 0
   for s in screen do
-    s.warning_text:set_markup(dstring.markup_text('', beautiful.fg_warning))
-    s.input_password_box:set_markup(dstring.markup_text('Enter your password', beautiful.bg_normal))
+    s.warning_text:set_markup(str.markup_text('', beautiful.fg_warning))
+    s.input_password_box:set_markup(str.markup_text('Enter your password', beautiful.bg_normal))
   end
 end
 
 local function fail_lock(msg)
   characters_entered = 0
   for s in screen do
-    s.warning_text:set_markup(dstring.markup_text('Failed to authenticate: ' .. msg, beautiful.fg_warning))
-    s.input_password_box:set_markup(dstring.markup_text('Enter your password', beautiful.bg_normal))
+    s.warning_text:set_markup(str.markup_text('Failed to authenticate: ' .. msg, beautiful.fg_warning))
+    s.input_password_box:set_markup(str.markup_text('Enter your password', beautiful.bg_normal))
   end
 end
 
@@ -67,7 +67,7 @@ local function grab_password()
         end
       end
       awful.screen.focused().input_password_box:set_markup(
-        dstring.markup_text(string.rep('', characters_entered), beautiful.fg_normal)
+        str.markup_text(string.rep('', characters_entered), beautiful.fg_normal)
       )
     end,
     exe_callback = function(input)
@@ -120,7 +120,7 @@ local function lock()
         if msg_style == pam.PROMPT_ECHO_OFF or msg_style == pam.PROMPT_ECHO_ON then
           responses[i] = { _G.input_password, 0 }
         elseif msg_style == pam.TEXT_INFO then
-          awful.screen.focused().warning_text:set_markup(dstring.markup_text(msg, beautiful.fg_warning))
+          awful.screen.focused().warning_text:set_markup(str.markup_text(msg, beautiful.fg_warning))
           responses[i] = { '', 0 }
         end
       end
@@ -167,7 +167,7 @@ end
 local function schedule_shutdown()
   awful.screen.focused().panel.prompt:show_confirm_prompt('Shutdown', 'Please enter time', function(input)
     awesome.emit_signal('exit', nil)
-    shell.run_command('sudo shutdown -P ' .. dstring.trim(input), true)
+    shell.run_command('sudo shutdown -P ' .. str.trim(input), true)
   end)
 end
 

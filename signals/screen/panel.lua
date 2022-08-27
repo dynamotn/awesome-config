@@ -5,8 +5,8 @@ local wibox = require('wibox')
 -- Theme handling library
 local beautiful = require('beautiful')
 -- Custom library
-local markup_text = require('dynamo.string').markup_text
-local run_command = require('dynamo.shell').run_command
+local markup_text = require('lib.string').markup_text
+local run_command = require('lib.shell').run_command
 local vicious = require('vicious')
 vicious.contrib = require('vicious.contrib')
 -- Widgets

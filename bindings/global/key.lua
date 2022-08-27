@@ -9,7 +9,10 @@ local k = require('bindings.special').key
 -- Configuration
 local apps = require('config.apps')
 -- Custom library
-local dynamo = require('dynamo')
+local notify = require('lib.notify')
+local session = require('lib.session')
+local redshift = require('lib.redshift')
+local workspace = require('lib.workspace')
 
 local list = {
   ['awesome'] = {
@@ -36,14 +39,14 @@ local list = {
       { k.super },
       'q',
       'Lock',
-      dynamo.session.lock,
+      session.lock,
     },
     -- Prompt
     {
       { k.alt },
       'F1',
       'Show properties of window',
-      dynamo.notify.xprop,
+      notify.xprop,
     },
     {
       { k.alt },
@@ -86,7 +89,7 @@ local list = {
       'Left',
       'View not empty previous workspace',
       function()
-        dynamo.misc.switch_occupied_tag(-1)
+        workspace.switch_occupied_tag(-1)
       end,
     },
     {
@@ -94,7 +97,7 @@ local list = {
       'Right',
       'View not empty next workspace',
       function()
-        dynamo.misc.switch_occupied_tag(1)
+        workspace.switch_occupied_tag(1)
       end,
     },
     {
@@ -333,7 +336,7 @@ local list = {
       { k.super },
       'd',
       'Toggle color temperature (redshift)',
-      dynamo.misc.redshift_toggle,
+      redshift.toggle,
     },
     {
       {},

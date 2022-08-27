@@ -7,7 +7,7 @@ local utils = require('menubar.utils')
 -- Configuration
 local app = require('config.apps')
 -- Custom session library
-local session = require('dynamo.session')
+local session = require('lib.session')
 
 require('menubar').utils.terminal = require('config.apps').terminal
 

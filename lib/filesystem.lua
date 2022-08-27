@@ -1,5 +1,5 @@
 -- Custom shell library
-local shell = require('dynamo.shell')
+local shell = require('lib.shell')
 
 -- { Advance function for file and directory
 -- Scan directory, and optionally filter outputs
@@ -31,6 +31,7 @@ end
 local function scan_dir_by_mime(directory, filter)
   return scan_dir('mime', directory, filter)
 end
+
 -- }
 
 -- { XDG related
@@ -40,6 +41,7 @@ end
 local function xdg_user_dirs(kind)
   return shell.run_command_one_line('xdg-user-dir ' .. kind)
 end
+
 -- }
 
 return {

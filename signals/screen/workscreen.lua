@@ -5,8 +5,8 @@ local beautiful = require('beautiful')
 -- Widget and layout library
 local wibox = require('wibox')
 -- Custom library
-local init_popup = require('dynamo.notify').init_popup
-local get_processes_info = require('dynamo.misc').get_processes_info
+local init_popup = require('lib.notify').init_popup
+local get_processes_info = require('lib.os').get_processes_info
 -- Bindings
 local bindings = require('bindings')
 -- Configuration
