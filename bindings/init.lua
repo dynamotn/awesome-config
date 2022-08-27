@@ -11,6 +11,7 @@ local config = {
     window = require('bindings.window.mouse'),
     widgets = {
       music = require('bindings.widgets.music'),
+      monitor = require('bindings.widgets.monitor'),
     },
   },
 }

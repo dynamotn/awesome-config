@@ -93,6 +93,9 @@ screen.connect_signal('request::desktop_decoration', function(s)
   init_popup(s.top_wibox:get_children_by_id(s.panel.memory.id)[1], get_processes_info)
   s.top_wibox:get_children_by_id(s.layout_box.id)[1]:buttons(bindings.config.mouse.global.layout)
   s.top_wibox:get_children_by_id(s.panel.music.id)[1]:buttons(bindings.config.mouse.widgets.music)
+  s.top_wibox:get_children_by_id(s.panel.cpu.id)[1]:buttons(bindings.config.mouse.widgets.monitor)
+  s.top_wibox:get_children_by_id(s.panel.memory.id)[1]:buttons(bindings.config.mouse.widgets.monitor)
+  s.top_wibox:get_children_by_id(s.panel.network.id)[1]:buttons(bindings.config.mouse.widgets.monitor)
 
   s.bottom_wibox:setup({
     layout = wibox.layout.align.horizontal,
