@@ -32,12 +32,15 @@ local function run_at_workspace(prg, workspace)
   end
 
   local function move_client(window)
-    for _, tag in ipairs(awful.tag.gettags(awful.screen.focused())) do
-      if tag.name == workspace then
-        awful.client.movetotag(tag, window)
+    for s in screen do
+      for _, tag in ipairs(awful.tag.gettags(s)) do
+        if tag.name == workspace then
+          awful.client.movetotag(tag, window)
+          client.disconnect_signal('manage', move_client)
+          return
+        end
       end
     end
-    client.disconnect_signal('manage', move_client)
   end
 
   client.connect_signal('manage', move_client)
