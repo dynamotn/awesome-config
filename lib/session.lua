@@ -66,9 +66,9 @@ local function grab_password()
           characters_entered = characters_entered - 1
         end
       end
-      awful.screen.focused().input_password_box:set_markup(
-        str.markup_text(string.rep('', characters_entered), beautiful.fg_normal)
-      )
+      for s in screen do
+        s.input_password_box:set_markup(str.markup_text(string.rep('', characters_entered), beautiful.fg_normal))
+      end
     end,
     exe_callback = function(input)
       _G.input_password = input
