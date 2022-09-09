@@ -75,7 +75,7 @@ return {
   },
   -- Set Thunderbird to always map on Mail workspace
   {
-    rule_any = { class = { 'Thunderbird', instance = 'Mail' } },
+    rule_any = { class = { 'Thunderbird', 'thunderbird' }, instance = 'Mail' },
     properties = { screen = find_screen_by_workspace_name(workspaces.mail), tag = workspaces.mail },
   },
   -- Set Rambox, Ferdi, Telegram to always map on Chat workspace
