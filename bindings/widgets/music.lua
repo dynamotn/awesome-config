@@ -14,7 +14,7 @@ local list = {
     {},
     m.left,
     function()
-      workspace.run_at_workspace(apps.music_player_cmd, workspaces.music)
+      workspace.run_at_workspace(apps.music_player_cmd, workspaces.media)
     end,
   },
 }

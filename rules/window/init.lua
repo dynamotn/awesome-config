@@ -78,6 +78,15 @@ return {
     rule_any = { class = { 'Thunderbird', 'thunderbird' }, instance = 'Mail' },
     properties = { screen = find_screen_by_workspace_name(workspaces.mail), tag = workspaces.mail },
   },
+  -- Set Vivaldi to always maps on Web workspace
+  {
+    rule = { class = 'Vivaldi-stable', instance = 'vivaldi-stable' },
+    properties = { screen = find_screen_by_workspace_name(workspaces.web), tag = workspaces.web },
+  },
+  {
+    rule = { name = 'Vivaldi' },
+    properties = { screen = find_screen_by_workspace_name(workspaces.web), tag = workspaces.web },
+  },
   -- Set Rambox, Ferdi, Telegram to always map on Chat workspace
   {
     rule_any = { class = { 'Rambox', 'Ferdi', 'TelegramDesktop' } },
@@ -117,5 +126,21 @@ return {
   {
     rule = { class = 'Steam' },
     properties = { screen = find_screen_by_workspace_name(workspaces.game), tag = workspaces.game },
+  },
+  -- Set Youtube & Spotify app of Chrome/Vivaldi to always maps on Media workspace
+  {
+    rule_any = { instance = { 'crx_agimnkijcaahngcdmfeangaknmldooml', 'crx_pjibgclleladliembfgfagdaldikeohf' } },
+    properties = { screen = find_screen_by_workspace_name(workspaces.media), tag = workspaces.media, floating = false },
+  },
+  -- Set Google Chat/Zalo/Telegram app of Chrome/Vivaldi to always maps on Media workspace
+  {
+    rule_any = {
+      instance = {
+        'crx_mdpkiolbdkhdjpekfbkbmhigcaggjagi',
+        'crx_aeejceomnhmjmeacdckmmopfaigimnkl',
+        'crx_khmlcabibblfpfhmkfpaiblbijoggmaa',
+      },
+    },
+    properties = { screen = find_screen_by_workspace_name(workspaces.chat), tag = workspaces.chat, floating = false },
   },
 }
