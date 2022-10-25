@@ -15,11 +15,7 @@ run_one_pid(apps.startup_terminal, nil, apps.terminal)
 -- }
 
 -- { Browser
-run_one_pid(
-  apps.browser,
-  nil,
-  linux_distribution == 'gentoo' and '/usr/lib64/firefox/firefox' or '/usr/lib/firefox/firefox'
-)
+run_one_pid(apps.browser, nil, '/opt/vivaldi/vivaldi-bin')
 -- }
 
 -- { Clipboard manager
