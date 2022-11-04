@@ -14,7 +14,6 @@ if screen.count() == 1 then
     {
       M.term,
       M.web,
-      M.mail,
       M.media,
       M.chat,
       M.doc,
@@ -26,14 +25,13 @@ if screen.count() == 1 then
 elseif screen.count() == 2 then
   M.list = {
     {
-      M.web,
-      M.mail,
+      M.term,
       M.doc,
       M.chat,
       M.media,
     },
     {
-      M.term,
+      M.web,
       M.sys,
       M.other,
     },

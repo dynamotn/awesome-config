@@ -67,6 +67,12 @@ return {
     properties = { floating = true },
   },
 
+  -- Set Kitty to always map on Web workspace
+  {
+    rule = { class = 'kitty' },
+    except_any = { name = { 'btop', 'ncmpcpp' } },
+    properties = { screen = find_screen_by_workspace_name(workspaces.term), tag = workspaces.term },
+  },
   -- Set Firefox to always map on Web workspace
   {
     rule_any = { class = { 'Firefox', 'firefox' } },
