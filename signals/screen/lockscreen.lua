@@ -82,13 +82,12 @@ screen.connect_signal('request::desktop_decoration', function(s)
     },
     {
       font = beautiful.lockscreen_date_font,
-      format = str.markup_text('%A, %B %Y', beautiful.fg_focus),
+      format = str.markup_text('%A, %d %B %Y', beautiful.fg_focus),
       widget = wibox.widget.textclock,
       align = 'center',
       valign = 'center',
     },
-    spacing = dpi(10),
-    layout = wibox.layout.fixed.vertical,
+    layout = wibox.layout.ratio.vertical,
   })
 
   local avatar = wibox.widget({
