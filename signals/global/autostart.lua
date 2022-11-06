@@ -23,7 +23,7 @@ run_one_pid(apps.clipboard)
 -- }
 
 -- { IM framework
-run_one_pid('ibus-daemon', '-drx')
+run_one_pid('ibus-daemon', '-dr')
 -- }
 
 -- { Redshift
