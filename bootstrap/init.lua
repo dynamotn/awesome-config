@@ -1,3 +1,4 @@
+require('bootstrap.error_handler')
 require('bootstrap.l10n')
 require('bootstrap.variables')
 require('bootstrap.modules')
