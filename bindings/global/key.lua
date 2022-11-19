@@ -42,6 +42,20 @@ local list = {
       'Lock',
       session.lock,
     },
+    {
+      { k.super, k.ctrl },
+      'q',
+      'Disable/enable lockscreen timeout',
+      function()
+        if _G.disabled_lockscreen == nil then
+          _G.disabled_lockscreen = 1
+          os.execute('xset s off')
+        else
+          _G.disabled_lockscreen = nil
+          os.execute('xset s ' .. require('config.common').screen_saver_timeout)
+        end
+      end,
+    },
     -- Prompt
     {
       { k.alt },
