@@ -54,7 +54,9 @@ local function draw_arrow(cairo, width, height, direction, style, fg_color, bg_c
   cairo:close_path()
   cairo:fill()
 
-  cairo:set_source_rgba(gears.color.parse_color(bg_color))
+  if bg_color ~= 'opaque' then
+    cairo:set_source_rgba(gears.color.parse_color(bg_color))
+  end
   cairo:new_path()
   if style == 'solid' then
     cairo:move_to(triangle_base_x, 0)
@@ -102,6 +104,7 @@ local function draw_curve(cairo, width, height, direction, style, fg_color, bg_c
     cairo:fill()
   end
 end
+
 -- }
 
 -- { Create separator widget same as powerline symbol
@@ -139,6 +142,7 @@ local function create(symbol, direction, style, fg_color, bg_color)
     end,
   }
 end
+
 -- }
 
 return setmetatable({}, {

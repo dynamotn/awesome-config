@@ -208,4 +208,13 @@ theme.awesome_icon = local_theme_path .. 'icons/awesome.png'
 theme.icon_theme = 'Moka'
 -- }
 
+-- { Notification
+theme.notification_position = 'top_right'
+theme.notification_bg = theme.powerline_fgs[0]
+theme.notification_margin = dpi(16)
+theme.notification_border_width = 0
+theme.notification_spacing = dpi(8)
+theme.notification_icon_size = dpi(32)
+-- }
+
 return theme

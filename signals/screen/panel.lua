@@ -155,6 +155,9 @@ vicious.register(M.cpu, vicious.widgets.cpu, markup_text('$1%', beautiful.cpu_fg
 panel_index = panel_index - 1
 M.volume = widgets.powerline_section(panel_index)
 vicious.register(M.volume, vicious.widgets.volume, function(_, args)
+  if args[1] == nil then
+    return ''
+  end
   if args[2] == '🔈' then
     M.volume:set_widget(beautiful.volume_icon_mute)
   elseif args[1] == 0 then
