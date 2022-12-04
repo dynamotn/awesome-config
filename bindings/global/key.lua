@@ -1,5 +1,7 @@
 -- AwesomeWM standard library
 local awful = require('awful')
+-- Notification library
+local naughty = require('naughty')
 -- Table utilities library
 local table = require('gears.table')
 -- Popup library
@@ -49,9 +51,11 @@ local list = {
       function()
         if _G.disabled_lockscreen == nil then
           _G.disabled_lockscreen = 1
+          naughty.notify({ text = 'Disable lockscreen timeout' })
           os.execute('xset s off')
         else
           _G.disabled_lockscreen = nil
+          naughty.notify({ text = 'Enable lockscreen timeout' })
           os.execute('xset s ' .. require('config.common').screen_saver_timeout)
         end
       end,
