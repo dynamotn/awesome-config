@@ -168,7 +168,7 @@ vicious.register(M.volume, vicious.widgets.volume, function(_, args)
     M.volume:set_widget(beautiful.volume_icon_normal)
   end
   return args[1]
-end, 1, { 'Master', '-D', 'pulse' })
+end, 1, { 'Master' })
 -- }
 
 -- { Music
