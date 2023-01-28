@@ -12,6 +12,7 @@ local config = {
     widgets = {
       music = require('bindings.widgets.music'),
       monitor = require('bindings.widgets.monitor'),
+      gpu = require('bindings.widgets.gpu'),
     },
   },
 }

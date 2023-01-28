@@ -12,6 +12,7 @@ local M = {
   launcher = 'rofi',
   composite_manager = 'picom',
   system_monitor = 'btop',
+  gpu_monitor = 'nvtop',
   automation_tool = 'xdotool',
   locker_tool = 'xss-lock',
 }
@@ -37,6 +38,7 @@ M.calculator_launcher = M.launcher
 M.editor_cmd = M.terminal .. ' ' .. M.editor
 M.music_player_cmd = M.terminal .. ' ' .. M.music_player
 M.system_monitor_cmd = M.terminal .. ' ' .. M.system_monitor
+M.gpu_monitor_cmd = M.terminal .. ' ' .. M.gpu_monitor
 M.startup_terminal = M.terminal
   .. ' '
   .. os.getenv('SHELL')

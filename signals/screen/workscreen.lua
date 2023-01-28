@@ -83,6 +83,7 @@ screen.connect_signal('request::desktop_decoration', function(s)
       s.panel.music,
       s.panel.volume,
       s.panel.cpu,
+      s.panel.gpu,
       s.panel.memory,
       s.panel.power,
       s.panel.network,
@@ -94,6 +95,7 @@ screen.connect_signal('request::desktop_decoration', function(s)
   s.top_wibox:get_children_by_id(s.layout_box.id)[1]:buttons(bindings.config.mouse.global.layout)
   s.top_wibox:get_children_by_id(s.panel.music.id)[1]:buttons(bindings.config.mouse.widgets.music)
   s.top_wibox:get_children_by_id(s.panel.cpu.id)[1]:buttons(bindings.config.mouse.widgets.monitor)
+  s.top_wibox:get_children_by_id(s.panel.gpu.id)[1]:buttons(bindings.config.mouse.widgets.gpu)
   s.top_wibox:get_children_by_id(s.panel.memory.id)[1]:buttons(bindings.config.mouse.widgets.monitor)
   s.top_wibox:get_children_by_id(s.panel.network.id)[1]:buttons(bindings.config.mouse.widgets.monitor)
 

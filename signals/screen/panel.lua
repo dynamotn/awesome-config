@@ -95,55 +95,73 @@ M.network = widgets.powerline_section(panel_index, beautiful.network_icon)
 vicious.register(
   M.network,
   vicious.contrib.net,
-  markup_text('↓ ${total down_kb}', beautiful.network_fg_down)
-    .. markup_text(' ↑ ${total up_kb}', beautiful.network_fg_up),
+  markup_text('↓ ${total down_kb} kb', beautiful.network_fg_down)
+    .. markup_text(' ↑ ${total up_kb} kb', beautiful.network_fg_up),
   1
 )
 -- }
 
 -- { Power
+-- FIXME: Assume that each laptop has only one battery
 run_command("find /sys/class/power_supply -iname 'BAT*' | awk -F/ '{printf $NF}'", false, function(stdout)
   if not stdout then
     return
   end
   panel_index = panel_index - 1
   M.power = widgets.powerline_section(panel_index)
-  vicious.register(
-    M.power,
-    vicious.widgets.bat,
-    function(_, args)
-      local text
-      if args[1] == '⌁' then
-        M.power:set_widget(beautiful.power_icon_ac)
-        text = 'AC'
-      elseif args[2] <= 5 then
-        M.power:set_widget(beautiful.power_icon_very_low)
-      elseif args[2] <= 15 then
-        M.power:set_widget(beautiful.power_icon_low)
-      else
-        M.power:set_widget(beautiful.power_icon_normal)
-        if args[1] == '↯' then
-          text = 'Full'
-        end
+  vicious.register(M.power, vicious.widgets.bat, function(_, args)
+    local text
+    if args[1] == '⌁' then
+      M.power:set_widget(beautiful.power_icon_ac)
+      text = 'AC'
+    elseif args[2] <= 5 then
+      M.power:set_widget(beautiful.power_icon_very_low)
+    elseif args[2] <= 15 then
+      M.power:set_widget(beautiful.power_icon_low)
+    else
+      M.power:set_widget(beautiful.power_icon_normal)
+      if args[1] == '↯' then
+        text = 'Full'
       end
-      if not text then
-        text = args[2] .. '%'
-      end
-      return text
-    end,
-    1,
-    stdout -- FIXME: Assume that each laptop has only one battery
-  )
+    end
+    if not text then
+      text = args[2] .. '%'
+    end
+    return text
+  end, 1, stdout)
 end)
 -- }
 
 -- { Memory
 panel_index = panel_index - 1
 M.memory = widgets.powerline_section(panel_index, beautiful.memory_icon)
-vicious.register(M.memory, vicious.widgets.mem, '$2MB', 1)
+vicious.register(M.memory, vicious.widgets.mem, '$2 MB', 1)
 -- }
 
--- TODO: Add NVidia GPU
+-- { GPU
+run_command('nvidia-smi', false, function(stdout)
+  if not stdout then
+    return
+  end
+  panel_index = panel_index - 1
+  M.gpu = widgets.powerline_section(panel_index, beautiful.gpu_icon)
+  vicious.register(M.gpu, function(_, warg)
+    if not warg then
+      warg = '0'
+    end
+    local f = io.popen('nvidia-smi --query-gpu=memory.used --format=csv,noheader -i ' .. warg)
+    local smi = f and f:read('*all') or nil
+    f:close()
+
+    -- Not installed
+    if smi == nil then
+      return { 0 }
+    end
+
+    return { smi:gsub('%s+$', '') }
+  end, '$1', 1)
+end)
+-- }
 
 -- { CPU
 panel_index = panel_index - 1

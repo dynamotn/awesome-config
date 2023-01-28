@@ -183,6 +183,9 @@ theme.power_icon_normal = local_theme_path .. 'widget/power_normal.png'
 -- Memory
 theme.memory_icon = local_theme_path .. 'widget/mem.png'
 
+-- GPU
+theme.gpu_icon = local_theme_path .. 'widget/gpu.png'
+
 -- CPU
 theme.cpu_icon = local_theme_path .. 'widget/cpu.png'
 
