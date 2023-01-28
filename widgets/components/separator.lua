@@ -34,7 +34,11 @@ local function draw_arrow(cairo, width, height, direction, style, fg_color, bg_c
     triangle_base_vicinity_x = width - chevron_size
   end
 
-  cairo:set_source_rgba(gears.color.parse_color(fg_color))
+  if fg_color ~= 'opaque' then
+    cairo:set_source_rgba(gears.color.parse_color(fg_color))
+  else
+    cairo:set_source_rgb(fg_color)
+  end
   cairo:new_path()
   if style == 'solid' then
     cairo:move_to(triangle_base_x, 0)
@@ -56,6 +60,8 @@ local function draw_arrow(cairo, width, height, direction, style, fg_color, bg_c
 
   if bg_color ~= 'opaque' then
     cairo:set_source_rgba(gears.color.parse_color(bg_color))
+  else
+    cairo:set_source_rgb(bg_color)
   end
   cairo:new_path()
   if style == 'solid' then

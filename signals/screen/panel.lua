@@ -70,16 +70,16 @@ M.space = wibox.widget.textbox(' ')
 -- }
 
 -- { Right panel
-local panel_index = -1
 
 -- { Layout button
 M.layout = function(screen)
-  return widgets.powerline_section(panel_index, awful.widget.layoutbox(screen))
+  local panel_index = -1
+  return widgets.powerline_section(panel_index, awful.widget.layoutbox(screen), beautiful.layout_bg_normal)
 end
 -- }
 
 -- { Clock
-panel_index = panel_index - 1
+local panel_index = -2
 M.clock = widgets.powerline_section(panel_index, beautiful.clock_icon)
 vicious.register(
   M.clock,

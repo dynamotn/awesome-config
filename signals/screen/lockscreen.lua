@@ -74,7 +74,7 @@ screen.connect_signal('request::desktop_decoration', function(s)
     }),
     {
       font = beautiful.lockscreen_time_font,
-      format = str.markup_text('%I:%M:%S', beautiful.fg_focus),
+      format = str.markup_text('%I:%M:%S', beautiful.fg_normal),
       widget = wibox.widget.textclock,
       align = 'center',
       valign = 'center',
@@ -82,7 +82,7 @@ screen.connect_signal('request::desktop_decoration', function(s)
     },
     {
       font = beautiful.lockscreen_date_font,
-      format = str.markup_text('%A, %d %B %Y', beautiful.fg_focus),
+      format = str.markup_text('%A, %d %B %Y', beautiful.fg_normal),
       widget = wibox.widget.textclock,
       align = 'center',
       valign = 'center',
@@ -108,7 +108,7 @@ screen.connect_signal('request::desktop_decoration', function(s)
 
   local username = wibox.widget({
     widget = wibox.widget.textbox,
-    markup = os.getenv('USER'):gsub('^%l', string.upper),
+    markup = str.markup_text(os.getenv('USER'):gsub('^%l', string.upper), beautiful.fg_warning),
     font = beautiful.lockscreen_username_font,
     align = 'center',
     valign = 'center',

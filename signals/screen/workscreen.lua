@@ -76,7 +76,7 @@ screen.connect_signal('request::desktop_decoration', function(s)
             'left',
             'solid',
             beautiful.bg_normal,
-            beautiful.bg_focus
+            beautiful.bg_systray
           ),
         },
       },
