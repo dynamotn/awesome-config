@@ -8,6 +8,8 @@ local beautiful = require('beautiful')
 -- Rules
 local rules = require('rules')
 require('signals.window.titlebar')
+-- Bling library
+local bling = require('bling')
 
 -- Signal function to execute when a new client appears.
 client.connect_signal('manage', function(c)
@@ -35,3 +37,6 @@ end)
 ruled.client.connect_signal('request::rules', function()
   ruled.client.append_rules(rules.window)
 end)
+
+-- Enable flash focus
+bling.module.flash_focus.enable()

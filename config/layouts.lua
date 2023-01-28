@@ -1,12 +1,10 @@
--- AwesomeWM standard library
-local awful = require('awful')
+-- Bling library
+local bling = require('bling')
 
 return {
-  awful.layout.suit.floating,
-  awful.layout.suit.tile,
-  awful.layout.suit.fair,
-  awful.layout.suit.fair.horizontal,
-  awful.layout.suit.max,
-  awful.layout.suit.magnifier,
-  awful.layout.suit.corner.nw,
+  bling.layout.centered,
+  bling.layout.mstab,
+  bling.layout.vertical,
+  bling.layout.horizontal,
+  bling.layout.deck,
 }
