@@ -8,3 +8,6 @@
 [submodule "vendor/inspect"]
 	path = vendor/inspect
 	url = https://github.com/kikito/inspect.lua
+[submodule "vendor/bling"]
+	path = vendor/bling
+	url = https://github.com/BlingCorp/bling.git
