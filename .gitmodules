@@ -8,6 +8,3 @@
 [submodule "vendor/inspect"]
 	path = vendor/inspect
 	url = https://github.com/kikito/inspect.lua
-[submodule "vendor/rubato"]
-	path = vendor/rubato
-	url = https://github.com/andOrlando/rubato.git
