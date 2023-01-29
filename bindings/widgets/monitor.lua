@@ -5,16 +5,14 @@ local table = require('gears.table')
 -- Special keys
 local m = require('bindings.special').mouse
 -- Custom library
-local workspace = require('lib.workspace')
-local apps = require('config.apps')
-local workspaces = require('config.workspaces')
+local scratchpad = require('widgets.scratchpad')
 
 local list = {
   {
     {},
     m.left,
     function()
-      workspace.run_at_workspace(apps.system_monitor_cmd, workspaces.sys)
+      scratchpad.monitor:toggle()
     end,
   },
 }

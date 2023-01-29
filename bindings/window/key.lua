@@ -75,7 +75,7 @@ local list = {
   {
     { k.super },
     'x',
-    'Show clipboard list',
+    'Show clipboard list to insert input to window',
     function(c)
       awful.spawn.with_shell(apps.clipboard_launcher(c.window))
     end,

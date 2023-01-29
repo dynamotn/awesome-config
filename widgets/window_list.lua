@@ -1,9 +1,5 @@
 -- AwesomeWM standard library
 local awful = require('awful')
--- Widget library
-local wibox = require('wibox')
--- Theme handling library
-local beautiful = require('beautiful')
 -- Custom library
 local taskbar = require('widgets.components.taskbar')
 

@@ -16,6 +16,7 @@ local session = require('lib.session')
 local redshift = require('lib.redshift')
 local workspace = require('lib.workspace')
 local menu = require('widgets.menu')
+local scratchpad = require('widgets.scratchpad')
 
 local list = {
   ['awesome'] = {
@@ -356,6 +357,38 @@ local list = {
       'd',
       'Toggle color temperature (redshift)',
       redshift.toggle,
+    },
+    {
+      { k.super },
+      'z',
+      'Show Kittuake',
+      function()
+        scratchpad.terminal:toggle()
+      end,
+    },
+    {
+      { k.super },
+      't',
+      'Show monitor terminal',
+      function()
+        scratchpad.monitor:toggle()
+      end,
+    },
+    {
+      { k.super },
+      'g',
+      'Show GPU detail terminal',
+      function()
+        scratchpad.gpu:toggle()
+      end,
+    },
+    {
+      { k.super },
+      'c',
+      'Show music player',
+      function()
+        scratchpad.music:toggle()
+      end,
     },
     {
       {},

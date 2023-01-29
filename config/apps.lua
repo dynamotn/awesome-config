@@ -36,9 +36,10 @@ M.calculator_launcher = M.launcher
 
 -- Terminal apps
 M.editor_cmd = M.terminal .. ' ' .. M.editor
-M.music_player_cmd = M.terminal .. ' ' .. M.music_player
-M.system_monitor_cmd = M.terminal .. ' ' .. M.system_monitor
-M.gpu_monitor_cmd = M.terminal .. ' ' .. M.gpu_monitor
+M.quake_cmd = M.terminal .. ' --class dynamo_kittuake'
+M.music_player_cmd = M.terminal .. ' --class dynamo_music ' .. M.music_player
+M.system_monitor_cmd = M.terminal .. ' --class dynamo_monitor ' .. M.system_monitor
+M.gpu_monitor_cmd = M.terminal .. ' --class dynamo_gpu ' .. M.gpu_monitor
 M.startup_terminal = M.terminal
   .. ' '
   .. os.getenv('SHELL')

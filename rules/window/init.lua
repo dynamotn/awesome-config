@@ -70,7 +70,6 @@ return {
   -- Set Kitty to always map on Web workspace
   {
     rule = { class = 'kitty' },
-    except_any = { name = { 'btop', 'ncmpcpp' } },
     properties = { screen = find_screen_by_workspace_name(workspaces.term), tag = workspaces.term },
   },
   -- Set Firefox to always map on Web workspace
@@ -136,7 +135,11 @@ return {
   -- Set Youtube & Spotify app of Chrome/Vivaldi to always maps on Media workspace
   {
     rule_any = { instance = { 'crx_agimnkijcaahngcdmfeangaknmldooml', 'crx_pjibgclleladliembfgfagdaldikeohf' } },
-    properties = { screen = find_screen_by_workspace_name(workspaces.media), tag = workspaces.media, floating = false },
+    properties = {
+      screen = find_screen_by_workspace_name(workspaces.media),
+      tag = workspaces.media,
+      floating = false,
+    },
   },
   -- Set Google Chat/Zalo/Telegram app of Chrome/Vivaldi to always maps on Media workspace
   {
