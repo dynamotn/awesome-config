@@ -486,6 +486,7 @@ for group, group_keybindings in pairs(list) do
         description = keybinding[3],
         group = group,
         on_press = function(...)
+          --- @type fun(...)
           local on_call = keybinding[4]
           if not _G.is_lock then
             on_call(...)

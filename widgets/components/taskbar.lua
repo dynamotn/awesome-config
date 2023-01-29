@@ -1,6 +1,5 @@
 -- Widget library
 local wibox = require('wibox')
-local gears = require('gears')
 -- Theme handling library
 local beautiful = require('beautiful')
 -- LGI library
@@ -9,7 +8,7 @@ local dpi = require('beautiful').xresources.apply_dpi
 
 local bar = { mt = {} }
 
-function bar:draw(context, cairo, width, height)
+function bar:draw(_, cairo, width, height)
   cairo:save()
   if self._private.background then
     cairo:set_source(self._private.background)
@@ -28,7 +27,7 @@ function bar:draw(context, cairo, width, height)
   end
   if self._private.bgimage then
     cairo:clip()
-    pattern = lgi.cairo.Pattern.create_for_surface(self._private.bgimage)
+    local pattern = lgi.cairo.Pattern.create_for_surface(self._private.bgimage)
     lgi.cairo.Pattern.set_extend(pattern, lgi.cairo.Extend.REPEAT)
     cairo:set_source(pattern)
     cairo:paint()

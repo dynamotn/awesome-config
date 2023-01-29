@@ -2,7 +2,6 @@
 local gears = require('gears')
 -- Custom library
 local filesystem = require('lib.filesystem')
-local lgi = require('lgi')
 
 -- Setup wallpaper
 screen.connect_signal('request::wallpaper', function(s)

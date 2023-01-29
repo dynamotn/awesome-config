@@ -89,7 +89,7 @@ end
 -- @param string fg_color Hexa or name foreground color of separator
 -- @param string bg_color Hexa or name foreground color of separator
 local function draw_curve(cairo, width, height, direction, style, fg_color, bg_color)
-  local curve_center_x
+  local curve_center_x, start_angle, end_angle
   if direction == 'left' then
     curve_center_x = width
     start_angle = math.pi / 2
@@ -133,7 +133,7 @@ local function create(symbol, direction, style, fg_color, bg_color)
 
   return {
     layout = wibox.widget.base.make_widget,
-    fit = function(_, _, width, height)
+    fit = function(_, _, _, height)
       -- Get width and height same with base widget that current widget put on
       return height / 2, height
     end,
