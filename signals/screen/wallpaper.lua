@@ -1,24 +1,21 @@
 -- AwesomeWM standard library
 local gears = require('gears')
+-- Bling library
+local bling = require('bling')
 -- Custom library
 local filesystem = require('lib.filesystem')
 
 -- Setup wallpaper
-screen.connect_signal('request::wallpaper', function(s)
-  local all_wallpapers = filesystem.scan_dir_by_mime(filesystem.xdg_user_dirs('PICTURES') .. '/Wallpaper', 'image')
-  local current_wallpaper
-
-  local timer = gears.timer.start_new(5, function()
-    if next(all_wallpapers) ~= nil then
-      if current_wallpaper == nil then
-        current_wallpaper = all_wallpapers[math.random(1, #all_wallpapers)]
-      end
-      gears.wallpaper.maximized(current_wallpaper, s, false)
-    end
-    collectgarbage('collect')
-  end)
-
-  timer:connect_signal('timeout', function()
-    timer:start()
-  end)
-end)
+local wallpaper_folder = filesystem.xdg_user_dirs('PICTURES') .. '/Wallpaper'
+bling.module.wallpaper.setup({
+  set_function = bling.module.wallpaper.setters.simple_schedule,
+  wallpaper = {
+    ['08:00:00'] = { wallpaper_folder .. '/day', wallpaper_folder .. '/all' },
+    ['18:00:00'] = { wallpaper_folder .. '/night', wallpaper_folder .. '/all' },
+  },
+  schedule_set_function = bling.module.wallpaper.setters.random,
+  position = 'maximized',
+  ignore_aspect = true,
+  recursive = false,
+  change_timer = 60,
+})
