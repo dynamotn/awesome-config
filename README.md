@@ -6,13 +6,13 @@ Features
 * 2 panels (top, bottom), avoid glitzy when use
 * Redshift support
 * Colorful powerline panel
+* Scratchpad for terminal
 
 Installation
 =============
 
 You must install:
 * [xdg-user-dirs](https://www.freedesktop.org/wiki/Software/xdg-user-dirs/): some Linux distros already install this package
-* [Moka icon theme](https://github.com/snwh/moka-icon-theme)
 * [My Iosevka font](https://github.com/dynamotn/font-collection/tree/main/files/DIY/Iosevka): just copy to your ~/.local/share/fonts folder
 * [Redshift](http://jonls.dk/redshift/)
 
@@ -24,8 +24,10 @@ git submodule update --init --remote
 ```
 and create `Wallpaper` folder in your `Pictures` user folder
 ```
-mkdir -p $(xdg-user-dir PICTURES)/Wallpaper
+mkdir -p $(xdg-user-dir PICTURES)/Wallpaper/{all,day,night}
 ```
+
+After that, put your wallpaper images to above folder. You can get my wallpaper collection at [here](https://github.com/dynamotn/wallpaper-collection).
 
 License
 ========
