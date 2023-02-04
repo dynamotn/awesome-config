@@ -80,6 +80,7 @@ screen.connect_signal('request::desktop_decoration', function(s)
           ),
         },
       },
+      s.panel.mail,
       s.panel.music,
       s.panel.volume,
       s.panel.cpu,

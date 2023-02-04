@@ -18,7 +18,7 @@ local function run_command(cmd, is_async, succeed_callback, failed_callback, wit
     elseif not exit_code ~= 0 and succeed_callback then
       return succeed_callback(stdout)
     else
-      return nil
+      return stdout
     end
   end
 
@@ -26,7 +26,7 @@ local function run_command(cmd, is_async, succeed_callback, failed_callback, wit
     return nil
   end
   if not is_async or is_async == false then
-    local stream = io.popen(cmd)
+    local stream = io.popen(with_shell and os.getenv('SHELL') .. ' -c "' .. cmd .. '"' or cmd)
     local stdout = stream:read('*all')
     local _, reason, exit_code = stream:close()
     return post_run_command(stdout, nil, reason, exit_code)

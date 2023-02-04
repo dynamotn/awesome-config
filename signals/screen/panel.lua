@@ -139,28 +139,20 @@ vicious.register(M.memory, vicious.widgets.mem, '$2 MB', 1)
 -- }
 
 -- { GPU
-run_command('nvidia-smi', false, function(stdout)
-  if not stdout then
-    return
+panel_index = panel_index - 1
+M.gpu = widgets.powerline_section(panel_index, beautiful.gpu_icon)
+vicious.register(M.gpu, function(_, warg)
+  if not warg then
+    warg = '0'
   end
-  panel_index = panel_index - 1
-  M.gpu = widgets.powerline_section(panel_index, beautiful.gpu_icon)
-  vicious.register(M.gpu, function(_, warg)
-    if not warg then
-      warg = '0'
-    end
-    local f = io.popen('nvidia-smi --query-gpu=memory.used --format=csv,noheader -i ' .. warg)
-    local smi = f and f:read('*all') or nil
-    f:close()
+  local smi = run_command('nvidia-smi --query-gpu=memory.used --format=csv,noheader -i ' .. warg, nil, nil, nil, true)
+  -- Not installed
+  if smi == nil then
+    return { 0 }
+  end
 
-    -- Not installed
-    if smi == nil then
-      return { 0 }
-    end
-
-    return { smi:gsub('%s+$', '') }
-  end, '$1', 1)
-end)
+  return { smi:gsub('%s+$', '') }
+end, '$1', 1)
 -- }
 
 -- { CPU
@@ -191,7 +183,7 @@ end, 1, { 'Master' })
 
 -- { Music
 panel_index = panel_index - 1
-M.music = widgets.powerline_section(panel_index, nil, nil, beautiful.bg_normal)
+M.music = widgets.powerline_section(panel_index)
 vicious.register(M.music, vicious.widgets.mpd, function(_, args)
   if args['{state}'] == 'Play' then
     M.music:set_widget(beautiful.music_icon_on)
@@ -205,6 +197,21 @@ vicious.register(M.music, vicious.widgets.mpd, function(_, args)
     end
   end
 end, 1)
+-- }
+
+-- { Mail
+panel_index = panel_index - 1
+M.mail = widgets.powerline_section(panel_index, beautiful.mail_icon, nil, beautiful.bg_normal)
+vicious.register(M.mail, function(_, _)
+  local mail = run_command('himalaya --output json search UNSEEN | jq ".[].id" | wc -l', nil, nil, nil, true)
+
+  -- Not installed
+  if mail == nil then
+    return { 0 }
+  end
+
+  return { mail:gsub('%s+$', '') }
+end, '$1', 30)
 -- }
 
 -- { Keyboard map indicator and switcher
