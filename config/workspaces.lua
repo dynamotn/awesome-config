@@ -14,6 +14,7 @@ if screen.count() == 1 then
     {
       M.term,
       M.web,
+      M.mail,
       M.media,
       M.chat,
       M.doc,
@@ -32,6 +33,7 @@ elseif screen.count() == 2 then
     },
     {
       M.web,
+      M.mail,
       M.sys,
       M.other,
     },
