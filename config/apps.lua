@@ -1,7 +1,7 @@
 local M = {
   terminal = 'kitty',
   editor = os.getenv('EDITOR') or 'vim',
-  browser = 'vivaldi-stable',
+  browser = 'firefox',
   clipboard = 'greenclip daemon',
   music_server = 'mopidy',
   music_player = 'ncmpcpp',
