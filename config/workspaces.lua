@@ -26,16 +26,16 @@ if screen.count() == 1 then
 elseif screen.count() == 2 then
   M.list = {
     {
-      M.term,
-      M.doc,
-      M.chat,
-      M.media,
-    },
-    {
       M.web,
       M.mail,
       M.sys,
       M.other,
+    },
+    {
+      M.term,
+      M.doc,
+      M.chat,
+      M.media,
     },
   }
 end
