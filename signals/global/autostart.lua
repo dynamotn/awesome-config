@@ -38,8 +38,8 @@ require('lib.redshift').init()
 run_one_pid(apps.music_server)
 -- }
 
--- { Ferdi
-run_one_pid(apps.message_client)
+-- { Firefox to chat
+run_one_pid(apps.chat_client, nil, '')
 -- }
 
 -- { Mail
