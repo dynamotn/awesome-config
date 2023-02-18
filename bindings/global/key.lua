@@ -406,6 +406,22 @@ local list = {
         awful.spawn(apps.application_launcher)
       end,
     },
+    {
+      { k.super },
+      'x',
+      'Show password list of Personal to insert input',
+      function()
+        awful.spawn.with_shell(apps.password_launcher)
+      end,
+    },
+    {
+      { k.super },
+      'r',
+      'Show password list of Enterprise to insert input',
+      function()
+        awful.spawn.with_shell(apps.password2_launcher)
+      end,
+    },
   },
   ['multimedia'] = {
     {

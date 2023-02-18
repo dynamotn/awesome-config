@@ -30,9 +30,8 @@ M.clipboard_launcher = function(window_id)
     .. M.automation_tool
     .. ' key --clearmodifiers Shift+Insert'
 end
-M.password_launcher = function(window_id)
-  return os.getenv('SHELL') .. ' -c __bitrofi_show_items'
-end
+M.password_launcher = 'bitrofi'
+M.password2_launcher = 'RBW_PROFILE=enterprise bitrofi'
 M.calculator_launcher = M.launcher
   .. ' -modi calc -show calc -no-show-match -no-sort -calc-command \'echo -n "{result}" | xsel -i -b\''
 
