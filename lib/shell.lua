@@ -83,8 +83,38 @@ end
 
 -- }
 
+-- { Run application only one window class
+-- @param string prg Command to run
+-- @param string arg_string Arguments of command
+-- @param string class Window class that need check if window is existed
+-- @param boolean with_shell Flag is ran with shell
+local function run_one_class(prg, arg_string, class, with_shell)
+  if not prg then
+    return nil
+  end
+
+  if not arg_string or tostring(arg_string):find('^%s*$') then
+    arg_string = ''
+  else
+    arg_string = ' ' .. arg_string
+  end
+
+  local is_existed = false
+  for _, c in ipairs(client.get()) do
+    if c.class == class then
+      is_existed = true
+      break
+    end
+  end
+
+  if not is_existed then
+    run_command(prg .. arg_string, true, nil, nil, with_shell)
+  end
+end
+
 return {
   run_one_pid = run_one_pid,
+  run_one_class = run_one_class,
   run_command = run_command,
   run_command_one_line = run_command_one_line,
   run_command_multiple_lines = run_command_multiple_lines,

@@ -1,4 +1,5 @@
 local run_one_pid = require('lib.shell').run_one_pid
+local run_one_class = require('lib.shell').run_one_class
 -- Configuration
 local apps = require('config.apps')
 
@@ -39,7 +40,7 @@ run_one_pid(apps.music_server)
 -- }
 
 -- { Firefox to chat
-run_one_pid(apps.chat_client, nil, '')
+run_one_class(apps.chat_client, nil, 'dynamo_chat')
 -- }
 
 -- { Mail
