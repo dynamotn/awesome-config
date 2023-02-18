@@ -83,6 +83,11 @@ return {
     rule_any = { class = { 'Thunderbird', 'thunderbird' }, instance = 'Mail' },
     properties = { screen = find_screen_by_workspace_name(workspaces.mail), tag = workspaces.mail },
   },
+  -- Set Audacity, Pavucontrol to always map on M&V workspace
+  {
+    rule_any = { class = { 'Audacity', 'Pavucontrol' } },
+    properties = { screen = find_screen_by_workspace_name(workspaces.game), tag = workspaces.media },
+  },
   -- Set Rambox, Ferdi, Telegram to always map on Chat workspace
   {
     rule_any = { class = { 'TelegramDesktop', 'dynamo_chat' } },
