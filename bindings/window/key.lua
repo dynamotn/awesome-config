@@ -74,10 +74,18 @@ local list = {
   },
   {
     { k.super },
-    'x',
+    'p',
     'Show clipboard list to insert input to window',
     function(c)
       awful.spawn.with_shell(apps.clipboard_launcher(c.window))
+    end,
+  },
+  {
+    { k.super },
+    'x',
+    'Show password list to insert input to window',
+    function(c)
+      awful.spawn.with_shell(apps.password_launcher(c.window))
     end,
   },
 }
