@@ -16,11 +16,7 @@ run_one_pid(apps.startup_terminal, nil, apps.terminal)
 -- }
 
 -- { Browser
-run_one_pid(
-  apps.browser,
-  nil,
-  linux_distribution == 'gentoo' and '/usr/lib64/firefox/firefox' or '/usr/lib/firefox/firefox'
-)
+run_one_class(apps.browser, nil, 'firefox')
 -- }
 
 -- { Clipboard manager
@@ -28,7 +24,7 @@ run_one_pid(apps.clipboard)
 -- }
 
 -- { IM framework
-run_one_pid('ibus-daemon', '-dr')
+run_one_pid('ibus-daemon', '-drx')
 -- }
 
 -- { Redshift
@@ -44,7 +40,7 @@ run_one_class(apps.chat_client, nil, 'dynamo_chat')
 -- }
 
 -- { Mail
-run_one_pid(apps.email_client)
+run_one_class(apps.email_client, nil, 'thunderbird')
 -- }
 
 -- { Locker
