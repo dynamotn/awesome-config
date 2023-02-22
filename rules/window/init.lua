@@ -127,6 +127,20 @@ return {
   -- Set Steam to always map on tags number 7 of primary screen
   {
     rule = { class = 'Steam' },
-    properties = { screen = find_screen_by_workspace_name(workspaces.game), tag = workspaces.game },
+    properties = { screen = find_screen_by_workspace_name(workspaces.game), tag = workspaces },
+  },
+  -- Set kitty screensaver application as wallpaper
+  {
+    rule = { class = 'dynamo_wallpaper' },
+    properties = {
+      titlebars_enabled = false,
+      opacity = 1,
+      maximized_horizontal = true,
+      maximized_vertical = true,
+      sticky = true,
+      skip_taskbar = true,
+      below = true,
+      focusable = false,
+    },
   },
 }

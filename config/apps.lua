@@ -54,6 +54,7 @@ M.volume_raise_cmd = M.sound_controller .. ' set-sink-volume @DEFAULT_SINK@ +1%'
 M.volume_lower_cmd = M.sound_controller .. ' set-sink-volume @DEFAULT_SINK@ -1%'
 M.volume_mute_cmd = M.sound_controller .. ' set-sink-mute @DEFAULT_SINK@ toggle'
 M.locker_cmd = M.locker_tool .. ' awesome-client "awesome.emit_signal(\'lockscreen::start\')"'
+M.wallpaper = M.terminal .. ' --class dynamo_wallpaper ' .. os.getenv('SHELL') .. ' -c screensaver'
 
 -- GUI apps
 M.chat_client = M.browser .. ' --no-remote --class dynamo_chat -P Chat'

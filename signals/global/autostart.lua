@@ -12,7 +12,7 @@ run_one_pid('unclutter')
 -- }
 
 -- { Terminal with tmux
-run_one_pid(apps.startup_terminal, nil, apps.terminal)
+run_one_class(apps.startup_terminal, nil, apps.terminal)
 -- }
 
 -- { Browser
@@ -45,4 +45,8 @@ run_one_class(apps.email_client, nil, 'thunderbird')
 
 -- { Locker
 run_one_pid(apps.locker_cmd)
+-- }
+
+-- { Wallpaper
+run_one_class(apps.wallpaper, nil, 'dynamo_wallpaper')
 -- }

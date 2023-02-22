@@ -12,6 +12,7 @@ screen.connect_signal('request::wallpaper', function(s)
     wallpaper = {
       ['08:00:00'] = { wallpaper_folder .. '/day', wallpaper_folder .. '/all' },
       ['18:00:00'] = { wallpaper_folder .. '/night', wallpaper_folder .. '/all' },
+      -- '#24273a',
     },
     schedule_set_function = bling.module.wallpaper.setters.random,
     position = 'maximized',

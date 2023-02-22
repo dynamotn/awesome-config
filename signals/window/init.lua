@@ -13,10 +13,6 @@ local bling = require('bling')
 
 -- Signal function to execute when a new client appears.
 client.connect_signal('manage', function(c)
-  c.shape = function(cairo, width, height)
-    gears.shape.rounded_rect(cairo, width, height, beautiful.border_radius)
-  end
-
   -- Set the windows at the slave,
   -- i.e. put it at the end of others instead of setting it master.
   if not awesome.startup then

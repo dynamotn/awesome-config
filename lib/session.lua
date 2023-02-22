@@ -20,10 +20,10 @@ local function unlock()
     _G.locked_workspace = nil
   end
 
-  local c = awful.client.restore()
-  if c then
-    c:emit_signal('request::activate')
-    c:raise()
+  for _, c in ipairs(client.get()) do
+    if c.class ~= 'dynamo_wallpaper' then
+      c.hidden = false
+    end
   end
 end
 
@@ -101,8 +101,10 @@ local function lock()
     keygrabbing_instance:stop()
   end
 
-  if client.focus then
-    client.focus.minimized = true
+  for _, c in ipairs(client.get()) do
+    if c.class ~= 'dynamo_wallpaper' then
+      c.hidden = true
+    end
   end
 
   for _, t in ipairs(mouse.screen.selected_tags) do
