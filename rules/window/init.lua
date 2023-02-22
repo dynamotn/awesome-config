@@ -32,6 +32,7 @@ return {
       maximized_vertical = false,
       size_hints_honor = false,
       titlebars_enabled = true,
+      opacity = 0.9,
     },
   },
 
